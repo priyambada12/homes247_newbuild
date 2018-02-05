@@ -1,0 +1,82 @@
+<div class="container">
+
+    <div class="row">
+        <div id="horizontalTab">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="my_account_links">
+                    <h2>My Accounts</h2>
+                    <ul class="resp-tabs-list">
+                        <li><a ng-href="#/myFav">My Favourite</a></li>
+                        <li><a ng-href="#/recentlyView">Recently Viewed</a></li>
+                        <li><a ng-href="#/setting">Account Settings</a></li>
+                        <li>
+                            <a ng-href="#/referEarn"><img src="images/refer_earn_img.png" alt="" /></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9">
+                <div class="resp-tabs-container" >
+                    <div class="my_account_details">
+                        <div class="account_photo">
+                            <span><img src="images/profile.png" alt="" /></span>
+                            <ul>
+                                <li><a href="#">Edit</a></li>
+                                <li><a href="#">Remove</a></li>
+                            </ul>
+                            <button type="button" ng-click = "changePwd()">Change</button>
+                        </div>
+                        <div class="account_info" ng-repeat="account in accounts track by $index">
+							
+                            <form>
+                                <div>
+                                    <label>User Name </label>
+                                    <p><strong>{{account.user_registration_name}}</strong></p>
+                                </div>
+                                <div>
+                                    <label>Mobile Number </label>
+                                    <p>{{account.user_registration_phoneNum}}</p>
+                                </div>
+                                <div>
+                                    <label>Email ID </label>
+                                    <p>{{account.user_registration_email}}</p>
+                                </div>
+                            </form>
+                            <div class="password_section">
+                                <h3>Update Password</h3>
+                                <form>
+                                    <input placeholder="New Password" type="password" ng-model ="user.newPwd" />
+                                    <input placeholder="Confirm password" type="password" ng-model ="user.confPwd" />
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="my_accoumt_text">
+                <p>
+                    Disclaimer of Warranty; Limitation of Liability: All the information provided on this website including the purchase Price and current Price are computed based on the limited information available with Homes247.in and may not reflect the correct information. Our company accepts no liability for the content of this website, or for the consequences of any actions taken on the basis of the information provided. The content is for information purposes only and does not constitute an offer to purchase or sell any property or to avail of any service.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <script type="text/ng-template" id="myModalContent.html">
+         <div class="modal-header">
+           <h3 class="modal-title">Message</h3> 
+        </div> 
+        <div class="modal-body">
+            <b>{{ message}}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+	 

@@ -1,0 +1,52 @@
+<div class="top_section_main">
+    	<div class="top_row_left">
+        <div class="burger_icon" ng-click="openNav()"><img src="images/burger_menu_icon.png" alt="" /></div>
+        	<div id="mySidenav" class="sidenav">
+            <div class="nav_logo">
+            	<a class="logo_nav" href="index.html"><img src="images/logo.png" alt="" /></a>
+            	<a href="javascript:void(0)" class="closebtn" ng-click="closeNav()"><img src="images/burger_menu_close.png" alt="" /></a>
+            </div>
+              <ul class="nav_links">
+              	<li><a ng-href="#/dashboard">Home</a></li>
+                <li><a ng-href="#/aboutUs">About Us</a></li>
+                <li><a ng-href="#/careers">Careers</a></li>
+                <li><a ng-href="#/blogs">Blogs</a></li>
+                <li><a ng-href="#/policy">Privacy Policy</a></li>
+                <li><a ng-href="#/faq">FAQ</a></li>
+                <li><a ng-href="#/contactUs">Contact us</a></li>
+                <li class="more_border dropdown"><a data-toggle="dropdown" href="#">More <span class="caret"></span></a>
+                	<ul class="dropdown-menu drop_style">
+                      <li><a ng-href="#/calculator">Home Loan</a></li>
+                      <li><a ng-href="#/calculator">Vaastu Tips</a></li>
+                      <li><a ng-href="#/calculator">EMI Calculator</a></li>
+                      <li><a ng-href="#/calculator">Interiors</a></li>
+                      <li><a ng-href="#/calculator">News</a></li>
+                    </ul>
+                </li>
+              </ul>     
+              <div class="nav_social_icon">
+              	<ul>
+                	<li><a class="nav_fb" href="#"></a></li>
+                    <li><a class="nav_insta" href="#"></a></li>
+                    <li><a class="nav_twitter" href="#"></a></li>
+                    <li><a class="nav_in" href="#"></a></li>
+                </ul>
+              </div>         
+            </div>
+
+        	<div class="logo"><a ng-href="#/dashboard"><img src="images/logo.png" alt="" /></a></div>
+        </div>
+        <div class="top_row_right">
+        	<div class="top_row_right_phno">
+            	<img src="images/call-icon.gif" alt="" />
+                <p>+91 85511 58621</p>
+            </div>
+            <ul>
+            	<li><a ng-href="#/offers"><span class="offer_icon"></span> Offers</a></li>
+                <li><a ng-href="#/services"><span class="nri_icon"></span> NRI services</a></li>
+                <li><a ng-href="#/myFav" ng-show="user_favs"><span class="favor_icon"></span> Favorites</a></li>
+                <li><a ng-click="userLoginType(valueType);" ng-model="valueType"><span class="signup_icon"></span> {{valueType}}</a></li>
+            </ul>
+        </div>
+    </div>
+	

@@ -1,0 +1,97 @@
+<div class="container">
+
+    <div class="row">
+        <div id="horizontalTab">
+            <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="my_account_links">
+                    <h2>My Accounts</h2>
+                    <ul class="resp-tabs-list">
+                          <li><a ng-href="#/myFav">My Favourite</a></li>
+                        <li><a ng-href="#/recentlyView">Recently Viewed</a></li>
+                        <li><a ng-href="#/setting">Account Settings</a></li>
+                        <li>
+                            <a ng-href="#/referEarn"><img src="images/refer_earn_img.png" alt="" /></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9">
+                <div class="resp-tabs-container">
+				<div>
+                	<div class="my_favorite_right">
+                    	<p>Refer a friend to our site and once the booking is made by your referral, You will</p>
+                        <h5>Earn upto  &nbsp; <i class="fa fa-inr" aria-hidden="true"></i>  10000</h5>
+                        <div class="my_favorite_form">
+                        	<div class="left_aside">
+                            	<input placeholder="Your Referral Name" type="text" ng-model="userRefer.name" />
+                                <input placeholder="Referral Mobile Number" type="text" ng-model="userRefer.number" />                                
+                            </div>
+                            <div class="right_aside">
+                            	<textarea placeholder="Anything we need to know about your referral requirements !"  ng-model="userRefer.msg"></textarea>  
+                            </div>
+                            <div class="text_nd_btn">
+                            	<h4>Your referal can expect a call from us in 5 minutes!!</h4>
+                                <a class="submit_btn" ng-click="referFriends(userRefer)">Submit</a>
+                            </div>
+                        </div>
+                        <div class="my_referral_lists_section">
+                        	<div class="referral_lists_heading">
+                            	<h3>My Referral Lists</h3>
+                            </div>
+                            <div class="my_referral_lists_table properties-table-section">
+                            	<table class="customize-table">
+                                	<thead>
+                                	<tr>
+                                    	<th>Date</th>
+                                        <th>Referral Name</th>
+                                        <th>Mobile Number</th>
+                                        <th>Status</th>
+                                        <th>Earnings</th>
+                                        <th>Referral ID</th>
+                                    </tr>
+                                    </thead>
+                                    <tr ng-repeat="userRefer in userReferList">
+                                    	<td>{{userRefer.user_refer_created|date:dd-MM-yyyy}}</td>
+                                        <td>{{userRefer.user_refer_name}}</td>
+                                        <td>{{userRefer.user_refer_number}}</td>
+                                        <td style="color:#ef970d;">RSV</td>
+                                        <td>- - -</td>
+                                        <td>{{userRefer.user_refer_IDPK}}</td>
+                                    </tr>
+                                 
+                                </table>
+                                <p>
+                                	If you would like to make an email enquiry about your referral, drop us an email to  <a href="#">referral.enquiry@homes247.in</a>
+									<span>Please specify the referral ID in the subject.</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="my_accoumt_text">
+                <p>
+                    Disclaimer of Warranty; Limitation of Liability: All the information provided on this website including the purchase Price and current Price are computed based on the limited information available with Homes247.in and may not reflect the correct information. Our company accepts no liability for the content of this website, or for the consequences of any actions taken on the basis of the information provided. The content is for information purposes only and does not constitute an offer to purchase or sell any property or to avail of any service.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+     <script type="text/ng-template" id="myModalContent.html">
+         <div class="modal-header">
+           <h3 class="modal-title">Message</h3> 
+        </div> 
+        <div class="modal-body">
+            <b>{{ message}}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>

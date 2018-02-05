@@ -1,0 +1,62 @@
+
+    <div class="about_us_banner">
+    	<img src="images/contact_us_banner.jpg" alt="" />
+        <h2>We Work Around the Clock to Serve Your Property Needs</h2>
+    </div>    
+    
+    <div class="about_contact_us">
+    <div class="container">
+    	<div class="row">
+        	<div class="col-lg-1 col-md-1 col-sm-1"></div>
+            <div class="col-lg-11 col-md-11 col-sm-11">
+            	
+                	<div class="call_back_form">
+                    	<h1 style="font-size:30px;">Expect a Call from us in 5 minutes</h1>
+                    	<form>
+                        	<input placeholder="Name" type="text" ng-model="user.name" />                            
+                            <select class="test_design">
+                            	<option>+91 INDIA</option>
+                            </select>
+                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno" />
+                            
+                            <a class="btn_style" ng-click="callBack(user);">Get Call Back</a>
+                        </form>  
+                                             
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+    
+    <div class="contact_us_info_main">
+    	<div class="container">
+        	<div class="row">
+            	<div class="col-lg-12">
+                	<h4>#507, Prestige Meridian II <br />MG Road, Bengaluru 560 001</h4>
+                    <div class="phone_email_info">
+                    	<p><span><img src="images/phone_icon.png" alt="" /></span> +91 91642 47247</p>
+                    </div>
+                    <div class="phone_email_info">
+                    	<p><span><img src="images/email_icon.png" alt="" /></span> enquiry@homes247.in</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contact_us_map">
+    	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.967323738642!2d77.6126168!3d12.973941799999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16814ca72a49%3A0x313d95a2777c40db!2sPrestige+Meridian!5e0!3m2!1sen!2sin!4v1513139274798" width="100%" height="290px" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+
+ <script type="text/ng-template" id="myModalContent.html">
+         <div class="modal-header">
+           <h3 class="modal-title">Message</h3> 
+        </div> 
+        <div class="modal-body">
+            <b>{{ message}}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+	 

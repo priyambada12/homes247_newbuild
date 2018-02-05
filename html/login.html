@@ -1,0 +1,41 @@
+
+<div class="signin_wrapper_main">
+    	<div class="left_form">
+        	<a class="logo_in" ng-href="#/dashboard"><img src="images/logo_up.png" alt="" /></a>
+            <form>
+            	<div>
+            		<input placeholder="User Name / Mobile Number" type="text" name="emailId" ng-model = "user.email" />
+                    <span class="user"></span>
+                </div>
+                <div>
+                <input class="passwd" placeholder="Password" type="password" name="password" ng-model="user.password" />
+                <div class="passd"></div>
+                </div>
+            </form>
+            <button class="btn_style" ng-click="login(user,1)">SIGN IN</button>
+            
+            <div class="social_btns">
+        	<button g-login type="button"><img src="images/login_with_gplus_btn.png" alt="" /></button>
+			<button fb-login type="button"><img src="images/login_with_fb_btn.png" alt="" /></button>
+        </div>
+        </div>
+        <div class="right_form">
+        	<h1>Welcome Back</h1>
+            <span><img src="images/login_page_img.png" alt="" /></span>
+			<a ng-href="#/signUp">Create Account</a> 
+        </div>
+    </div>
+	
+	 <script type="text/ng-template" id="myModalContent.html">
+         <div class="modal-header">
+           <h3 class="modal-title">Message</h3> 
+        </div> 
+        <div class="modal-body">
+            <b>{{ message}}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+	 

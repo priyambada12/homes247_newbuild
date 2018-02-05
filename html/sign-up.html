@@ -1,0 +1,66 @@
+
+<div class="signup_wrapper_main">
+	<div class="left_text">
+    	<div class="logo_up">
+        	<a ng-href="#/dashboard"><img src="images/logo_up.png" alt="" /></a>
+        </div>
+        <div class="welcome_text">
+        	<span><img src="images/welcome.png" alt="" /></span>
+            <p>
+            	Please enter your details and explore the best
+online property search experience.
+            </p>
+            <h2>Already have an account ?</h2>
+            <a class="btn_style" ng-href="#/login">SIGN IN</a>
+        </div>
+    </div>
+    <div class="right_text">
+    	<div class="social_btns">
+        	<!-- <button fb-login><img src="images/login_with_fb_btn.png" alt="" /></button>
+            <button g-login><img src="images/login_with_gplus_btn.png" alt="" /> -->
+			<button g-login type="button"><img src="images/login_with_gplus_btn.png" alt="" /></button>
+			<button fb-login type="button"><img src="images/login_with_fb_btn.png" alt="" /></button>
+			<!-- <google-plus-signin clientid="939204790309-ipeio986co1f35sc6b0vd9mnfuvh6rll.apps.googleusercontent.com"></google-plus-signin> -->
+			</button>
+        </div>
+        <form name="registrationForm" ng-submit="doRegistration(signup);">
+        	<input placeholder="User Name" type="text" name="uname" ng-model="signup.name" required ng-minlength="3"/>
+			<span ng-show="registrationForm.$dirty && registrationForm.uname.$error.required">This is a required field</span>
+            <span ng-show="registrationForm.$dirty && registrationForm.uname.$error.minlength">Minimum length required is 4</span>
+            <span ng-show="registrationForm.$dirty && registrationForm.uname.$invalid">This field is invalid </span>
+
+            <input placeholder="Mobile Number" type="number" ng-model="signup.number" name="mobile" required ng-minlength="9"/>
+			<span ng-show="registrationForm.$dirty && registrationForm.mobile.$error.required">This is a required field</span>
+            <span ng-show="registrationForm.$dirty && registrationForm.mobile.$error.minlength">Minimum length required is 10</span>
+            <span ng-show="registrationFormregistrationForm.$dirty && registrationForm.mobile.$invalid">This field is invalid </span>
+		
+            <input placeholder="Choose a Password" type="password" ng-model="signup.password" name="pwd" required />
+			<span ng-show="registrationForm.$dirty && registrationForm.pwd.$error.required">This is a required field</span>
+            <span ng-show="registrationForm.$dirty && registrationForm.pwd.$invalid">This field is invalid </span>
+			
+            <input placeholder="Email Address (optional)" type="email" ng-model="signup.email" name="email" required />
+			<span ng-show="registrationForm.$dirty && registrationForm.email.$error.required">This is a required field</span>
+            <span ng-show="registrationForm.$dirty && registrationForm.email.$invalid">This field is invalid </span>
+			
+			<input type="submit" value="Create Account" ></input>
+
+            <!-- <a href="#">Create Account</a> -->
+        </form>
+    </div>
+</div>
+
+ <script type="text/ng-template" id="myModalContent.html">
+         <div class="modal-header">
+           <h3 class="modal-title">Message</h3> 
+        </div> 
+        <div class="modal-body">
+            <b>{{ message}}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+	 
+
+
