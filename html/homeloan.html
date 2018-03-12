@@ -1,0 +1,408 @@
+<!-- <div loading-indicatoremi class="waiting-box">
+	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
+       <div class="container">
+       		<div class="row">
+            	<div class="col-lg-12">
+                	<div class="emi_etc_section_main">
+                    	<div id="horizontalTab">
+                        <ul class="resp-tabs-list">
+                        <li class="resp-tab-active">Home Loan</li>
+                        <li>EMI Calculator</li>
+                        <li>Interiors</li>
+                        <li>Vaastu Tips</li>
+                        <li>News</li>
+                        </ul>
+                        <div class="resp-tabs-container">
+                        <div>
+                        	<div class="monthly_installments_banner">
+                            	<img src="images/home_loan_banner.jpg" alt="" />
+                                <h2>Home Loan Consulting</h2>
+                            </div>
+                            <div class="home_loan_text">
+                            <p>
+                            	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+<br /><br />
+At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+<br /><br />
+On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains
+                            </p>
+                            <h4>FAQ on Home loans</h4>
+                            </div>
+                        </div>
+                        <div>
+                        	<div class="monthly_installments_banner">
+                            	<img src="images/monthly_installments_bg.jpg" alt="" />
+                                <h2>Equated Monthly Installments</h2>
+                            </div>
+                             <div>
+                        	<div class="monthly_installments_banner">
+                            	<img src="images/monthly_installments_bg.jpg" alt="" />
+                                <h2>Equated Monthly Installments</h2>
+                            </div>
+                            <div class="row">
+                            	<div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="loan_emi_calculator">
+                                    	<h2>Home Loan & EMI Calculator</h2>
+                                        <form>
+                                        	<select>
+                                            	<option>1 BHK + 1T (1000 sq ft)</option>
+                                            </select>
+                                            <div class="loan_emi_calculator_box">
+                                            	<h3>Loan Amount</h3>
+                                                <input placeholder="Enter amount" valid-number type="text" ng-model="emi.amount" />
+                                                <div class="loan_emi_scale">
+                                            	<img src="images/loan_emi_graph.png" alt="" />
+                                           		 </div>
+                                            </div>
+                                            <div class="loan_emi_calculator_box">
+                                            	<h3>Loan Tenure (in yrs)</h3>
+                                                <input placeholder="year" valid-number type="text" ng-model="emi.term" />
+                                                <div class="loan_emi_scale">
+                                            	<img src="images/loan_emi_graph2.png" alt="" />
+                                           		 </div>
+                                            </div>
+                                            <div class="loan_emi_calculator_box">
+                                            	<h3>Interest Rate (p.a)</h3>
+                                                <input placeholder="rate of interest" valid-number type="text" ng-model="emi.intrestrate"/>
+                                                <div class="loan_emi_scale">
+                                            	<img src="images/loan_emi_graph3.png" alt="" />
+                                           		 </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-5">
+                                	<div class="principal_amount">
+                                    	<img src="images/img_1.png" alt="" />
+                                        <h4>Principal amount
+                                        	<strong>{{emi.amount}}</strong>
+                                        </h4>
+                                    </div>
+                                    <div class="monthly_emi_result">
+                                    	<h4>Monthly EMI : {{monthlyAmount|currency:"&#8377;"}}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                	<div class="emi_indicators_main">
+                                    	<div class="emi_indicators_box">
+                                        	<span></span>
+                                            <h6>Principal : <strong>{{emi.amount|currency:"&#8377;"}}</strong></h6>
+                                        </div>
+                                        <div class="emi_indicators_box">
+                                        	<span style="background:#0a3544;"></span>
+                                            <h6>Interest <br />Payable : <strong>{{interestpayable |currency:"&#8377;"}}</strong></h6>
+                                        </div>
+                                        <div class="emi_indicators_box">
+                                            <h6>Total Amount <br />Payable : <strong>{{totalAmount|currency:"&#8377;"}}</strong></h6>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="apply_now_btn">
+                                    	<a ng-click ="getrate(emi);">Apply Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div>
+                        	<div class="monthly_installments_banner">
+                            	<img src="images/interiors_banner.jpg" alt="" />
+                                <h2>Interior Design and Consultation</h2>
+                            </div>
+                            <div class="home_loan_text">
+                            <h2>Lorem Ipsum</h2>
+                            <p>
+                            	<span class="interiors_inner_banner"><img src="images/interiors_inner_banner.jpg" alt="" /></span>
+                            	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+<br /><br />                            
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum                            
+                            </p>
+                            <ul class="interiors_text_list">
+                            	<li>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</li>
+                                <li>Totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </li>
+                                <li>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit </li>
+                                <li>Sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</li>
+                            </ul>
+                            </div>
+                        </div>
+                        <div>
+                        	<div class="monthly_installments_banner">
+                            	<img src="images/vaastu_tips_banner.jpg" alt="" />
+                                <h2>Vaastu - Tips</h2>
+                            </div>
+                            <div class="home_loan_text">
+                            <h2>Vaastu for Home</h2>
+                            <p>
+                            	Vaastu is a set of principles that helps home owners lead a happy and peaceful life in their abode. The doctrine of Vaastu is related to architecture and the designs are based on directional arrangements. Vaastu guidelines can be applied during the construction of homes, offices, temples and other buildings and help bring about positive energy and general well-being for the home owner. As such, it is important to keep in mind few tips while searching for or building your ideal house.
+<br /><br />
+General Tips:
+<br />The entrance to the house should be towards the east as it is considered an auspicious direction. The entrance should also be well-kept and nicely decorated
+<br />The north direction signifies prosperity, as such this part of the house should not be blocked in any way
+<br />Make sure to never grow a Cactus plant in the house
+<br />Hinges on doors should work smoothly and should not make noise
+<br />If the house has a slope, it should be from south to north or from west to east only
+<br />Avoid putting up paintings or pictures that depict violence or sorrow
+<br /><br />
+Bedrooms:
+<br />The master bedroom in the house should always be in the south-west direction and not in the north
+<br />One should always sleep with their head towards the south
+<br />Make sure the bed is not placed directly below a beam
+<br />Bedrooms should be absolutely clutter free, especially the area around where you place your head while sleeping.	
+                            </p>
+                            <div class="btn_nri">
+                    	<a href="#">Read More</a>
+                    </div>
+                            </div>
+                        </div>
+                        <div>
+                        	<div class="row">
+                            	<div class="col-lg-7 col-md-7 col-sm-7">
+                                	<div class="news_banner_main">
+                            			<img src="images/news_banner.jpg" alt="" />
+                                        <div class="news_text">
+                                        	<h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h5>
+                                            <a href="#">Read more -></a>
+                                        </div>
+                            		</div>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-5">
+                                	<div class="trending_news_main">
+                                        <h1>Trending News</h1>
+                                        <div class="content mCustomScrollbar">
+                                        <div class="trending_news_info">
+                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <p>by Eddard Stark</p>
+                                        </div>
+                                        <div class="trending_news_info">
+                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <p>by Eddard Stark</p>
+                                        </div>
+                                        <div class="trending_news_info">
+                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <p>by Eddard Stark</p>
+                                        </div>
+                                        <div class="trending_news_info">
+                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <p>by Eddard Stark</p>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>       
+                            
+                            <div class="row">
+                            	<div class="col-lg-12 col-md-12 col-sm-12">
+                                	<div class="other_news_main">
+                                    	<h2>Other News</h2>
+                                    </div>
+                                </div>
+                            </div>      
+                             <div class="row">
+                            	<div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                	<div class="other_news_content">                                    	
+                                        	<img src="images/news_img1.jpg" alt="" />
+                                            <div class="name_link">
+                                            	<h4>Lorem ipsum dolor sit ame</h4>
+                                            	<a href="#">Read more -></a>
+                                            </div>
+                                    </div>
+                                </div>
+                             </div>            	
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       </div> 
+       
+       <div class="clarify_query_section">
+      		<div class="container">
+            	<div class="row">
+                	<div class="col-lg-12">
+                    	<h1>Let us clarify your Query</h1>
+                    </div>
+                </div>
+                <div class="row">
+                	<form name="moreForm">
+                	<div class="col-lg-4 col-md-4 col-sm-4">
+                    	<div class="clarify_query_form">
+                        	<div class="input_div">
+                            	<input placeholder="Name" type="text" ng-model ="user.name" name="uname" required ng-minlength="3" />
+								<span ng-show="moreForm.uname.$dirty && moreForm.uname.$error.required">This is a required field</span>
+								<span ng-show="moreForm.uname.$dirty && moreForm.uname.$error.minlength">Minimum length required is 3</span>
+            				
+                            </div>                            
+                            <div class="input_div">
+                            	<select class="test_design">
+                                	<option>+91 INDIA</option>
+                                </select>
+                            	<input class="inhalf" placeholder="Mobile Number" type="text" numbers-only ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13" />
+								<span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.required">This is a required field</span>
+							    <span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.minlength">Minimum length required is 10</span>
+							    <span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.maxlength">Mobile Number is too long</span>
+		
+                            </div>
+                            <div class="input_div">
+                            	<input placeholder="Email Id" type="email" name="email" ng-model ="user.email" />
+								<span ng-show="moreForm.email.$dirty && moreForm.email.$error.required">This is a required field</span>
+							    <span ng-show="moreForm.$error.email">Enter a valid Email Address</span>
+                            
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                    	<div class="clarify_query_form">
+                        	<div class="input_div">
+                            	<textarea placeholder="Your message" ng-model="user.msg" name="msg" required></textarea>
+								<span ng-show="moreForm.msg.$dirty && moreForm.msg.$error.required">This is a required field</span>
+                            </div>
+                            <div class="input_div">
+                            	<p>All email enquiries will be taken care in one business day</p>
+                            	<a ng-click="userQuery(user)">Submit</a>
+                            </div>
+                        </div>
+                    </div>
+					</form>
+                </div>
+            </div>
+       </div>
+	   
+	   <script type="text/ng-template" id="myModalContent.html">
+         <div class="modal-header">
+           <h3 class="modal-title">Message</h3> 
+        </div> 
+        <div class="modal-body">
+            <b>{{ message}}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+	
+		<script>
+	 $('#horizontalTab').easyResponsiveTabs({
+type: 'default', //Types: default, vertical, accordion           
+width: 'auto', //auto or any width like 600px
+fit: true,   // 100% fit in a container
+closed: 'accordion', // Start closed if in accordion view
+activate: function(event) { // Callback function if tab is switched
+var $tab = $(this);
+var $info = $('#tabInfo');
+var $name = $('span', $info);
+$name.text($tab.text());
+$info.show();
+}
+});
+$('#verticalTab').easyResponsiveTabs({
+type: 'vertical',
+width: 'auto',
+fit: true
+});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		$('.test_design').niceSelect();
+		});
+</script>
+

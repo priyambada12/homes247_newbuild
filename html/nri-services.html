@@ -1,4 +1,5 @@
-
+<!-- <div loading-indicator class="waiting-box">
+	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
     <div class="about_us_banner">
     	<img src="images/nri_banner.jpg" alt="" />
         <h2>Non-Resident Indian - Services</h2>
@@ -45,33 +46,47 @@ Government servants deputed abroad on assignments with foreign Governments or re
                     </div>
                 </div>
                 <div class="row">
+				<form name="serviceForm">
                 	<div class="col-lg-4 col-md-4 col-sm-4">
                     	<div class="clarify_query_form">
                         	<div class="input_div">
-                            	<input placeholder="Name" type="text" />
+                            	<input placeholder="Name" type="text" ng-model ="user.name" name="uname" required ng-minlength="3" />
+								<span ng-show="serviceForm.uname.$dirty && serviceForm.uname.$error.required">This is a required field</span>
+								<span ng-show="serviceForm.uname.$dirty && serviceForm.uname.$error.minlength">Minimum length required is 3</span>
+            				
                             </div>                            
                             <div class="input_div">
                             	<select class="test_design">
                                 	<option>+91 INDIA</option>
                                 </select>
-                            	<input class="inhalf" placeholder="Mobile Number" type="text" />
+                            	<input class="inhalf" placeholder="Mobile Number" type="number" ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13" />
+								<span ng-show="serviceForm.phno.$dirty && serviceForm.phno.$error.required">This is a required field</span>
+							    <span ng-show="serviceForm.phno.$dirty && serviceForm.phno.$error.minlength">Minimum length required is 10</span>
+							    <span ng-show="serviceForm.phno.$dirty && serviceForm.phno.$error.maxlength">Mobile Number is too long</span>
+		
+								
                             </div>
                             <div class="input_div">
-                            	<input placeholder="Email Id" type="text" />
+                            	<input placeholder="Email Id" type="email" name="email" ng-model ="user.email" required />
+								<span ng-show="serviceForm.email.$dirty && serviceForm.email.$error.required">This is a required field</span>
+							    <span ng-show="serviceForm.$error.email">Enter a valid Email Address</span>
+                            
                             </div> 
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-8">
                     	<div class="clarify_query_form">
                         	<div class="input_div">
-                            	<textarea placeholder="Your message"></textarea>
+                            	<textarea placeholder="Your message" ng-model="user.msg" name="msg" required></textarea>
+								<span ng-show="serviceForm.msg.$dirty && serviceForm.msg.$error.required">This is a required field</span>
                             </div>
                             <div class="input_div">
                             	<p>All email enquiries will be taken care in one business day</p>
-                            	<a href="#">Submit</a>
+                            	<a ng-click="userQuery(user)">Submit</a>
                             </div>
                         </div>
                     </div>
+					</form>
                 </div>
             </div>
        </div>
@@ -88,6 +103,12 @@ Government servants deputed abroad on assignments with foreign Governments or re
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
+    
+    		<script type="text/javascript">
+		$(document).ready(function() {
+		$('.test_design').niceSelect();
+		});
+</script>
 	 
     
 

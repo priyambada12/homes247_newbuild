@@ -1,4 +1,5 @@
-
+<!-- <div loading-indicatorcontact class="waiting-box">
+	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
     <div class="about_us_banner">
     	<img src="images/contact_us_banner.jpg" alt="" />
         <h2>We Work Around the Clock to Serve Your Property Needs</h2>
@@ -12,14 +13,23 @@
             	
                 	<div class="call_back_form">
                     	<h1 style="font-size:30px;">Expect a Call from us in 5 minutes</h1>
-                    	<form>
-                        	<input placeholder="Name" type="text" ng-model="user.name" />                            
-                            <select class="test_design">
+                    	<form name="contactForm">
+                        	<input placeholder="Name" type="text" ng-model="user.name" name="uname" required ng-minlength="3"/>                            
+                            <select class="select_design">
                             	<option>+91 INDIA</option>
                             </select>
-                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno" />
+                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13"/>
                             
+							
                             <a class="btn_style" ng-click="callBack(user);">Get Call Back</a>
+							 <div class="clearfix"></div>
+							<span ng-show="contactForm.uname.$dirty && contactForm.uname.$error.required">This is a required field</span>
+							<span ng-show="contactForm.uname.$dirty && contactForm.uname.$error.minlength">Minimum length required is 3</span>
+            				
+							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.required">This is a required field</span>
+							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.minlength">Minimum length required is 10</span>
+							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.maxlength">Mobile Number is too long</span>
+		
                         </form>  
                                              
                     </div>

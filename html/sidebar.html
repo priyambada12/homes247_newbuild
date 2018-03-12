@@ -1,3 +1,5 @@
+<!-- <div loading-indicator class="waiting-box">
+	<span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
 <div class="top_section_main">
     	<div class="top_row_left">
         <div class="burger_icon" ng-click="openNav()"><img src="images/burger_menu_icon.png" alt="" /></div>
@@ -14,15 +16,19 @@
                 <li><a ng-href="#/policy">Privacy Policy</a></li>
                 <li><a ng-href="#/faq">FAQ</a></li>
                 <li><a ng-href="#/contactUs">Contact us</a></li>
-                <li class="more_border dropdown"><a data-toggle="dropdown" href="#">More <span class="caret"></span></a>
+				
+               <!--  <li class="more_border dropdown"><a data-toggle="dropdown" href="#">More <span class="caret"></span></a> -->
+			   <!--  <div class="dropdown">-->
+				<li class="more_border dropdown"><a data-toggle="dropdown" href="">More <span class="caret"></span></a>
                 	<ul class="dropdown-menu drop_style">
-                      <li><a ng-href="#/calculator">Home Loan</a></li>
-                      <li><a ng-href="#/calculator">Vaastu Tips</a></li>
+                      <li><a ng-href="#/homeloan">Home Loan</a></li> 
+                      <li><a ng-href="#/vaastu">Vaastu Tips</a></li> 
                       <li><a ng-href="#/calculator">EMI Calculator</a></li>
-                      <li><a ng-href="#/calculator">Interiors</a></li>
-                      <li><a ng-href="#/calculator">News</a></li>
+                      <li><a ng-href="#/interior">Interiors</a></li> 
+                     <li><a ng-href="#/news">News</a></li> 
                     </ul>
                 </li>
+				<!-- </div>  -->
               </ul>     
               <div class="nav_social_icon">
               	<ul>
@@ -36,6 +42,17 @@
 
         	<div class="logo"><a ng-href="#/dashboard"><img src="images/logo.png" alt="" /></a></div>
         </div>
+		<div class="inner_header_search" ng-if="showSearchBar">
+            	<div class="location_icon"><img src="images/search_location_icon.png" alt="" /></div>
+            	<select class="ui selection dropdown" ng-options="citydata as citydata.city for citydata in cities track by citydata.city" 
+				ng-model="currentCity" ng-change="getBuilders(currentCity);"></select>
+					<!--  <option value="">Bengaluru</option>  -->
+                <div class="search_input_box">
+                	<input client-auto-complete class="form-control" ng-model="ctrl.client" 
+					placeholder="Enter a location, builder, project or a RERA ID" type="text" />
+                </div>
+                <div class="search_btn"><a ng-click="getProjects(currentCity)"><img src="images/search_icon.png" alt="" /></a></div>
+            </div>
         <div class="top_row_right">
         	<div class="top_row_right_phno">
             	<img src="images/call-icon.gif" alt="" />
@@ -44,9 +61,21 @@
             <ul>
             	<li><a ng-href="#/offers"><span class="offer_icon"></span> Offers</a></li>
                 <li><a ng-href="#/services"><span class="nri_icon"></span> NRI services</a></li>
-                <li><a ng-href="#/myFav" ng-show="user_favs"><span class="favor_icon"></span> Favorites</a></li>
+                <li ng-show="user_favs"><a ng-href="#/myFav"><span class="favor_icon"></span> Favorites</a></li>
                 <li><a ng-click="userLoginType(valueType);" ng-model="valueType"><span class="signup_icon"></span> {{valueType}}</a></li>
             </ul>
         </div>
     </div>
 	
+	<script>
+	$(document).ready(function(){
+	//alert("loaded");
+		$(".burger_icon").click(function(){
+			$(".logo").hide();
+	});
+		$(".closebtn").click(function(){
+			$(".logo").show();
+			});
+			
+	});
+</script>

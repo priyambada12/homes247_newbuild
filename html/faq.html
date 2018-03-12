@@ -1,6 +1,5 @@
-
-
-    
+<!-- <div loading-indicatorfaq class="waiting-box">
+	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
     
     <div class="about_us_banner">
     	<img src="images/faq_banner.jpg" alt="">
@@ -333,10 +332,20 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                 	<div class="faq_form_main">
                     	<h2>Do you have any questions to ask ?</h2>
-                        <form>
-                        	<input placeholder="Name" type="text" ng-model="user.name" />
-                            <input placeholder="Email Id" type="text" ng-model="user.email" />
-                            <textarea placeholder="Your message" ng-model="user.message"></textarea>
+                        <form name="faqForm">
+                        	<input placeholder="Name" type="text" ng-model="user.name" name="uname" required ng-minlength="3" />
+							<div class="clearfix"></div>
+							<span ng-show="faqForm.uname.$dirty && faqForm.uname.$error.required">This is a required field</span>
+							<span ng-show="faqForm.uname.$dirty && faqForm.uname.$error.minlength">Minimum length required is 3</span>
+            				
+                            <input placeholder="Email Id" type="email" ng-model="user.email" name="email" required />
+							<div class="clearfix"></div>
+							<span ng-show="faqForm.email.$dirty && faqForm.email.$error.required">This is a required field</span>
+							<span ng-show="faqForm.$error.email">Enter a valid Email Address</span>
+                            <textarea placeholder="Your message" name="msg" ng-model="user.message" required></textarea>
+							<span ng-show="faqForm.msg.$dirty && faqForm.msg.$error.required">This is a required field</span>
+							<div class="clearfix"></div>	
+							
                             <button type="button" value="Submit" ng-click="userQuery(user)">Submit</button>
                         </form>
                     </div>

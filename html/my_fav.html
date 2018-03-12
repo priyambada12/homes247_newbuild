@@ -1,3 +1,5 @@
+<!-- <div loading-indicator class="waiting-box">
+	<span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
 <div class="container">
 
     <div class="row">
@@ -23,7 +25,7 @@
 					<h3 ng-hide="recentView">Nothing to show you</h3>
                     	<div class="content mCustomScrollbar" ng-show="recentView">
 							
-                            <div class="recently_viewed_box" ng-repeat="userfav in user_Fav_list">
+                            <div class="recently_viewed_box" ng-repeat="userfav in user_Fav_list" ng-click="getpropertydata(userfav);">
 							
 							
                             	<div ng-repeat = "property_deatils in userfav.property_deatils">

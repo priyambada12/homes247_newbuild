@@ -1,10 +1,10 @@
 //(function(){
 var app = angular.module('contactUsApp',['ui.bootstrap','modalApp']);
-app.controller('contactUsCtrl',function($scope, networkFactory,$modal, $log){
+app.controller('contactUsCtrl',function($scope, networkFactory,$modal, $log,$cookies){
 
-	
+//	$cookies.set('key','others');
 //s$('.test_design').niceSelect();
-	$('#first').carouseller({
+	/* $('#first').carouseller({
 					scrollSpeed: 850,
 					autoScrollDelay: -1800,
 					easing: 'easeOutBounce'
@@ -18,7 +18,7 @@ app.controller('contactUsCtrl',function($scope, networkFactory,$modal, $log){
 					scrollSpeed: 800,
 					autoScrollDelay: 1600,
 					easing: 'linear'
-				});
+				}); */
 				
 	$scope.user = {
         name: '',
@@ -41,7 +41,7 @@ app.controller('contactUsCtrl',function($scope, networkFactory,$modal, $log){
             networkFactory.addCallbackDetails(requestParam, function(success) {
                 var status = success.data.status;
                 if (status == "True") {
-					$scope.msgs = "You will intimate you soon";
+					$scope.msgs = "We will intimate you soon.";
                     $scope.open();
                 }
             }, function(error) {

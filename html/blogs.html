@@ -1,3 +1,5 @@
+<!-- <div loading-indicatorblogs class="waiting-box">
+	<span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
 <div class="container">
     	<div class="row">
         	<div class="col-lg-6 col-md-6 col-sm-6">
@@ -24,40 +26,20 @@
             <div class="col-lg-5 col-md-5 col-sm-5">
             	<div class="top_stories_main">
                 	<h1>Top Stories</h1>
-                    <div class="top_stories_info">
-                    	<a href="#">Advantages of owning a property in Bangalore</a>
-                        <p>by Eddard Stark</p>
+                    <div class="top_stories_info" ng-repeat = "tops in topStories">
+                    	<a ui-sref="newStory({param:tops.id,type:1})">{{tops.title}}</a>
+                        <p>{{tops.addedby}}</p>
                     </div>
-                    <div class="top_stories_info">
-                    	<a href="#">Advantages of owning a property in Bangalore</a>
-                        <p>by Eddard Stark</p>
-                    </div>
-                    <div class="top_stories_info">
-                    	<a href="#">Advantages of owning a property in Bangalore</a>
-                        <p>by Eddard Stark</p>
-                    </div>
-                    <div class="top_stories_info">
-                    	<a href="#">Advantages of owning a property in Bangalore</a>
-                        <p>by Eddard Stark</p>
-                    </div>
+                    
                 </div>
                 <div class="recent_stories">
                 	<h1>Recent Stories</h1>
-                    <div class="recent_stories_box">
-                    	<a href="#">Familiarize yourself with real estate business</a>
-                        <p>by John snow</p>
-                        <span><img src="images/recent_stories_img.jpg" alt="" /></span>
+                    <div class="recent_stories_box" ng-repeat = "recents in recentStories">
+                    	<a ui-sref="newStory({param:recents.id,type:2})">{{recents.title}}</a>
+                        <p>{{recents.addedby}}</p>
+                        <span><img ng-src="{{imagepath}}{{recents.imgPath}}" alt="" /></span>
                     </div>
-                    <div class="recent_stories_box">
-                    	<a href="#">Familiarize yourself with real estate business</a>
-                        <p>by John snow</p>
-                        <span><img src="images/recent_stories_img.jpg" alt="" /></span>
-                    </div>
-                    <div class="recent_stories_box">
-                    	<a href="#">Familiarize yourself with real estate business</a>
-                        <p>by John snow</p>
-                        <span><img src="images/recent_stories_img.jpg" alt="" /></span>
-                    </div>
+                    
                 </div>
             </div>
         </div>

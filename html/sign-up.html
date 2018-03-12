@@ -1,4 +1,5 @@
-
+<!-- <div loading-indicator class="waiting-box">
+	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
 <div class="signup_wrapper_main">
 	<div class="left_text">
     	<div class="logo_up">
@@ -23,26 +24,26 @@ online property search experience.
 			<!-- <google-plus-signin clientid="939204790309-ipeio986co1f35sc6b0vd9mnfuvh6rll.apps.googleusercontent.com"></google-plus-signin> -->
 			</button>
         </div>
-        <form name="registrationForm" ng-submit="doRegistration(signup);">
+        <form name="registrationForm" ng-submit="doRegistration(signup);" class="form.validate">
         	<input placeholder="User Name" type="text" name="uname" ng-model="signup.name" required ng-minlength="3"/>
-			<span ng-show="registrationForm.$dirty && registrationForm.uname.$error.required">This is a required field</span>
-            <span ng-show="registrationForm.$dirty && registrationForm.uname.$error.minlength">Minimum length required is 4</span>
-            <span ng-show="registrationForm.$dirty && registrationForm.uname.$invalid">This field is invalid </span>
+			<span ng-show="registrationForm.uname.$dirty && registrationForm.uname.$error.required">This is a required field</span>
+            <span ng-show="registrationForm.uname.$dirty && registrationForm.uname.$error.minlength">Minimum length required is 3</span>
+            
 
-            <input placeholder="Mobile Number" type="number" ng-model="signup.number" name="mobile" required ng-minlength="9"/>
-			<span ng-show="registrationForm.$dirty && registrationForm.mobile.$error.required">This is a required field</span>
-            <span ng-show="registrationForm.$dirty && registrationForm.mobile.$error.minlength">Minimum length required is 10</span>
-            <span ng-show="registrationFormregistrationForm.$dirty && registrationForm.mobile.$invalid">This field is invalid </span>
+            <input placeholder="Mobile Number" type="tel" ng-model="signup.number" name="mobile" required ng-minlength="10" ng-maxlength="13"/>
+			<span ng-show="registrationForm.mobile.$dirty && registrationForm.mobile.$error.required">This is a required field</span>
+            <span ng-show="registrationForm.mobile.$dirty && registrationForm.mobile.$error.minlength">Minimum length required is 10</span>
+            <span ng-show="registrationForm.mobile.$dirty && registrationForm.mobile.$error.maxlength">Mobile Number is too long</span>
 		
-            <input placeholder="Choose a Password" type="password" ng-model="signup.password" name="pwd" required />
-			<span ng-show="registrationForm.$dirty && registrationForm.pwd.$error.required">This is a required field</span>
-            <span ng-show="registrationForm.$dirty && registrationForm.pwd.$invalid">This field is invalid </span>
+            <input placeholder="Choose a Password" type="password" ng-model="signup.password" name="pwd" required ng-minlength="6" />
+			<span ng-show="registrationForm.pwd.$dirty && registrationForm.pwd.$error.required">This is a required field</span>
+            <span ng-show="registrationForm.pwd.$dirty && registrationForm.pwd.$error.minlength">Minimum length required is 6</span>
 			
-            <input placeholder="Email Address (optional)" type="email" ng-model="signup.email" name="email" required />
-			<span ng-show="registrationForm.$dirty && registrationForm.email.$error.required">This is a required field</span>
-            <span ng-show="registrationForm.$dirty && registrationForm.email.$invalid">This field is invalid </span>
+            <input placeholder="Email Address" type="email" ng-model="signup.email" name="email" required />
+			<span ng-show="registrationForm.email.$dirty && registrationForm.email.$error.required">This is a required field</span>
+            <span ng-show="registrationForm.$error.email">Enter a valid Email Address</span>
 			
-			<input type="submit" value="Create Account" ></input>
+			<input type="submit" value="Create Account" ng-disabled="!registrationForm.$valid"></input>
 
             <!-- <a href="#">Create Account</a> -->
         </form>

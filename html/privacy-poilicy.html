@@ -1,4 +1,5 @@
-
+<!-- <div loading-indicator class="waiting-box">
+	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
     <div class="container">
     	<div class="row">
         	<div class="col-lg-12">
@@ -84,26 +85,38 @@ We request you to please provide the following information in your complaint:-
                     </div>
                 </div>
                 <div class="row">
+				<form name="policyForm">
                 	<div class="col-lg-4 col-md-4 col-sm-4">
                     	<div class="clarify_query_form">
                         	<div class="input_div">
-                            	<input placeholder="Name" type="text" ng-model ="user.name" />
+                            	<input placeholder="Name" type="text" ng-model ="user.name" name="uname" required ng-minlength="3" />
+								<span ng-show="policyForm.uname.$dirty && policyForm.uname.$error.required">This is a required field</span>
+								<span ng-show="policyForm.uname.$dirty && policyForm.uname.$error.minlength">Minimum length required is 3</span>
+            				
                             </div>                            
                             <div class="input_div">
                             	<select class="test_design">
                                 	<option>+91 INDIA</option>
                                 </select>
-                            	<input class="inhalf" placeholder="Mobile Number" type="number" ng-model="user.mobileno" />
+                            	<input class="inhalf" placeholder="Mobile Number" type="text" numbers-only ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13" />
+								<span ng-show="policyForm.phno.$dirty && policyForm.phno.$error.required">This is a required field</span>
+							    <span ng-show="policyForm.phno.$dirty && policyForm.phno.$error.minlength">Minimum length required is 10</span>
+							    <span ng-show="policyForm.phno.$dirty && policyForm.phno.$error.maxlength">Mobile Number is too long</span>
+		
                             </div>
                             <div class="input_div">
-                            	<input placeholder="Email Id" type="email" ng-model ="user.email" />
+                            	<input placeholder="Email Id" type="email" name="email" ng-model ="user.email" />
+								<span ng-show="policyForm.email.$dirty && policyForm.email.$error.required">This is a required field</span>
+							    <span ng-show="policyForm.$error.email">Enter a valid Email Address</span>
+                            
                             </div> 
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-8">
                     	<div class="clarify_query_form">
                         	<div class="input_div">
-                            	<textarea placeholder="Your message" ng-model="user.msg"></textarea>
+                            	<textarea placeholder="Your message" ng-model="user.msg" name="msg" required></textarea>
+								<span ng-show="policyForm.msg.$dirty && policyForm.msg.$error.required">This is a required field</span>
                             </div>
                             <div class="input_div">
                             	<p>All email enquiries will be taken care in one business day</p>
@@ -111,6 +124,7 @@ We request you to please provide the following information in your complaint:-
                             </div>
                         </div>
                     </div>
+					</form>
                 </div>
             </div>
        </div>
@@ -129,4 +143,10 @@ We request you to please provide the following information in your complaint:-
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
+    
+             		<script type="text/javascript">
+		$(document).ready(function() {
+		$('.test_design').niceSelect();
+		});
+</script>
 	 

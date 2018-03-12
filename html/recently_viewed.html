@@ -1,3 +1,5 @@
+<!-- <div loading-indicator class="waiting-box">
+	<span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
 <div class="container">
 
     <div class="row">
@@ -22,7 +24,7 @@
 					<h3 ng-hide="recentView">Nothing to show you</h3>
                     	<div class="content mCustomScrollbar" ng-show="recentView">
 							
-                            <div class="recently_viewed_box" ng-repeat="userrecentview in viewedList">
+                            <div class="recently_viewed_box" ng-repeat="userrecentview in viewedList" ng-click="getpropertydata(userrecentview);">
                             	<div ng-repeat="recentview in userrecentview.property_deatils">
 								<span><img ng-src="{{propertyimage}}{{recentview.ImagePath}}" alt="" style="height: 30px;" /></span>
                                 <div class="recently_viewed_text" >

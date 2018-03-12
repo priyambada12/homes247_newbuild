@@ -1,6 +1,6 @@
 //(function(){
-var app = angular.module('propertyApp', ['ui.bootstrap','modalApp']);
-app.factory('propertyFactory', function(networking) {
+var propertyapp = angular.module('propertyApp', ['ui.bootstrap','modalApp']);
+propertyapp.factory('propertyFactory', function(networking) {
     var factory = {};
     factory.getPropretiesByID = function(requestData, callback) {
         return networking.callServerForUrlEncondedPOSTRequest('/get_propertyById', requestData, callback);
@@ -19,8 +19,83 @@ app.factory('propertyFactory', function(networking) {
 	
     return factory;
 });
-app.controller('propertyCtrl', function($scope, propertyFactory, $stateParams,urls,$modal, $log,networkFactory) {
+
+propertyapp.directive('myRepeatDirective', function() {
+  return function(scope, element, attrs) {
+    angular.element(element).css('color','blue');
+	
+    if (scope.$last){
+	  var firstSlides = $("#slideshow-list li"),
+			secondSlides = $("#image-list li"),
+			nbSlides = firstSlides.length,
+			slideTime = 3000,
+			nextSlide = 0,
+			timer;
+			
+			 function slideshow() {
+
+     secondSlides.eq(nextSlide).addClass('active').siblings().removeClass('active');
+     firstSlides.eq(nextSlide).fadeIn().delay(2000).fadeOut();
+     nextSlide = (nextSlide + 1) % nbSlides;
+     timer = setTimeout(slideshow, slideTime);
+	
+ }
+ slideshow();
+ 
+    }
+  };
+});
+propertyapp.directive('validNumber', function() {
+      return {
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModelCtrl) {
+          if(!ngModelCtrl) {
+            return; 
+          }
+
+          ngModelCtrl.$parsers.push(function(val) {
+            if (angular.isUndefined(val)) {
+                var val = '';
+            }
+            
+            var clean = val.replace(/[^-0-9\.]/g, '');
+            var negativeCheck = clean.split('-');
+			var decimalCheck = clean.split('.');
+            if(!angular.isUndefined(negativeCheck[1])) {
+                negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
+                clean =negativeCheck[0] + '-' + negativeCheck[1];
+                if(negativeCheck[0].length > 0) {
+                	clean =negativeCheck[0];
+                }
+                
+            }
+              
+            /*if(!angular.isUndefined(decimalCheck[1])) {
+                decimalCheck[1] = decimalCheck[1].slice(0,2);
+                clean =decimalCheck[0] + '.' + decimalCheck[1];
+            }*/
+
+            if (val !== clean) {
+              ngModelCtrl.$setViewValue(clean);
+              ngModelCtrl.$render();
+            }
+            return clean;
+          });
+
+          element.bind('keypress', function(event) {
+            if(event.keyCode === 32) {
+              event.preventDefault();
+            }
+          });
+        }
+      };
+    });
+propertyapp.controller('propertyCtrl', function($scope, propertyFactory, $stateParams,urls,$modal,
+ $log,networkFactory,$cookies) {
+	//$cookies.set('key','others');
+	$scope.ph_numbr = /^\+?\d{10}$/;
 	$scope.propertyimage=urls.imagesURL+"uploadPropertyImgs/";
+	$scope.uploadBHKImages = urls.imagesURL+"uploadBHKImgs/";
 	$scope.amenitesImages = urls.imagesURL+"amenites/";
     var property_id = $stateParams.param;
 	
@@ -34,7 +109,8 @@ app.controller('propertyCtrl', function($scope, propertyFactory, $stateParams,ur
         name: '',
         mobileno: ''
     };
-
+	
+		
 	
     propertyFactory.getPropretiesByID({
         propId: property_id
@@ -42,16 +118,65 @@ app.controller('propertyCtrl', function($scope, propertyFactory, $stateParams,ur
 		console.log(success.data);
         if (success.data.hasOwnProperty('deatils')) {
             $scope.propDetails = success.data.deatils;
+			$scope.activeItem = $scope.propDetails[0].images[0].Id;
 			console.log(success.data.deatils);
 			$scope.image = $scope.propDetails[0].images[0].name;
 			$scope.location = $scope.propDetails[0].locality_name;
 			$scope.city_name=   $scope.propDetails[0].city_name;
 			var localityId = $scope.propDetails[0].LoaclityId;
+			$scope.tab =  $scope.propDetails[0].BHK_Deatils[0].BHK;
 			$scope.getSimilarProjects(localityId);
+			
         }
     }, function(error) {
         console.log(error);
     });
+		
+		
+		$scope.$on('$viewContentLoaded', function(){
+			var firstSlides = $("#slideshow-list li"),
+			secondSlides = $("#image-list li"),
+			nbSlides = firstSlides.length,
+			slideTime = 3000,
+			nextSlide = 0,
+			timer;
+			console.log(firstSlides);
+			console.log(firstSlides.length);
+			
+  });
+	
+
+        $scope.setTab = function (tabId) {
+			//alert(tabId);
+            $scope.tab = tabId;
+        };
+
+        $scope.isSet = function (tabId) {
+            return $scope.tab === tabId;
+        };
+	
+		$scope.emi ={amount:'',intrestrate:'',term:''};
+	     $scope.getrate=function(emi){
+			 if(emi.amount == ''){
+				 $scope.msgs = "Enter the amount";
+				 $scope.open();
+			 }
+			else if(emi.term == ''){
+				$scope.msgs = "Enter the year";
+				 $scope.open();
+			}else if(emi.intrestrate == ''){$scope.msgs = "Enter the interest rate";
+				 $scope.open();}
+				 else if(emi.amount != '' && emi.intrestrate !='' && emi.term !='')	{ 
+			 var interest_payable= emi.amount*(emi.intrestrate/100)*emi.term;
+			 $scope.interestpayable = interest_payable;
+               $scope.totalAmount = parseInt(interest_payable)+parseInt(emi.amount);
+			   $scope.monthlyAmount=(parseInt(emi.amount)+parseInt(interest_payable))/(parseInt(emi.term)*12);
+			}
+        };
+            
+       
+        
+	
 	
 	$scope.getcallBackForProperties = function(){
 		if ($scope.enquiry.name == "") {
@@ -65,13 +190,16 @@ app.controller('propertyCtrl', function($scope, propertyFactory, $stateParams,ur
 		propertyFactory.getCallBackBasedOnProperty(propertyCallBack,function(success){
 			var status = success.data.status;
                 if (status == "True") {
-                    $scope.msgs = "You will intimate you soon";
+                    $scope.msgs = "We will intimate you soon.";
 					$scope.open();
                 }
 		},function(error){
 			$scope.msgs = "Sorry! we are unable to process your request";
 			$scope.open();
 		});
+		
+		angular.element("input[type='text']").val(null);
+			
 		};
 	};
 
@@ -92,7 +220,7 @@ app.controller('propertyCtrl', function($scope, propertyFactory, $stateParams,ur
             networkFactory.addCallbackDetails(requestParam, function(success) {
                 var status = success.data.status;
                 if (status == "True") {
-					$scope.msgs = "You will intimate you soon";
+					$scope.msgs = "We will intimate you soon.";
                     $scope.open();
                 }
             }, function(error) {
@@ -116,110 +244,14 @@ app.controller('propertyCtrl', function($scope, propertyFactory, $stateParams,ur
 		});
 	};
 	
-    //$('.test_design').niceSelect();
-    $('#first').carouseller({
-        scrollSpeed: 850,
-        autoScrollDelay: -1800,
-        easing: 'easeOutBounce'
-    });
-    $('#third').carouseller({
-        scrollSpeed: 800,
-        autoScrollDelay: 1600,
-        easing: 'linear'
-    });
-    $('#top-project').carouseller({
-        scrollSpeed: 800,
-        autoScrollDelay: 1600,
-        easing: 'linear'
-    });
-    //$(fourd).carouseller();
+	function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    if ((charCode < 48 || charCode > 57))
+        return false;
 
-    $('#horizontalTab').easyResponsiveTabs({
-        type: 'default', //Types: default, vertical, accordion           
-        width: 'auto', //auto or any width like 600px
-        fit: true, // 100% fit in a container
-        closed: 'accordion', // Start closed if in accordion view
-        activate: function(event) { // Callback function if tab is switched
-            var $tab = $(this);
-            var $info = $('#tabInfo');
-            var $name = $('span', $info);
-            $name.text($tab.text());
-            $info.show();
-        }
-    });
-    $('#verticalTab').easyResponsiveTabs({
-        type: 'vertical',
-        width: 'auto',
-        fit: true
-    });
+    return true;
+} 
 
-    <!--**************** Gallery Vertical Silder ****************-->
-
-    var firstSlides = $("#slideshow-list li"),
-        secondSlides = $("#image-list li"),
-        nbSlides = firstSlides.length,
-        slideTime = 3000,
-        nextSlide = 0,
-        timer;
-
-    function slideshow() {
-        secondSlides.eq(nextSlide).addClass('active').siblings().removeClass('active');
-        firstSlides.eq(nextSlide).fadeIn().delay(2000).fadeOut();
-        nextSlide = (nextSlide + 1) % nbSlides;
-        timer = setTimeout(slideshow, slideTime);
-
-    }
-
-    slideshow();
-
-    $('#image-list li').click(function() {
-        clearTimeout(timer);
-        var clickIndex = $(this).index()
-        $('#slideshow-list li').eq(clickIndex).show().siblings().hide();
-    });
-
-    $('#image-list').mouseleave(function(e) {
-        $('#slideshow-list li').hide();
-        clearTimeout(timer);
-        setTimeout(slideshow(), 2000);
-    });
-	/* 
-
-
-  if($(".overview_section_main").offset() !=undefined){
-    var triggerTop = $(".overview_section_main").offset().top - 80;
-    var triggerBottom = triggerTop + $(".overview_section_main").height();
-    var item = $('.sticky-stuff');
-  }
-    $(window).scroll(function() {
-            var curentScroll = $(window).scrollTop();
-            var isSticky = curentScroll > triggerTop && curentScroll < triggerBottom
-            item.toggleClass('sticky', isSticky);
-        })
-        .resize(function() {
-            size = $(window).height();
-        });
-
-
-
-
-    // Prevent console.log from generating errors in IE for the purposes of the demo
-    if (!window.console) console = {
-        log: function() {}
-    };
-
-    // The actual plugin
-    $('.single-page-nav').singlePageNav({
-        offset: $('.single-page-nav').outerHeight(),
-        filter: ':not(.external)',
-        updateHash: true,
-        beforeStart: function() {
-            console.log('begin scrolling');
-        },
-        onComplete: function() {
-            console.log('done scrolling');
-        }
-    }); */
 	
 		$scope.open = function (size) {
     var modalInstance;
@@ -244,9 +276,15 @@ app.controller('propertyCtrl', function($scope, propertyFactory, $stateParams,ur
       $log.info('Modal dismissed at: ' + new Date());
     });
   };
-	
-	
-	
+  
+   $scope.hitimages =function() {
+ //alert("clicked");
+ /* var timer = setTimeout(slideshow, 10000);
+     clearTimeout(timer);
+     var clickIndex = $(this).index()
+     $('#slideshow-list li').eq(clickIndex).show().siblings().hide(); */
+ };
+  
 	
 });
 //});

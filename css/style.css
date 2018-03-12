@@ -4,6 +4,7 @@ body{
 	padding:0;
 	background:#f2f2f2;
 }
+@font-face{font-family:'Pacifico';src:url("/examples/fonts/pacifico.eot");src:url("/examples/fonts/pacifico.eot?#iefix") format("embedded-opentype"),url("/examples/fonts/pacifico.woff") format("woff"),url("/examples/fonts/pacifico.ttf") format("truetype"),url("/examples/fonts/pacifico.svg#Pacifico") format("svg")}.header{padding:20px 0px}.header .title{color:#3498db;font-size:48px;line-height:100px;font-family:'Pacifico'}.header .sub-title{color:#555;font-size:12px;font-style:italic;font-weight:400;margin:10px auto;text-align:center}.blue{background:#3498db;color:#fff}.blue h3{background:#fff;color:#3498db;font-size:36px;line-height:100px;margin:10px;padding:2%;position:relative;text-align:center}.content .content-title{text-align:center;line-height:100px;font-family:'Pacifico'}.footer{padding:20px 0px}.footer .title{color:#3498db;font-size:48px;line-height:100px;font-family:'Pacifico'}.footer .sub-title{color:#555;font-size:12px;font-style:italic;font-weight:400;margin:10px auto;text-align:center}
 
 @font-face {
     font-family: 'kaushan_scriptregular';
@@ -199,6 +200,8 @@ ul.nav_links li a {
 
 /*=============== End ===============*/
 
+
+
 .top_row_right{
 	float:right;
 	margin:0;
@@ -233,7 +236,8 @@ ul.nav_links li a {
 }
 
 .top_row_right li{
-	margin:0 50px 0 0;
+	/*margin:0 50px 0 0;*/
+	margin:0 25px 0 0;
 	display:inline-block;
 }
 
@@ -354,7 +358,7 @@ ul.nav_links li a {
 .slider_search_main .search_section .location_icon {
 	float: left;
 	width: 3%;
-	margin: 17px 0 0 0;
+	margin: 20px 0 0 0;
 }
 
 .slider_search_main .search_section select{
@@ -363,7 +367,7 @@ ul.nav_links li a {
 }
 
 .search_input_box{
-	width:77%;
+	width:75%;
 	float:left;
 }
 
@@ -374,6 +378,7 @@ ul.nav_links li a {
 	color:#b7b7b7;
 	padding:18px 20px;
 	border:none;
+	height: 60px;
 }
 
 .search_section .search_btn a{
@@ -392,6 +397,7 @@ ul.nav_links li a {
 	padding:17px 10px 11px 10px;
 	text-align:center;
 	border:1px solid #e56e2e;
+	height:137px;
 }
 
 .banner_min_slider_box h3{
@@ -414,13 +420,13 @@ ul.nav_links li a {
 }
 
 .home_mini_banner{
-	margin-top: -136px;
+	margin-top: -137px;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0)
 { 
     .home_mini_banner{
-	margin-top: -134px;
+	margin-top: -137px;
 }
 }
 
@@ -430,10 +436,12 @@ ul.nav_links li a {
 	padding:0;
 	text-align:center;
 	border:1px solid #fff;
+	height:137px;
 }
 
 .banner_min_slider_box_video .bg_img img{
 	width:100%; 
+	height:137px;
 }
 
 .banner_min_slider_box_video h4{
@@ -473,7 +481,7 @@ ul.nav_links li a {
 /*============= India Properties hover effect css start ================*/
 
 .hovereffect {
-  width: 100%;
+  /*width: 100%;*/
   height: 100%;
   float: left;
   overflow: hidden;
@@ -615,7 +623,9 @@ ul.nav_links li a {
 }
 
 .top_projects_section .top_projects_box{
-	margin:0;
+	/*margin:0;*/
+	margin-left: 5px;
+	margin-right: 5px;
 	padding:0;
 	background:#FFF;
 }
@@ -633,10 +643,12 @@ ul.nav_links li a {
 
 .top_projects_box .pi_main img{
 	width:100%;
+	height:240px;
 }
 
 .top_project_info{
 	padding:10px;
+	min-height: 130px;
 }
 
 .top_project_info:after{
@@ -683,6 +695,7 @@ ul.nav_links li a {
 .top_project_info .pi_right{
 	float:left;
 	width:60%;
+	font-size: 0;
 	text-align:left;
 }
 
@@ -880,7 +893,7 @@ ul.nav_links li a {
 	position: relative;
 	padding: 0;
 	width: 340px;
-	margin: 0 auto;
+	margin: -85px auto 0 auto;
 }
 
 .best_price_box:after{
@@ -893,13 +906,14 @@ ul.nav_links li a {
 }
 	
 
-.best_price_box .best_price_icon1{
-	position:absolute;
-	margin:0 auto;
-	left:0;
-	right:0;
-	top:0;
-	display: table;
+.best_price_box .best_price_icon1 {
+    position: absolute;
+    margin: 0 auto;
+    left: 140px;
+    top: 0;
+    display: table;
+    width: 60px;
+    text-align: center;
 }
 
 .best_price_box .best_price_icon2{
@@ -916,13 +930,13 @@ ul.nav_links li a {
 	top:170px;
 }
 
-.best_price_box .best_price_icon4{
-	position:absolute;
-	margin:0 auto;
-	left:0;
-	right:0;
-	top:250px;
-	display: table;
+.best_price_box .best_price_icon4 {
+    position: absolute;
+    margin: 0 auto;
+    left: 140px;
+    top: 250px;
+    display: table;
+    width: 60px;
 }
 
 .best_price_box .best_price_icon5{
@@ -1008,8 +1022,9 @@ ul.nav_links li a {
 	color: #FFF;
 	text-transform: uppercase;
 	display: table;
-	padding: 1px 60px;
+	padding:10px 60px;
 	margin: 50px auto 0 auto;
+	border: 0;
 }
 
 .call_back_form p{
@@ -1028,21 +1043,21 @@ ul.nav_links li a {
 
 
 .rera_section_mian {
-	margin: 135px 0 0 0;
+	margin: 35px 0 0 0;
 	background: #0a3544;
-	padding: 25px 0;
+	padding: 10px 0;
 	text-align: center;
 }
 
 .rera_section_mian h1{
-	font-size:25px;
+	font-size:20px;
 	font-weight:500;
 	color:#e5652e;
 	margin:0 0 5px 0;
 }
 
 .rera_section_mian p{
-	font-size:20px;
+	font-size:18px;
 	font-weight:400;
 	color:#fff;
 	margin:0;
@@ -1380,13 +1395,27 @@ ul.nav_links li a {
 
 .inner_header_search{
 	float:left;
-	width:440px;
-	border:1px solid #c5c4c4;
+	/*width:440px;
 	margin:8px 0 0 30px;
+	*/
+	width:400px;
+	margin:8px 0 0 20px;
+	display: flex;
+
+	border:1px solid #c5c4c4;
 	position:relative;
 	background: #fff;
 }
-
+.inner_header_search>.ui.selection.dropdown{
+	    min-width: 5em!important;
+    padding: 0px;
+    border: 0px;
+    border-right: 1px solid #d8d8d8;
+    border-radius: 0px;
+}
+.inner_header_search>.search_input_box input{
+	height: auto!important;
+}
 .inner_header_search .location_icon {
 	width: 6%;
 	text-align: center;
@@ -1621,7 +1650,7 @@ ul.nav_links li a {
 	padding:30px 0 140px 0;
 	clear:both;
 	background-size:cover;
-	margin:30px 0 0 0;
+	margin:30px 0 20px 0;
 }
 
 .our_mission_main h1 {
@@ -1643,6 +1672,7 @@ ul.nav_links li a {
 	color:#0b3544;
 	font-weight:300;
 	text-align:center;
+	margin-top: 20px;
 }
 
 
@@ -1718,16 +1748,18 @@ ul.nav_links li a {
 	margin: 2px 10px 0 0;
 }
 
-.properties_per_page{
-	float:right;
+.properties_per_page {
+	float: right;
+	width: 32%;
 }
 
 .properties_per_page p{
 	font-size:12px;
-	color:1c1c1c;
-	margin:0;
+	color:#1c1c1c;
+	margin:2px 0 0 0;
 	font-weight:400;
 	display:inline-block;
+	float:left;
 }
 
 .city_search_filter h1{
@@ -1744,6 +1776,7 @@ ul.nav_links li a {
 .sort_by_city{
 	margin:0;
 	float:right;
+	width:100%;
 }
 
 .sort_by_city h5{
@@ -1751,8 +1784,9 @@ ul.nav_links li a {
 	font-size:14px;
 	color:#1c1c1c;
 	font-weight:400;
-	margin:0;
+	margin:0 5px 0 0;
 	line-height: 22px;
+	float:right;
 }
 
 .sort_by_city .test_design{
@@ -1765,6 +1799,23 @@ ul.nav_links li a {
 	font-size:15px;
 	font-weight:400;
 	width: 65%;
+}
+
+.sort_by_city select.select_design{
+	background: url(../images/select_arrow.png) no-repeat center right transparent;
+	width: 45%;
+	border: 0;
+	font-size: 15px;
+	font-weight: 400;
+	height: 25px;
+	float: right;
+	margin: 0;
+	color: #e5652e;
+	padding-right: 0;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
 }
 
 .sort_by_city .nice-select::after {
@@ -2022,6 +2073,12 @@ ul.nav_links li a {
 	color: #e5652e;
 	background-color: #fff;
 	border-color: #ddd;
+}
+
+.pagination > .active > a , .pagination > .active > a:hover{
+	color: #e5652e;
+	background-color: #fff;
+	border-color: #ddd;	
 }
 
 .pagination_main_left{
@@ -2357,6 +2414,7 @@ ul.nav_links li a {
 
 .contact_us_map{
 	margin:0;
+	margin-bottom: -40px!important;
 }
 
 
@@ -2397,6 +2455,10 @@ ul.nav_links li a {
 	border:1px solid #d7d7d7;
 	-moz-appearance:none;
 	-webkit-appearance:none;
+}
+
+.loan_emi_calculator select:focus{
+	outline:none;
 }
 
 .loan_emi_calculator_box{
@@ -2526,7 +2588,7 @@ ul.nav_links li a {
 	display:inline-block;
 	font-size:24px;
 	color:#1c1c1c;
-	padding:6px 27px;
+	padding:12px 27px;
 	border:1px solid #e5652e;
 	font-weight:600;
 	text-decoration:none;
@@ -2624,7 +2686,7 @@ ul.nav_links li a {
 	color: #FFF;
 	text-transform: uppercase;
 	display: inline-block;
-	padding: 1px 80px;
+	padding: 10px 80px;
 	margin: 10px 0 0 2%;
 	float:right;
 }
@@ -2735,6 +2797,17 @@ ul.nav_links li a {
 	margin-bottom:30px;
 }
 
+.faq_form_main form input[type="email"]{
+	border:none;
+	border-bottom:1px solid #1c1c1c;
+	padding: 5px 0px;
+	font-size: 16px;
+	font-weight: 400;
+	width:100%;
+	color:#494848;	
+	background:transparent;
+	margin-bottom:30px;
+}
 .faq_form_main form textarea{
 	border:none;
 	border:1px solid #1c1c1c;
@@ -2754,7 +2827,7 @@ ul.nav_links li a {
 	color: #FFF;
 	text-transform: uppercase;
 	display:block;
-	padding: 1px 0px;
+	padding: 10px 0px;
 	margin:0;
 	border:none;
 	width: 100%;
@@ -2939,7 +3012,7 @@ ul.nav_links li a {
 	font-size: 20px;
 	color: #FFF;
 	display: table;
-	padding: 6px 70px;
+	padding: 10px 70px;
 	margin: 50px auto 0 auto;
 }
 
@@ -3000,6 +3073,10 @@ ul.nav_links li a {
 	margin:0;
 	padding:0;
 	position:relative;
+}
+
+.property_details_banner > img {
+    height: 450px;
 }
 
 .property_details_banner img{
@@ -3251,7 +3328,7 @@ ul.nav_links li a {
 }
 
 .gallery_slider_box .content{
-	height:280px;
+	height:400px;
 }
 
 .gallery_slider_box .mCSB_inside > .mCSB_container {
@@ -3464,6 +3541,7 @@ ul.nav_links li a {
 	width:100%;
 	border:1px solid #e5652e;
 	transition:all 0.5s ease;
+	height: 163px;
 }
 
 .similar_projects_box:hover img{
@@ -3481,6 +3559,7 @@ ul.nav_links li a {
   text-align:center;
   margin:0;
   padding:0;
+  width: 80%;
 }
 
 .similar_projects_box h4 small{
@@ -3566,13 +3645,17 @@ ul.nav_links li a {
 	width: 25%;
 	border: 0;
 	border-bottom: 1px solid #d7d7d7;
-	font-size: 22px;
+	font-size: 14px;
 	font-weight:300;
 	height: 50px;
 	float: left;
 	margin: 0;
 	color:#6f6f6f;
 	padding-right:0;
+}
+
+.property_details_form .nice-select .option {
+    padding-left: 8px;
 }
 
 .property_details_form .gcb_btn {
@@ -4608,7 +4691,7 @@ ul.nav_links li a {
 .fsp-close {
 	background: url(../images/exit_map_btn.jpg) #fff no-repeat right center;
 	border:1px solid #a1a1a1;
-	width: 415px;
+	width: 150px;
 	height: 54px;
 	right: 0 !important;
 	top: 80px !important;
@@ -4621,7 +4704,7 @@ ul.nav_links li a {
 	text-decoration:none;
 }
 
-.fsp-close::after {
+/* .fsp-close::after {
 	content: "3500 Properties found";
 	font-size: 17px;
 	color: #1c1c1c;
@@ -4629,7 +4712,7 @@ ul.nav_links li a {
 	position: absolute;
 	left: 25px;
 	top: 11px;
-}
+} */
 
 /*================ Sign Up Css =================*/
 
@@ -4672,13 +4755,21 @@ ul.nav_links li a {
 	padding:0;
 	display:block;
 }
-
 .signup_wrapper_main .left_text .welcome_text p{
+font-size:14px;
+color:#1c1c1c;
+font-weight:400;
+/*margin: 0 20px;*/
+margin: 0 30px;
+}
+
+
+/* .signup_wrapper_main .left_text .welcome_text p{
 	font-size:14px;
 	color:#1c1c1c;
 	font-weight:400;
 	margin: 0 20px;
-}
+} */
 
 .signup_wrapper_main .left_text .welcome_text h2{
 	font-size:16px;
@@ -4919,21 +5010,218 @@ ul.nav_links li a {
 	color: #FFF;
 	text-decoration: none;
 }
+
+.similar_projects_slider .carousel-block{
+	background-color: transparent;
+}
 	 
 	 
 	 
 
 
 
+/*===============15-2-2018 ==================*/
+
+.slider_search_main .test_design {
+    min-width: 165px !important;
+    float: left;
+    height: 59px;
+}
 
 
+/*=============== 23-02-2018 css start ===============*/
 
+.search_section .ui.selection.dropdown {
+	float: left;
+	width: 22%;
+	min-width: auto;
+	line-height: 29px;
+	border: 0;
+	border-right:solid 1px #e8e8e8;
+	border-radius: 0;
+	font-size:19px;
+	padding-left: 5px;
+}
 
+.search_section .ui.selection.dropdown .dropdown.icon {
+	top: 10px;
+	font-size: 30px;
+	padding: 25px 5px 0 0;
+}
+
+.search_section .ui.selection.dropdown .default.text{
+	color:#454545;
+}
+	
 
 
 
 	
+.top_project_filter .ui.selection.dropdown {
+	float: left;
+	width: 80%;
+	min-width: auto;
+	line-height: 10px;
+	border: 0;
+	border-right: 0px solid #ccc;
+	border-radius: 0;
+	font-size: 19px;
+	padding-left: 5px;
+	min-height: auto;
+}
 
+.top_project_filter .ui.selection.dropdown .dropdown.icon {
+    top: 10px;
+    font-size: 30px;
+    padding: 16px 5px 0 0;
+}
+
+.top_project_filter .ui.selection.dropdown .default.text{
+	color:#454545;
+}
+
+
+.call_back_form .ui.selection.dropdown {
+	float: left;
+	width: 18%;
+	min-width: auto;
+	line-height: 21px;
+	border: 0;
+	border-bottom: 1px solid #0a3544;
+	border-radius: 0;
+	font-size: 12px;
+	padding-left: 5px;
+	min-height: auto;
+	background: transparent;
+	margin-right: 27px;
+}
+
+.call_back_form .ui.selection.dropdown .dropdown.icon {
+	top: 6px;
+	font-size: 21px;
+	padding: 16px 5px 0 0;
+	color: #929292;
+}
+
+.call_back_form .ui.selection.dropdown .default.text{
+	color:#454545;
+}
+
+.call_back_form .ui.selection.active.dropdown .menu {
+    border-color: rgba(68, 68, 68, 0.11);
+    box-shadow: 0px 0px 0px 0px rgba(34, 36, 38, 0.15);
+}
+
+.call_back_form .ui.selection.active.dropdown {
+    border-color: #96C8DA;
+    box-shadow: 0px 0px 0px 0px rgba(34, 36, 38, 0.15);
+}
+
+
+.properties_per_page .test_design{
+	width:32%;
+	background:transparent;
+	border:none;
+	font-size:15px;
+	float:right;
+	height:auto;
+	padding-right: 20px;
+}
+
+.properties_per_page select.select_design{
+	background: url(../images/select_arrow.png) no-repeat center right transparent;
+	width: 32%;
+	border: 0;
+	font-size: 15px;
+	font-weight: 400;
+	height: 25px;
+	float: right;
+	margin: 0;
+	color: #454545;
+	padding-right: 0;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+}
+
+.properties_per_page .icon_city {
+	float: left;
+	width: 13%;
+	margin: 18px 0 0 0;
+}
+
+.properties_per_page .nice-select{
+	line-height: 20px;
+}
+
+.properties_per_page .nice-select::after{
+	width:10px;
+	height:10px;
+	right: 8px;
+	top: 13px;
+}
+
+.property_details_form select{
+	background: url(../images/select_arrow.png) no-repeat center right transparent;
+	width: 25%;
+	border: 0;
+	border-bottom: 1px solid #d7d7d7;
+	font-size: 22px;
+	font-weight: 300;
+	height: 50px;
+	float: left;
+	margin: 0;
+	color: #6f6f6f;
+	padding-right: 0;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	-ms-appearance:none;
+	-o-appearance:none;
+}
+
+.property_details_form select:focus{
+	outline:none;
+}
+
+select:focus, input:focus{
+	outline:none;
+}
+
+select.select_design{
+	background: url(../images/select_arrow.png) no-repeat center right transparent;
+	width: 67%;
+	border: 0;
+	font-size: 15px;
+	font-weight: 400;
+	height: 50px;
+	float: left;
+	margin: 0;
+	color: #454545;
+	padding-right: 0;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+}
+
+.call_back_form select.select_design{
+	background: url(../images/select_arrow.png) no-repeat center right transparent;
+	width: 150px;
+	border: 0;
+	font-size: 15px;
+	font-weight: 400;
+	height: 41px;
+	float: left;
+	margin: 0 20px 0 0;
+	border-bottom: 1px solid #0a3544;
+	color: #454545;
+	padding-right: 0;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+}
 
 
 
@@ -5532,31 +5820,111 @@ Label the data
 .properties-table-section td:nth-of-type(5):before { content: "Earnings"; }
 .properties-table-section td:nth-of-type(6):before { content: "Referral ID"; }
 
+}
 
+.waiting-box {
+    display: block;
+    position: fixed; /* fixed position so it doesn't scroll */
+    z-index: 9999; /* on top of everything else */
+    width: 250px;
+    margin-left: -125px; /* horizontally centered */
+    left: 50%;
+    top: 10px; /* displayed on the top of the page, just like Gmail's yellow info-box */
+    height: 60px;
+    padding: 10px;
+    background-color: #f3e9b5;
+    border-radius: 4px;
+}
 
-
-
-
+a,.propclass{
+	cursor:pointer;
 }
 
 
 	
 
 
+.slick-next:before, .slick-prev:before{
+	color:#000000!important;
+}
+/* Code Started By raj kamal*/
+
+.search_section>.search_btn{
+cursor: pointer;
+}
+.slick-slide>.hovereffect{
+cursor: pointer!important;	
+}
+.top_projects_section{
+margin-top: 15px;
+}
+.top_project_info>.pi_right>ul>li>a{
+cursor: pointer;
+}
+
+.new_project_details_box{
+cursor: pointer;
+}
+.new_ptest>a:hover{
+cursor: pointer;	
+}/* 
+.footer_right_links_wrapper{
+display: flex;
+width: 55%;
+} */
+.mrgLft15{
+margin-left: 15px;
+}
+.social_btns>button{
+	background:transparent!important;
+	border:0px!important;
+}
+.new_project_details_box .new_pimg{
+   max-height: 350px;
+   max-width: 570px;
+   width: 570px;
+   height: 350px;
+   }
+
+   .mask{
+   	cursor: pointer;
+   }
+.new_project_info>ul>li>a{
+   	cursor: pointer;
+}
+
+/*.sidenav{
+width: 310px;
+}
+*/
+.signup_wrapper_main .right_text form{
+padding-bottom: 45px;
+}
+
+.bgWhite{
+	background:#f2f2f2!important;
+	    margin-top: -20px;
+    padding-top: 20px;
+}
+
+.navbar-default {
+    background-color: transparent!important;
+    border-color: transparent!important;
+}
+
+.errorText{
+	color: #f00!important;
+}
+#fixRightSidebar {
+  background-color:#eee;
+  height:100%;
+  position:fixed;
+  right:0;
+}
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+/* Code Ends here*/

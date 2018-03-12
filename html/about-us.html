@@ -1,4 +1,5 @@
-    <div class="about_us_banner">
+
+<div class="about_us_banner">
     	<img src="images/about_us_banner.jpg" alt="" />
         <h2>We Bring Your Dream Home to Reality!</h2>
     </div>
@@ -67,15 +68,21 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
 					
                     	<h1>Contact Us</h1>
 						
-                    	<form>
+                    	<form name="aboutForm">
 						
-                        	<input placeholder="Name" type="text" ng-model="user.name" />                            
+                        	<input placeholder="Name" name="uname" required ng-minlength="3" type="text" ng-model="user.name" />                            
                             <select class="test_design">
                             	<option>+91 INDIA</option>
                             </select>
-                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno"/>
+                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13"/>
                             <div class="clearfix"></div>
-							
+							<span ng-show="aboutForm.uname.$dirty && aboutForm.uname.$error.required">This is a required field</span>
+							<span ng-show="aboutForm.uname.$dirty && aboutForm.uname.$error.minlength">Minimum length required is 3</span>
+            				
+							<span ng-show="aboutForm.phno.$dirty && aboutForm.phno.$error.required">This is a required field</span>
+							<span ng-show="aboutForm.phno.$dirty && aboutForm.phno.$error.minlength">Minimum length required is 10</span>
+							<span ng-show="aboutForm.phno.$dirty && aboutForm.phno.$error.maxlength">Mobile Number is too long</span>
+		
                             <button class="btn_style" ng-click="callBack(user);">Get Call Back</button>
 							
                         </form>                        
@@ -98,6 +105,11 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
         </div>
     </script>
 	 
+         		<script type="text/javascript">
+		$(document).ready(function() {
+		$('.test_design').niceSelect();
+		});
+</script>
     
     
     

@@ -2,8 +2,8 @@
 var app = angular.module('buildPageApp',[]);
 
 app.controller('builderPageCtrl',function(){
-	
-	 $('.test_design').niceSelect();
+	//$cookies.set('key','others');
+	 /* $('.test_design').niceSelect();
 	 
 	 $('#first').carouseller({
 					scrollSpeed: 850,
@@ -21,7 +21,7 @@ app.controller('builderPageCtrl',function(){
 					easing: 'linear'
 				});
 	
-	$(fourd).carouseller();
+	$(fourd).carouseller(); */
 });
 
 

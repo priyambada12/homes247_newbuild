@@ -1,0 +1,418 @@
+  <div loading-indicator class="waiting-box">
+	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div>
+<div class="slider_section_main">    	
+        <div class="slider_search_main">
+        	<h2>Find Happiness With Homes247.in</h2>
+            <div class="search_section">
+            	<div class="location_icon"><img src="images/search_location_icon.png" alt="" /></div>
+				
+				<select class="ui selection dropdown" ng-options="citydata as citydata.city for citydata in cities track by citydata.city" 
+				ng-model="currentCity" ng-change="getBuilders();">
+					 <option value="">Bengaluru</option> 
+					<!-- <option value="" selected>Please Select</option> -->
+            	<!-- <select class="test_design" ng-model="city" ng-options="city for city in cities"> -->
+                	
+                </select>
+                <div class="search_input_box">
+				<!-- <select class="test_design" placeholder="Enter a location, builder, project or a RERA ID"
+				ng-options="list as list.name for list in autolist" ng-model="builderData">
+				
+            	
+                	
+                </select> -->
+                 <input client-auto-complete class="form-control" ng-model="ctrl.client.name" 
+placeholder="Enter a location, builder, project or a RERA ID" type="text">
+                            
+                            <input client-auto-complete class="form-control" ng-model="ctrl.client" placeholder="Enter a location, builder, project or a RERA ID" type="hidden">
+                	<!-- <input placeholder="Enter a location, builder, project or a RERA ID" type="text" ng-model="builderData" /> -->
+                </div>
+                <div class="search_btn"><a ng-click="getProjects(currentCity)"><img src="images/search_icon.png" alt="" /></a></div>
+            </div>
+        </div>
+    </div>
+   
+    <div class="home_mini_banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="first" class="carouseller"> 
+                            <a href="javascript:void(0)" class="carousel-button-left"><img src="images/mini_banner_right_arrow.png" alt="" /></a> 
+                            <div class="carousel-wrapper"> 
+                                <div class="carousel-items"> 
+                                    <div class="span3 carousel-block">
+                                        <div class="banner_min_slider_box">
+                                            <h3>Get Value of Any Property</h3>
+                                            <span><img src="images/icon_1.png" alt="" /></span>
+                                            <p>know the accurate estimate of any property with Propworth App</p>
+                                        </div>
+                                    </div>
+                                    <div class="span3 carousel-block">
+                                        <div class="banner_min_slider_box" style="border-color:#23c067;">
+                                            <h3>Ask Your Questions here</h3>
+                                            <span><img src="images/icon_2.png" alt="" /></span>
+                                            <p>Discuss RERA & all your property concerns. Get answers from experts & users</p>
+                                        </div>
+                                    </div>
+                                    <div class="span3 carousel-block">
+                                        <div class="banner_min_slider_box" style="border-color:#f76c6c;">
+                                            <h3>Home Loans at Best Rates</h3>
+                                            <span><img src="images/icon_3.png" alt="" /></span>
+                                            <p>Finalized your Home? Get Great deals in Home Loans in your city</p>
+                                        </div>
+                                    </div>
+                                    <div class="span3 carousel-block">
+                                        <div class="banner_min_slider_box_video" style="border-color:#fff;">                                            
+                                            <div class="bg_img"><img src="images/mini_banner_img.jpg" alt="" /></div>
+                                            <h4>How Homes247 works?</h4>
+                                        </div>
+                                    </div>
+                                    <div class="span3 carousel-block">
+                                        <div class="banner_min_slider_box">
+                                            <h3>Get Value of Any Property</h3>
+                                            <span><img src="images/icon_1.png" alt="" /></span>
+                                            <p>know the accurate estimate of any property with Propworth App</p>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                            <a href="javascript:void(0)" class="carousel-button-right"><img src="images/mini_banner_left_arrow.png" alt="" /></a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="properties_india_main" >
+        <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Properties In India</h1>
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="col-lg-12">
+		<!-- SLICK-SLIDER -->
+			
+					<div class="content">
+					<slick class="slider" init-onload="true" settings="slickConfig3" ng-if="slickConfig3Loaded">
+					<div class="span3 carousel-block" ng-repeat ="cityname in cities">
+					
+						<div class="hovereffect">	
+                            <img ng-src="{{imagePath}}{{cityname.imagPath}}" alt="" />
+                            <div class="overlay">
+                               <h2>{{cityname.city}}</h2>
+                               <a class="info" ng-click="getProjects(cityname);">View projects</a>
+                            </div>
+                        </div>
+					</div>
+					</slick>
+					</div>
+		<!-- SLICK-SLIDER -->
+                    </div>
+                </div>
+         </div>
+    </div>
+    
+    <div class="top_projects_section">
+    	<div class="container">
+        	<div class="row">
+            	<div class="col-lg-12">
+                	<h1>Top Projects</h1>
+                    <div class="top_project_filter">
+                    	<div class="checkin_icon"><img ng-src="images/search_location_icon.png" alt="" /></div>
+                    	<select class=" ui selection dropdown" ng-options="citydata as citydata.city for citydata in cities" 
+						ng-model="cityProperty" ng-change="getProperties();" >
+                            <option value="">Bengaluru</option> 
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" >
+            	<div class="col-lg-12" >
+    
+	<!---	SLICK-SLIDER  --->
+			
+				<div class="content">
+				<slick class="slider" init-onload="true" settings="slickConfig2" ng-if="slickConfig2Loaded">
+				<div class="span4 carousel-block" ng-repeat="property in topProperties" >	
+						<div class="top_projects_box" ng-repeat = "image in property.images | limitTo:1">
+                        	<a href="#" class="pi_main"><img ng-src="{{propertyimage}}{{image.name}}" alt="" class="propclass" ng-click="getPropertyID(property.property_info_IDPK);" /></a>
+                            <div class="top_project_info">
+                            <div class="pi_left">
+                            	<h2 class="propclass" ng-click="getPropertyID(property.property_info_IDPK);">{{property.propertyName}} <small>{{property.locality_name}},{{property.city_name}}</small></h2>
+                                <h3>
+                                	<span class="bed_img" ><img src="images/bed_icon.png" alt="" /></span>
+                                    {{property.bhk}}
+                                </h3>
+                            </div>
+                            <div class="pi_right">
+                            	<div class="pi_star"><a ng-click="userFav(property,$parent.$index);" id="{{$parent.$index}}">
+								<img src="images/start_icon.png" alt="" ng-if="!property.user_fav"/>
+								<img src="images/selected_star.png" alt="" ng-if="property.user_fav"/></a></div>
+                                <h5><i class="fa fa-inr" aria-hidden="true"></i> {{property.price_min}} Onwards</h5>
+                                <div class="clearfix"></div>
+                                <ul>
+                                	<li><a ng-click="getPropertyID(property.property_info_IDPK);">View Details</a></li>
+                                    <li class="enquire"><a ui-sref="enquiry({param:property.property_info_IDPK})">Enquire Now</a></li>
+                                </ul>
+                            </div>
+                            </div>
+                        </div>
+					</div>
+					</slick>
+					</div>
+	
+	<!---	SLICK-SLIDER  --->
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="new_project_main">
+    	<div class="container">
+        	<div class="row">
+            	<div class="col-lg-12 col-md-12 col-sm-12">
+                	<h1>New Projects</h1>
+                </div>
+            </div>
+        	<div class="row">
+            	<div class="col-lg-12 col-md-12 col-sm-12">
+				
+		<!-- SLICK-SLIDER -->
+				
+				<div class="content">
+				<slick class="slider" settings="slickConfig4" ng-if="slickConfig4Loaded">
+					<div class="span6 carousel-block"  ng-repeat="newProp in newProperties" >		
+                    	<div class="new_project_details_box">				
+                        <div class="view view-eighth" ng-repeat = "image in newProp.images | limitTo:1">
+                    <img class="new_pimg" ng-src="{{propertyimage}}{{image.name}}" alt="" />
+                    <div class="mask">
+                        <div class="new_project_info">
+                        	<h4>{{newProp.propertyName}}</h4>
+                            <h3><img src="images/location_icon.png" alt="" /> {{newProp.locality_name}},{{newProp.city_name}}</h3>
+                            <div class="clearfix"></div>
+                            <h6><img src="images/bed_icon_2.png" alt="" /> {{newProp.bhk}} </h6>
+                            <h6><i class="fa fa-inr" aria-hidden="true"></i> {{newProp.price_min}} - {{newProp.price_max}}</h6>
+                            <div class="clearfix"></div>
+                            <ul>
+                            	<li><a ng-click="getPropertyID(newProp.property_info_IDPK);">View Details</a></li>
+                                <li class="enquire"><a ui-sref="enquiry({param:newProp.property_info_IDPK})">Enquire Now</a></li>
+                            </ul>
+                        </div>
+                        <p class="new_ptest">{{newProp.discription}} <a ng-click="getPropertyID(newProp.property_info_IDPK);">view this property</a></p>
+                    </div>
+                </div>
+                		</div>
+					</div>
+					</slick>
+					</div>
+		
+		<!-- SLICK-SLIDER -->
+		
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="call_back_section">
+    	<div class="container">
+        	<div class="row">
+            	<div class="col-lg-12 col-md-12 col-sm-12">
+                	<h1>Call Back</h1>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-lg-5 col-md-5 col-sm-5">
+                	<div class="best_price_box">
+                    	<h5>Best Price</h5>
+                    	<div class="best_price_icon1"><img src="images/best_price_icon1.png" alt="" /></div>
+                        <div class="best_price_icon2"><img src="images/best_price_icon2.png" alt="" /></div>
+                        <div class="best_price_icon3"><img src="images/best_price_icon3.png" alt="" /></div>
+                        <div class="best_price_icon4"><img src="images/best_price_icon4.png" alt="" /></div>
+                        <div class="best_price_icon5"><img src="images/best_price_icon5.png" alt="" /></div>
+                        <div class="best_price_icon6"><img src="images/best_price_icon6.png" alt="" /></div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-7">
+                	<div class="call_back_form">
+                    	<form name="contactForm">
+                        	<input placeholder="Name" name="uname" type="text" ng-model="user.name" required ng-minlength="3"/> 
+										
+                            <select class="ui selection dropdown">
+                            	<option>+91 INDIA</option>
+                            </select>
+                            <input placeholder="Mobile Number" name="phno" type="text" ng-model="user.mobileno" required ng-minlength="10" ng-maxlength="13"/>
+							
+                            <div class="clearfix"></div>
+							<span class="error" ng-show="contactForm.uname.$dirty && contactForm.uname.$error.required">This is a required field</span>
+							<span ng-show="contactForm.uname.$dirty && contactForm.uname.$error.minlength">Minimum length required is 3</span>
+            				
+							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.required">This is a required field</span>
+							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.minlength">Minimum length required is 10</span>
+							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.maxlength">Mobile Number is too long</span>
+		
+                            <button class="btn_style" ng-click="callBack(user);">Get Call Back</button>
+							
+                        </form>
+                        <p>
+                        	All the request are handled in just 5 minutes, Please <a href="#">click here</a> to raise a ticket if we <br /> have missed the deadline.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="rera_section_mian">
+    	<div class="container">
+        	<div class="row">
+            	<div class="col-lg-12">
+                	<h1>Real Estate Regulatory Authority (RERA)</h1>
+                    <p>Get a brief summary of RERA & Its benefits <a href="#">here</a>. You can also browse through RERA registered projects in Top cities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="testimonials_section_main">
+    	<div class="container">
+        	<div class="row">
+            	<div class="col-lg-12">
+                	<h1>Testimonials</h1>
+                    
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <div class="testimonials_text">
+        				<div class="testi_media"><img src="images/video_img.jpg" alt="" /></div>
+                    	<div class="testi_text">
+                        	<p>
+                            <sub>“</sub>
+                            	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+							<sub>“</sub>
+                            </p>
+                            <h5>
+                            	Akina Parvathi
+                                <small>Bengaluru</small>
+                            </h5>
+                        </div>                        
+                    </div>
+      </div>
+
+      <div class="item">
+        <div class="testimonials_text">
+        				<div class="testi_media"><img src="images/video_img.jpg" alt="" /></div>        					
+                    	<div class="testi_text">
+                        	<p>
+                            <sub>“</sub>
+                            	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+							<sub>“</sub>
+                            </p>
+                            <h5>
+                            	Akina Parvathi
+                                <small>Bengaluru</small>
+                            </h5>
+                        </div>                        
+                    </div>
+      </div>
+    
+      <div class="item">
+        <div class="testimonials_text">
+        				<div class="testi_media"><img src="images/video_img.jpg" alt="" /></div>
+                    	<div class="testi_text">
+                        	<p>
+                            <sub>“</sub>
+                            	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
+ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+							<sub>“</sub>
+                            </p>
+                            <h5>
+                            	Akina Parvathi
+                                <small>Bengaluru</small>
+                            </h5>
+                        </div>
+                        
+                    </div>
+      </div>
+    </div>
+    
+        <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="blogs_section_main">
+    	<div class="container">
+        	<div class="row">
+            	<div class="col-lg-12">
+                	<h1>Blogs</h1>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-lg-4 col-md-4 col-sm-4">
+                	<div class="blog_info_box">
+                    	<a href="#"><img src="images/blog_img_1.jpg" alt="" /></a>
+                        <h5>Date : 25 - Oct, 2017</h5>
+                        <h6><i class="fa fa-comment" aria-hidden="true"></i> Interactions (10)</h6>
+                        <div class="clearfix"></div>
+                        <h2>How to pick your best property ?</h2>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                	<div class="blog_info_box">
+                    	<a href="#"><img src="images/blog_img_2.jpg" alt="" /></a>
+                        <h5>Date : 25 - Oct, 2017</h5>
+                        <h6><i class="fa fa-comment" aria-hidden="true"></i> Interactions (10)</h6>
+                        <div class="clearfix"></div>
+                        <h2>How to pick your best property ?</h2>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                	<div class="blog_info_box">
+                    	<a href="#"><img src="images/blog_img_3.jpg" alt="" /></a>
+                        <h5>Date : 25 - Oct, 2017</h5>
+                        <h6><i class="fa fa-comment" aria-hidden="true"></i> Interactions (10)</h6>
+                        <div class="clearfix"></div>
+                        <h2>How to pick your best property ?</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	 <script type="text/ng-template" id="myModalContent.html">
+         <div class="modal-header">
+           <h3 class="modal-title">Message</h3> 
+        </div> 
+        <div class="modal-body">
+            <b>{{ message}}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+	
+	
+	 

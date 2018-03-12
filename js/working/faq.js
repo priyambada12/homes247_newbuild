@@ -9,11 +9,11 @@ app.factory('faqFactory', function(networking) {
 	
     return factory;
 });
-app.controller('faqCtrl',function(faqFactory, $scope,$modal, $log){
+app.controller('faqCtrl',function(faqFactory, $scope,$modal, $log,$cookies){
 
-	
+	//$cookies.set('key','others');
 	//$('.test_design').niceSelect();
-	$('#first').carouseller({
+	/* $('#first').carouseller({
 					scrollSpeed: 850,
 					autoScrollDelay: -1800,
 					easing: 'easeOutBounce'
@@ -27,7 +27,7 @@ app.controller('faqCtrl',function(faqFactory, $scope,$modal, $log){
 					scrollSpeed: 800,
 					autoScrollDelay: 1600,
 					easing: 'linear'
-				});
+				}); */
 	//$(fourd).carouseller();
 	
 	
@@ -59,7 +59,7 @@ app.controller('faqCtrl',function(faqFactory, $scope,$modal, $log){
             faqFactory.addClientQuery(requestParam, function(success) {
                 var status = success.data.status;
                 if (status == "True") {
-					$scope.msgs = "You will intimate you soon";
+					$scope.msgs = "We will intimate you soon.";
                     $scope.open();
 					angular.element("input").val(null);
 					angular.element("textarea").val(null);

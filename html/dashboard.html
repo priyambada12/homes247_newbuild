@@ -1,12 +1,15 @@
+  <div loading-indicator class="waiting-box">
+	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div>
 <div class="slider_section_main">    	
         <div class="slider_search_main">
         	<h2>Find Happiness With Homes247.in</h2>
             <div class="search_section">
             	<div class="location_icon"><img src="images/search_location_icon.png" alt="" /></div>
 				
-				<select class="test_design" 
-				ng-options="citydata as citydata.city for citydata in cities" ng-model="currentCity" ng-change="getBuilders();">
-				
+				<select class="ui selection dropdown" ng-options="citydata as citydata.city for citydata in cities track by citydata.city" 
+				ng-model="currentCity" ng-change="getBuilders();">
+					 <option value="">Bengaluru</option> 
+					<!-- <option value="" selected>Please Select</option> -->
             	<!-- <select class="test_design" ng-model="city" ng-options="city for city in cities"> -->
                 	
                 </select>
@@ -17,7 +20,8 @@
             	
                 	
                 </select> -->
-                 <input client-auto-complete class="form-control" ng-model="ctrl.client.name" placeholder="Enter a location, builder, project or a RERA ID" type="text">
+                 <input client-auto-complete class="form-control" ng-model="ctrl.client.name" 
+placeholder="Enter a location, builder, project or a RERA ID" type="text">
                             
                             <input client-auto-complete class="form-control" ng-model="ctrl.client" placeholder="Enter a location, builder, project or a RERA ID" type="hidden">
                 	<!-- <input placeholder="Enter a location, builder, project or a RERA ID" type="text" ng-model="builderData" /> -->
@@ -32,7 +36,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div id="first" class="carouseller"> 
-                            <a href="javascript:void(0)" class="carousel-button-left"><img src="images/mini_banner_left_arrow.png" alt="" /></a> 
+                            <a href="javascript:void(0)" class="carousel-button-left"><img src="images/mini_banner_right_arrow.png" alt="" /></a> 
                             <div class="carousel-wrapper"> 
                                 <div class="carousel-items"> 
                                     <div class="span3 carousel-block">
@@ -73,14 +77,14 @@
                                     
                                 </div>
                             </div>
-                            <a href="javascript:void(0)" class="carousel-button-right"><img src="images/mini_banner_right_arrow.png" alt="" /></a>
+                            <a href="javascript:void(0)" class="carousel-button-right"><img src="images/mini_banner_left_arrow.png" alt="" /></a>
                         </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="properties_india_main">
+    <div class="properties_india_main" >
         <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -89,9 +93,10 @@
                 </div>
                 <div class="row">
                 	<div class="col-lg-12">
-                    	<div id="third" class="carouseller"> 			
-			<div class="carousel-wrapper"> 
-				<div class="carousel-items"> 
+		<!-- SLICK-SLIDER -->
+			
+					<div class="content">
+					<slick class="slider" init-onload="true" settings="slickConfig3" ng-if="slickConfig3Loaded">
 					<div class="span3 carousel-block" ng-repeat ="cityname in cities">
 					
 						<div class="hovereffect">	
@@ -102,12 +107,9 @@
                             </div>
                         </div>
 					</div>
-					                        
-				</div>
-			</div>
-            <a href="javascript:void(0)" class="carousel-button-right"><img src="images/property_right_icon.png" alt="" /></a>
-            <a href="javascript:void(0)" class="carousel-button-left"><img src="images/property_left_icon.png" alt="" /></a> 			
-		</div>
+					</slick>
+					</div>
+		<!-- SLICK-SLIDER -->
                     </div>
                 </div>
          </div>
@@ -120,29 +122,28 @@
                 	<h1>Top Projects</h1>
                     <div class="top_project_filter">
                     	<div class="checkin_icon"><img ng-src="images/search_location_icon.png" alt="" /></div>
-                    	<select class="test_design" ng-options="citydata as citydata.city for citydata in cities" 
+                    	<select class=" ui selection dropdown" ng-options="citydata as citydata.city for citydata in cities" 
 						ng-model="cityProperty" ng-change="getProperties();" >
-                            
+                            <option value="">Bengaluru</option> 
                         </select>
                     </div>
                 </div>
             </div>
             <div class="row" >
             	<div class="col-lg-12" >
-                	<div id="fourd" class="carouseller"> 			
-			<div class="carousel-wrapper" > 
-				<div class="carousel-items" > 
-					<div class="span4 carousel-block" ng-repeat="property in topProperties" >
-					
-					
+    
+	<!---	SLICK-SLIDER  --->
+			
+				<div class="content">
+				<slick class="slider" init-onload="true" settings="slickConfig2" ng-if="slickConfig2Loaded">
+				<div class="span4 carousel-block" ng-repeat="property in topProperties" >	
 						<div class="top_projects_box" ng-repeat = "image in property.images | limitTo:1">
-						
-                        	<a href="#" class="pi_main"><img ng-src="{{propertyimage}}{{image.name}}" alt="" /></a>
+                        	<a href="#" class="pi_main"><img ng-src="{{propertyimage}}{{image.name}}" alt="" class="propclass" ng-click="getPropertyID(property.property_info_IDPK);" /></a>
                             <div class="top_project_info">
                             <div class="pi_left">
-                            	<h2>{{property.propertyName}} <small>{{property.locality_name}},{{property.city_name}}</small></h2>
+                            	<h2 class="propclass" ng-click="getPropertyID(property.property_info_IDPK);">{{property.propertyName}} <small>{{property.locality_name}},{{property.city_name}}</small></h2>
                                 <h3>
-                                	<span class="bed_img"><img src="images/bed_icon.png" alt="" /></span>
+                                	<span class="bed_img" ><img src="images/bed_icon.png" alt="" /></span>
                                     {{property.bhk}}
                                 </h3>
                             </div>
@@ -160,18 +161,15 @@
                             </div>
                         </div>
 					</div>
-                                      
-				</div>
-			</div>
-            <a href="javascript:void(0)" class="carousel-button-right"><img src="images/property_right_icon.png" alt="" /></a>
-            <a href="javascript:void(0)" class="carousel-button-left"><img src="images/property_left_icon.png" alt="" /></a> 			
-		</div>
+					</slick>
+					</div>
+	
+	<!---	SLICK-SLIDER  --->
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="new_project_main">
+	<div class="new_project_main">
     	<div class="container">
         	<div class="row">
             	<div class="col-lg-12 col-md-12 col-sm-12">
@@ -180,11 +178,12 @@
             </div>
         	<div class="row">
             	<div class="col-lg-12 col-md-12 col-sm-12">
-                	<div id="fourd01" class="carouseller"> 
-			<a href="javascript:void(0)" class="carousel-button-left">‹</a> 
-			<div class="carousel-wrapper"> 
-				<div class="carousel-items"> 
-					<div class="span6 carousel-block" ng-repeat="newProp in newProperties">		
+				
+		<!-- SLICK-SLIDER -->
+				
+				<div class="content">
+				<slick class="slider" settings="slickConfig4" ng-if="slickConfig4Loaded">
+					<div class="span6 carousel-block"  ng-repeat="newProp in newProperties" >		
                     	<div class="new_project_details_box">				
                         <div class="view view-eighth" ng-repeat = "image in newProp.images | limitTo:1">
                     <img class="new_pimg" ng-src="{{propertyimage}}{{image.name}}" alt="" />
@@ -201,16 +200,16 @@
                                 <li class="enquire"><a ui-sref="enquiry({param:newProp.property_info_IDPK})">Enquire Now</a></li>
                             </ul>
                         </div>
-                        <p class="new_ptest">{{newProp.discription}} <a >view this property</a></p>
+                        <p class="new_ptest">{{newProp.discription}} <a ng-click="getPropertyID(newProp.property_info_IDPK);">view this property</a></p>
                     </div>
                 </div>
                 		</div>
 					</div>
-                  
-				</div>
-			</div>
-			<a href="javascript:void(0)" class="carousel-button-right">›</a>
-		</div>
+					</slick>
+					</div>
+		
+		<!-- SLICK-SLIDER -->
+		
                 </div>
             </div>
         </div>
@@ -237,13 +236,22 @@
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7">
                 	<div class="call_back_form">
-                    	<form>
-                        	<input placeholder="Name" type="text" ng-model="user.name"/>                            
-                            <select class="test_design">
+                    	<form name="contactForm">
+                        	<input placeholder="Name" name="uname" type="text" ng-model="user.name" required ng-minlength="3"/> 
+										
+                            <select class="ui selection dropdown">
                             	<option>+91 INDIA</option>
                             </select>
-                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno"/>
+                            <input placeholder="Mobile Number" name="phno" type="text" ng-model="user.mobileno" required ng-minlength="10" ng-maxlength="13"/>
+							
                             <div class="clearfix"></div>
+							<span ng-show="contactForm.uname.$dirty && contactForm.uname.$error.required">This is a required field</span>
+							<span ng-show="contactForm.uname.$dirty && contactForm.uname.$error.minlength">Minimum length required is 3</span>
+            				
+							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.required">This is a required field</span>
+							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.minlength">Minimum length required is 10</span>
+							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.maxlength">Mobile Number is too long</span>
+		
                             <button class="btn_style" ng-click="callBack(user);">Get Call Back</button>
 							
                         </form>
@@ -274,10 +282,7 @@
             	<div class="col-lg-12">
                 	<h1>Testimonials</h1>
                     
-                    
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
@@ -408,4 +413,6 @@ ullamco laboris nisi ut aliquip ex ea commodo consequat.
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
+	
+	
 	 

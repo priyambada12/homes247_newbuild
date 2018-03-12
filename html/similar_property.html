@@ -1,0 +1,302 @@
+<!-- <div loading-indicator class="waiting-box">
+	<span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
+<div ng-repeat = "propDetail in propDetails" >
+    <div class="property_details_banner" >
+    	<img ng-src="{{propertyimage}}{{image}}" alt="" />
+        <div class="property_banner_text">
+        	<div class="container">
+        	<div class="row">
+            	<div class="col-lg-12 col-md-12 col-sm-12">
+                	<h1>{{propDetail.propertyName}}</h1>
+                    <!-- <h3>by Prestige Group</h3> -->
+                    <p><img src="images/location_icon2.png" alt="" /> {{location}}, {{city_name}}</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    
+        <div class="container">
+        	<div class="row">
+            	<div class="col-lg-8 col-md-8 col-sm-8" >
+                	<div class="about_property_row">
+                    	<div class="aap">
+                        	<h3>Apartments</h3>
+                            <h2>{{propDetail.bhk}}</h2>
+                        </div>
+                        <div class="aap">
+                        	<h3>Area</h3>
+                            <h2>{{propDetail.area_min}}-{{propDetail.area_max}}</h2>
+                            <h6>square feet</h6>
+                        </div>
+                        <div class="aap">
+                        	<h3>Price</h3>
+                            <h2>{{propDetail.price_min}}-{{propDetail.price_max}}</h2>
+                        </div>
+                    </div>
+                    <div class="sticky-stuff">
+                    <div class="property_details_menu single-page-nav">
+                        <ul>
+                        <li><a href="#section1">Overview</a></li>
+                        <li><a href="#section2">Gallery</a></li>
+                        <li><a href="#section3">Price & Floor plans</a></li>
+                        <li><a href="#section4">Amenities</a></li>
+                        <li><a href="#section5">Neighbourhood</a></li>
+                        <li><a href="#section6">Homeloan</a></li>
+                        </ul>
+                    </div>
+                    </div>
+                    <div class="overview_section_main" id="section1">
+                       	<h2>{{propDetail.propertyName}}</h2>
+                     
+                     <div id="overview01" class="overview_section_row">
+                    	<div class="osm">
+                        	<h3>Status</h3>
+                            <h2>Ready to move in</h2>
+                        </div>
+                        <div class="osm">
+                        	<h3>Total area</h3>
+                            <h2>{{propDetail.dimension}} Acres</h2>
+                        </div>
+                        <div class="osm">
+                        	<h3>Total apartments</h3>
+                            <h2>{{propDetail.total_apartments}}</h2>
+                        </div>
+                        <div class="clearfix"></div>
+                        <p>
+							{{propDetail.discription}}
+                            <a href="#">more</a>
+                        </p>
+                        <h5>Home loan available in the following banks</h5>
+                        <div class="bank_logo">
+                        	<img src="images/banks_logo.png" alt="" />
+                        </div>
+                    </div>
+                     <div class="property_details_gallery" id="section2">
+                     	<h2>Gallery</h2>
+						<div class="gallery_slider_box">
+                            <div class="left" id="slideshow-main">
+                                <ul id="slideshow-list" >
+                                    <li  ng-repeat="image in propDetail.images"><a href="Javascript:void(0)"><img ng-src="{{propertyimage}}{{image.name}}" alt="" />
+                                        </a>
+                        
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                            <div class="right">
+                            <div class="content mCustomScrollbar">
+                                <ul id="image-list">
+                                    <li><a href="Javascript:void(0)"><img ng-src="{{propertyimage}}{{image.name}}" alt=""/>
+                                        </a>
+                                    </li>
+                                  
+                                </ul>
+                            </div>
+                            </div>
+                        </div>
+                     </div>
+                     <div class="price_floor_plans" id="section3" >
+                     	<h2>Price & Floor plans</h2>
+                        <div class="price_floor_plans" >
+                        	<div id="horizontalTab">
+                        <ul class="resp-tabs-list" >
+                        <li ng-repeat="bhktype in propDetail.BHK_Deatils">{{bhktype.BHK}} BHK</li>
+                        </ul>
+                        <div class="resp-tabs-container" style="text-align:center;">
+                        <div >
+                        	<div class="price_floor_property" ng-repeat="bhk in propDetail.BHK_Deatils">
+                            	<span><img src="images/property_img1.jpg" alt="" /></span>
+                                <h6>{{bhk.Area}} sq ft
+                                	<small>{{bhk.BHK}} BHK+{{bhk.Bedroom}}T)</small>
+                                </h6>
+                                <h5>Price :{{bhk.Price}} L </h5>
+                                <a href="#/enquiry({propDetail.property_info_IDPK})">Enquire now</a>
+                            </div>
+                           
+                            <div class="show_more"><a href="#">Show More</a></div>
+                        </div>
+                       
+                        
+                       
+                        
+                        </div>
+                        </div>
+                        </div>
+                     </div>
+                     <div class="amenities_section" id="section4">
+                     	<h2>Amenities</h2>
+                        <div class="amenities_info" ng-repeat="amenities in propDetail.Amenities_Deatils">
+                        	<span><img ng-src={{amenitesImages}}{{amenities.ImgPath}} alt="" /></span>
+                            <h4>{{amenities.Name}}</h4>
+                        </div>
+                        
+                     </div>
+                     <div class="neighbourhood_section" id="section5">
+                     	<h2>Neighbourhood</h2>
+                        <span><img src="images/property_details_map.png" alt="" /></span>
+                     </div>
+                     <div class="homeloan_calculator_section" id="section6">
+                        <div class="row">
+                        	<div class="col-lg-5 col-md-5 col-sm-5">
+                            	<div class="loan_emi_calculator">
+                                    	<h2>Home Loan & EMI Calculator</h2>
+                                        <form>
+                                        	<select>
+                                            	<option>1 BHK + 1T (1000 sq ft)</option>
+                                            </select>
+                                            <div class="loan_emi_calculator_box">
+                                            	<h3>Loan Amount</h3>
+                                                <input placeholder="15,00,000" type="text" />
+                                                <div class="loan_emi_scale">
+                                            	<img src="images/loan_emi_graph.png" alt="" />
+                                           		 </div>
+                                            </div>
+                                            <div class="loan_emi_calculator_box">
+                                            	<h3>Loan Tenure (in yrs)</h3>
+                                                <input placeholder="5" type="text" />
+                                                <div class="loan_emi_scale">
+                                            	<img src="images/loan_emi_graph2.png" alt="" />
+                                           		 </div>
+                                            </div>
+                                            <div class="loan_emi_calculator_box">
+                                            	<h3>Interest Rate (p.a)</h3>
+                                                <input placeholder="5" type="text" />
+                                                <div class="loan_emi_scale">
+                                            	<img src="images/loan_emi_graph3.png" alt="" />
+                                           		 </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-7">
+                            	<div class="principal_amount">
+                                    	<img src="images/img_1.png" alt="" />
+                                        <h4>Principal amount
+                                        	<strong>15,00,000</strong>
+                                        </h4>
+                                    </div>
+                                    <div class="emi_indicators_main">
+                                    	<div class="emi_indicators_box">
+                                        	<span></span>
+                                            <h6>Principal : <strong>15.0 L</strong></h6>
+                                        </div>
+                                        <div class="emi_indicators_box">
+                                        	<span style="background:#0a3544;"></span>
+                                            <h6>Interest <br />Payable : <strong>2.5 L</strong></h6>
+                                        </div>
+                                        <div class="emi_indicators_box">
+                                            <h6>Total Amount <br />Payable : <strong>17.5 L</strong></h6>
+                                        </div>
+                                    </div>
+                                    <div class="property_details_ratebtn">
+                                    	<div class="monthly_emi_result">
+                                    	<h4>Monthly EMI : 25,758</h4>
+                                    </div>
+                                    <div class="apply_now_btn">
+                                    	<a href="#">Apply Now</a>
+                                    </div>
+                                    </div>
+                            </div>
+                        </div>
+                     </div>                     
+                    </div> 
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                	<div class="property_details_form">
+                    	<h2>Interested to buy this property !</h2>
+                        <form>
+						<input placeholder="Name" type="text" ng-model="enquiry.name" />                            
+                            <select class="test_design">
+                            	<option>+91 INDIA</option>
+                            </select>
+                            <input placeholder="Mobile Number" class="mob_nu" type="text" ng-model="enquiry.mobileno"/>
+                            <div class="clearfix"></div>
+							<a class="gcb_btn" ng-click="getcallBackForProperties(enquiry);">Get Call Back</a>
+							<a class="read_d" href="#">read disclaimer</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-lg-12 col-md-12 col-sm-12">
+                	<div class="similar_projects_section">
+                     	<h2>Similar Projects</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row similar_projects_slider">
+            	<div class="col-lg-12">
+                    	<div id="third" class="carouseller"> 			
+			<div class="carousel-wrapper"> 
+				<div class="carousel-items"> 
+					<div class="span3 carousel-block" ng-repeat ="similarprop in similarpropDetails">
+						<div class="similar_projects_section">                     	
+                        <div class="similar_projects_box">
+                        	<a ui-sref="property({param:{{similarprop.property_info_IDPK}}});">
+							<div ng-repeat = "image in similarprop.images|limitTo: 1">
+                        	<img ng-src="{{propertyimage}}{{image.name}}" alt="" />
+							</div>
+                            <h4>{{similarprop.propertyName}}
+                            <small>{{similarprop.locality_name}}</small>
+                            </h4>
+                            </a>
+                        </div>
+                     </div>
+					</div>             
+				</div>
+			</div>
+            <a href="javascript:void(0)" class="carousel-button-right"><img src="images/property_right_icon.png" alt="" /></a>
+            <a href="javascript:void(0)" class="carousel-button-left"><img src="images/property_left_icon.png" alt="" /></a> 			
+		</div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="about_contact_us property_cb_bg">
+    <div class="container">
+    	<div class="row">
+        	<div class="col-lg-2 col-md-2 col-sm-2"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8">            	
+                	<div class="call_back_form">
+                    	<h1 style="font-size:30px;">How About Saving Your Time!</h1>
+                    	<form name="simpropform">
+                        	<input placeholder="Name" type="text" ng-model="user.name" name="uname" required ng-minlength="3" />                            
+                            <select class="test_design">
+                            	<option>+91 INDIA</option>
+                            </select>
+                            <input placeholder="Mobile Number" type="number" ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13"/>
+                            <div class="clearfix"></div>
+							
+							<span ng-show="simpropform.uname.$dirty && simpropform.uname.$error.required">This is a required field</span>
+							<span ng-show="simpropform.uname.$dirty && simpropform.uname.$error.minlength">Minimum length required is 3</span>
+            				
+							<span ng-show="simpropform.phno.$dirty && simpropform.phno.$error.required">This is a required field</span>
+							<span ng-show="simpropform.phno.$dirty && simpropform.phno.$error.minlength">Minimum length required is 10</span>
+							<span ng-show="simpropform.phno.$dirty && simpropform.phno.$error.maxlength">Mobile Number is too long</span>
+		
+                            <button class="btn_style" ng-click="callBack(user);">Get Call Back</button>
+                        </form>   
+                        <p style="text-align:center; margin-top: 30px;">All the request are handled in just 5 minutes, Please <a href="#">click here</a> to send an email inquiry</p>                     
+                    </div>
+                </div>
+            <div class="col-lg-2 col-md-2 col-sm-2"></div>
+        </div>
+    </div>
+    </div>
+	
+	 <script type="text/ng-template" id="myModalContent.html">
+         <div class="modal-header">
+           <h3 class="modal-title">Message</h3> 
+        </div> 
+        <div class="modal-body">
+            <b>{{ message}}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+	 
+

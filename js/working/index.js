@@ -1,10 +1,66 @@
 //(function(){
-var app = angular.module('homesApp', ['routerApp', 'networkApp', 'sidebarApp',
+var app = angular.module('homesApp', ['duScroll','slickCarousel','routerApp', 'networkApp', 'sidebarApp',
     'footerApp', 'aboutUsApp', 'blogsApp',
     'careerApp', 'calculatorApp', 'faqApp',
     'servicesApp', 'offersApp', 'policyApp',
-    'signupApp', 'contactUsApp', 'loginApp', 'myAccountApp','propertyApp','cityApp','ui.bootstrap','modalApp'
+    'signupApp', 'contactUsApp', 'loginApp', 'myAccountApp',
+	'propertyApp','cityApp','ui.bootstrap','modalApp'
 ]);
+
+app.config(function ($httpProvider) {
+	
+    $httpProvider.interceptors.push(function ($q, $rootScope) {
+        return {
+            'request': function (config) {
+                $rootScope.$broadcast('loading-started');
+                return config || $q.when(config);
+            },
+            'response': function (response) {
+                $rootScope.$broadcast('loading-complete');
+                return response || $q.when(response);
+            },
+             'responseError': function (rejection) {
+                $rootScope.$broadcast('loading-complete');
+                return $q.reject(rejection);
+            }
+        };
+    });
+});
+
+app.factory('loadingCounts', function () {
+	
+    return {
+        enable_count: 0,
+        disable_count: 0
+    }
+});
+
+app.directive("loadingIndicator", function (loadingCounts, $timeout) {
+	
+    return {
+        restrict: "A",
+        link: function (scope, element, attrs) {
+            scope.$on("loading-started", function (e) {
+                loadingCounts.enable_count++;
+                console.log("displaying indicator " + loadingCounts.enable_count);
+                //only show if longer than one sencond
+                $timeout(function () {
+                    if (loadingCounts.enable_count > loadingCounts.disable_count) {
+                        element.css({ "display": "" });
+                    }
+                }, 1000);  
+            });
+            scope.$on("loading-complete", function (e) {
+                loadingCounts.disable_count++;
+                console.log("hiding indicator " + loadingCounts.disable_count);
+                if (loadingCounts.enable_count == loadingCounts.disable_count) {
+                    element.css({ "display": "none" });
+                }
+            });
+        }
+    };
+});
+
 app.factory('networkFactory', function(networking) {
     var factory = {};
 
@@ -42,6 +98,7 @@ app.factory('networkFactory', function(networking) {
 });
 app.directive('clientAutoComplete',function($filter){
 	return {
+				
                 restrict: 'A',       
                 link: function (scope, elem, attrs) {
                     elem.autocomplete({
@@ -84,30 +141,39 @@ app.directive('clientAutoComplete',function($filter){
 
             };
 });
-app.controller('dashboardCtrl', function($scope, networkFactory,$state,urls,$modal, $log,$cookies,cityFactory) {
+app.controller('dashboardCtrl', function($scope,$timeout, networkFactory,$state,urls,$modal, $log,$cookies,cityFactory) {
 
     //$('.test_design').niceSelect();
+	$('body').attr('id', '');
+	
 
-    $('#first').carouseller({
-        scrollSpeed: 850,
-        autoScrollDelay: -1800,
-        easing: 'easeOutBounce'
+$(function() {
+	$(this).css('background-color', 'red');
+	$scope.slickConfig3Loaded = true;
+    $scope.slickConfig2Loaded = true;
+	$scope.slickConfig4Loaded = true;
+	$('.ui.dropdown').dropdown();
+     $('#first').carouseller({
+        //scrollSpeed: 850,
+        //autoScrollDelay: -1800,
+        //easing: 'easeOutBounce'
     });
 
     $('#third').carouseller({
-        scrollSpeed: 800,
-        autoScrollDelay: 1600,
-        easing: 'linear'
+       //scrollSpeed: 800,
+        //autoScrollDelay: 1600,
+        //easing: 'linear'
     });
     $('#top-project').carouseller({
-        scrollSpeed: 800,
-        autoScrollDelay: 1600,
-        easing: 'linear'
+       // scrollSpeed: 800,
+        //autoScrollDelay: 1600,
+        //easing: 'linear'
     });
-    $(fourd).carouseller();
-    $(fourd01).carouseller();
+    $('#fourd').carouseller();
 
-
+     $('#fourd01').carouseller(); 
+});
+//	$cookies.put('key','dashboard');
     $scope.user = {
         name: '',
         mobileno: ''
@@ -137,7 +203,7 @@ app.controller('dashboardCtrl', function($scope, networkFactory,$state,urls,$mod
             networkFactory.addCallbackDetails(requestParam, function(success) {
                 var status = success.data.status;
                 if (status == "True") {
-					$scope.msgs = "You will intimate you soon";
+					$scope.msgs = "We will intimate you soon.";
                     $scope.open();
                 }
             }, function(error) {
@@ -174,14 +240,34 @@ app.controller('dashboardCtrl', function($scope, networkFactory,$state,urls,$mod
 
     networkFactory.getCityDetails(function(success) {
         console.log(success.data);
-		
-        $scope.cities = success.data.locations;
+		 $scope.cities = success.data.locations;
 		$scope.currentCity = $scope.cities [0];
-		$scope.cityProperty = $scope.currentCity ;
+		$scope.cityProperty = $scope.currentCity;
 		$scope.getProperties($scope.currentCity);
+		
 		$scope.getBuilders();
+		$scope.updateNumber();
+		 $scope.slickConfig3 = {
+      autoplay: true,
+      infinite: true,
+      autoplaySpeed: 1000,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+	  cssEase: 'ease-out',
+      method: {}
+    };
+		//$scope.slickConfig3();
 		//customerSearchCtrl();
     });
+	
+	 $scope.updateNumber = function () {
+      $scope.slickConfig3Loaded = false;
+      $timeout(function () {
+        $scope.slickConfig3Loaded = true;
+      });
+    };
+
+   
 	
 	$scope.getProperties= function(){
 	var id = $scope.cityProperty.id;
@@ -189,13 +275,54 @@ app.controller('dashboardCtrl', function($scope, networkFactory,$state,urls,$mod
         console.log(success.data.deatils);
 		
 		$scope.topProperties =success.data.deatils; 
+		$scope.updateNumber2();
+		
+    $scope.slickConfig2 = {
+      autoplay: true,
+      infinite: true,
+      autoplaySpeed: 1000,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+	  init: true,
+      method: {}
+    };
+	
+		
     });
+	
+	
 
     networkFactory.getNewProperties({'cityId':id,'userId':userID},function(success) {
         console.log(success.data.deatils);
 		$scope.newProperties = success.data.deatils;
+		 $scope.updateNumber3();
+		 $scope.slickConfig4 = {
+      autoplay: true,
+      infinite: true,
+      autoplaySpeed: 1000,
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      method: {}
+    };
     });
 	}
+	
+	 $scope.updateNumber2 = function () {
+      $scope.slickConfig2Loaded = false;
+      $timeout(function () {
+        $scope.slickConfig2Loaded = true;
+      });
+    };
+
+		
+    $scope.updateNumber3 = function () {
+      $scope.slickConfig4Loaded = false;
+      $timeout(function () {
+        $scope.slickConfig4Loaded = true;
+      });
+    };
+
+   
 	 $scope.getBuilders = function(){
 	 	 var ctrl = this;
          ctrl.client ={name:'', id:'',type:''};
@@ -220,8 +347,9 @@ $scope.setClientData = function(item){
 	$scope.getPropertyID = function(propertyID){
 		var clientData = $cookies.get('user');
 		if(clientData == null){
-			$cookies.put('recentView',propertyID);
-			$state.go('login');
+			/* $cookies.put('recentView',propertyID);
+			$state.go('login'); */
+			$state.go('property',{param:propertyID});
 		}else{
 			var client_Data = JSON.parse(clientData);
 			networkFactory.getUserrecentView({userId:client_Data[0].user_registration_IDPK , propId:propertyID},function(success){
@@ -232,7 +360,8 @@ $scope.setClientData = function(item){
 		}
 	};
 	
-	$scope.getProjects = function(currentcity){
+	$scope.getProjects = function(currentCity){
+		//alert(currentCity.city);
 		var propData = $scope.builderData;
 		var requests = {locality:'',buliderId:'',reraId:''};
 		if(propData!= undefined && propData.hasOwnProperty('type')){
@@ -242,7 +371,8 @@ $scope.setClientData = function(item){
 		
 		}
 		$state.go('city',
-		{ cityname:currentcity.city,locality:requests.locality,buliderId:requests.buliderId,reraId:requests.reraId });
+		{cityname:currentCity.city,locality:requests.locality,
+		buliderId:requests.buliderId,reraId:requests.reraId });
 	};
 	
 

@@ -1,0 +1,14 @@
+<!-- <div loading-indicator class="waiting-box">
+	<span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
+<div class="container">
+    	<div class="row">
+        	<div class="col-lg-6 col-md-6 col-sm-6">
+            	<div class="blog_main_box" ng-repeat="story in stories">
+                	<h1>{{story.top_stories_title}} <small>{{story.top_stories_addedBy}}</small></h1>
+                    <a href="#"><img ng-src="{{imagepath}}{{story.top_stories_imgpath}}" alt="" /></a>
+                    <h5>Date : {{story.top_stories_created}}</h5>
+                    <h5><i class="fa fa-comment" aria-hidden="true"></i> {{story.top_stories_description}}</h5>
+                </div>
+				</div>
+				</div>
+				</div>

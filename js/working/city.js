@@ -1,5 +1,6 @@
-var app = angular.module('cityApp', ['ui.bootstrap', 'modalApp']);
-app.factory('cityFactory', function(networking) {
+var cityapp = angular.module('cityApp', ['ui.bootstrap', 'modalApp','mapApp']);
+
+cityapp.factory('cityFactory', function(networking) {
     var factory = {};
 
     factory.addCallbackDetails = function(requestData, callback) {
@@ -34,13 +35,63 @@ app.factory('cityFactory', function(networking) {
 
     return factory;
 });
-app.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, urls, $modal, $log, $cookies, $window, networkFactory) {
-    
-    $scope.itemsPerPage = 2;
+cityapp.directive('clientSearchComplete',function($filter){
+	return {
+				
+                restrict: 'A',       
+                link: function (scope, elem, attrs) {
+                    elem.autocomplete({
+                        source: function (request, response) {
+
+                            //term has the data typed by the user
+                            var params = request.term;
+                            
+                            //simulates api call with odata $filter
+                            var datalist = scope.autolist;
+                            scope.$watch('autolist', function(newValue, oldValue) {
+   										 console.log(newValue);
+   										 console.log(oldValue);
+  								  //var someVar = [Do something with someVar];
+
+   		
+									    // so it will not trigger another digest 
+									  //  angular.copy(someVar, $scope.someVar);
+
+									});                                     
+                            if (datalist) { 
+                                var result = $filter('filter')(datalist, {name:params});
+                                angular.forEach(result, function (item) {
+                                    item['value'] = item['name'];
+                                });                       
+                            }
+                            response(result);
+
+                        },
+                        minLength: 1,                       
+                        select: function (event, ui) {
+                           //force a digest cycle to update the views
+                           scope.$apply(function(){
+                           	scope.setClientData(ui.item);
+                           });                       
+                        },
+                       
+                    });
+                }
+
+            };
+});
+cityapp.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, urls, $modal, $log, $cookies, $window, networkFactory) {
+   // $cookies.set('key','others');
+  // loadMap();
+  $('body').attr('id', '');
+    $scope.sizeselect=[{value:5},{value:10}];
+	$scope.sizevalue = $scope.sizeselect[0];
+	$scope.itemsPerPage = $scope.sizevalue.value;
     $scope.pagedItems = [];
     $scope.currentPage = 0;
     $scope.properties = [];
-    $scope.gap = 2;
+	$scope.prop_val = true;
+    $scope.gap = 0;
     //console.log($state.params);
     $scope.propertyimage = urls.imagesURL + "uploadPropertyImgs/";
     var clientData = $cookies.get('user');
@@ -49,6 +100,7 @@ app.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, u
         console.log(clients[0].user_registration_IDPK);
         var userID = clients[0].user_registration_IDPK;
     }
+	console.log($state.params);
     console.log($stateParams.cityname + " " + $stateParams.locality + " " + $stateParams.buliderId + " " + $stateParams.reraId);
     var cityname = $stateParams.cityname;
     $scope.city_name = cityname;
@@ -67,18 +119,21 @@ app.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, u
         networkFactory.getProjectDetailsWithFilter(cityname, requests, function(success) {
             console.log(success);
             var projectDetails = success.data.deatils;
+			$window.sessionStorage.setItem('properties',JSON.stringify(projectDetails));
             if (projectDetails != undefined)
                 console.log(projectDetails);
             if (projectDetails.length > 0) {
                 $scope.prop_val = true;
                 $scope.properties = projectDetails;
+				
                 $scope.currentPage = 0;
+				 $scope.gap = Math.ceil(projectDetails.length/$scope.itemsPerPage);
                 // now group by pages
                  $scope.groupToPages();
             } else {
                 $scope.prop_val = false;
             }
-
+	
         }, function(error) {
             console.log(error);
         });
@@ -88,16 +143,19 @@ app.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, u
         }, function(success) {
             console.log(success);
             var projectDetails = success.data.deatils;
+			$window.sessionStorage.setItem('properties',JSON.stringify(projectDetails));
             console.log(projectDetails);
             if (projectDetails.length > 0) {
                 $scope.prop_val = true;
                 $scope.properties = projectDetails;
                  $scope.currentPage = 0;
+				  $scope.gap = Math.ceil(projectDetails.length/$scope.itemsPerPage);
         		// now group by pages
        			 $scope.groupToPages();
             } else {
                 $scope.prop_val = false;
             }
+			
         }, function(error) {
             console.log(error);
         });
@@ -146,7 +204,7 @@ app.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, u
             networkFactory.addCallbackDetails(requestParam, function(success) {
                 var status = success.data.status;
                 if (status == "True") {
-                    $scope.msgs = "You will intimate you soon";
+                    $scope.msgs = "We will intimate you soon.";
                     $scope.open();
                 }
             }, function(error) {
@@ -177,23 +235,36 @@ app.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, u
             console.log(success);
             if (success.data.deatils.length > 0) {
                 $scope.prop_val = true;
-                $scope.properties = success.data.deatils;
-                 $scope.currentPage = 0;
-                // now group by pages
-                 $scope.groupToPages();
+               
             } else {
                 $scope.prop_val = false;
             }
-
+			$window.sessionStorage.setItem('properties',JSON.stringify(success.data.deatils));
+			 $scope.properties = success.data.deatils;
+                 $scope.currentPage = 0;
+				  $scope.gap = Math.ceil($scope.properties.length/$scope.itemsPerPage);
+                // now group by pages
+                 $scope.groupToPages();
+				
 
         });
     };
+	
+	$scope.changepageSize = function(size){
+		$scope.itemsPerPage =size.value;
+		$scope.currentPage = 0;
+		$scope.gap = Math.ceil($scope.properties.length/$scope.itemsPerPage);
+        $scope.groupToPages();
+	};
 
     $scope.getPropertyID = function(propertyID) {
 
         if (clientData == null) {
-            $cookies.put('recentView', propertyID);
-            $state.go('login');
+            //$cookies.put('recentView', propertyID);
+            //$state.go('login');
+			$state.go('property', {
+                    param: propertyID
+                });
         } else {
             var client_Data = JSON.parse(clientData);
             cityFactory.getUserrecentView({
@@ -281,7 +352,7 @@ app.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, u
 
      $scope.range = function (size,start, end) {
         var ret = [];        
-        console.log(size,start, end);
+        //console.log(size,start, end);
                       
         if (size < end) {
             end = size;
@@ -290,7 +361,7 @@ app.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, u
         for (var i = start; i < end; i++) {
             ret.push(i);
         }        
-         console.log(ret);        
+         //console.log(ret);        
         return ret;
     };
     
@@ -325,21 +396,139 @@ app.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, u
         $scope.currentPage = this.n;
     };
 
+	/* $scope.mapview = function(){
+		$state.go('map');
+	}; */
+	function loadCity(){
+	networkFactory.getCityDetails(function(success) {
+        console.log(success.data);
+		$scope.cities = success.data.locations;
+		$scope.selectCity = $scope.cities [0];
+		//$scope.cityProperty = $scope.currentCity;
+		$scope.getBuilders($scope.selectCity);
+	});
+}
 
-    $(".open-popup").fullScreenPopup({
-        bgColor: '#fff'
-    });
+	var map;
+      function loadMap() {
+		  //alert("loaing");
+        map = new google.maps.Map(document.getElementById('googleMap'), {
+          center: {lat:12.972442, lng:77.580643},
+          zoom: 10,
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+		loadmarker();
+		 }
+		function loadmarker(){
+		var infowindow = new google.maps.InfoWindow();
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-36251023-1']);
-    _gaq.push(['_setDomainName', 'jqueryscript.net']);
-    _gaq.push(['_trackPageview']);
+  var marker, i;
+	var locations=JSON.parse($window.sessionStorage.getItem('properties'));
+	//alert(locations.length);
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
+        map: map
+      });
 
-    var ga = document.createElement('script');
-    ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i].address);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+		}
+
+$scope.getBuilders = function(cities){
+
+	 	 var ctrl = this;
+         ctrl.client ={name:'', id:'',type:''};
+	 	//var builder = $scope.currentCity;
+		//alert(cities.city);
+		networkFactory.getBuilderDetails({'city_id':cities.id},function(success){
+			console.log(success.data.autolist);
+			$scope.autolist = success.data.autolist;
+		});
+
+}
+$scope.setClientData = function(item){
+		
+			 if (item){
+                       
+                       $scope.builderData =item;
+                        // console.log(item);
+                     }
+		
+	};
+$scope.getProjects = function(cities){
+	//alert(cities.city);
+		var propData = $scope.builderData;
+		var requests = {locality:'',buliderId:'',reraId:''};
+		if(propData!= undefined && propData.hasOwnProperty('type')){
+		if(propData.type=='bulider_name') {requests.buliderId=propData.id}
+		if(propData.type=='city_name'){requests.locality=propData.id}
+		if(propData.type=='reraId'){requests.reraId=propData.id}
+		
+		}
+		
+	};
+	
+$scope.resetMapField = function(){
+	 if (angular.isDefined($scope.bedtype)) {
+            delete $scope.bedtype;
+        }
+        if (angular.isDefined($scope.budgettype)) {
+            delete $scope.budgettype;
+        }
+        if (angular.isDefined($scope.possissiontype)) {
+            delete $scope.possissiontype;
+        }
+	$scope.filtermapProperties();
+};
+
+$scope.filtermapProperties = function(){
+ var obj = {
+            locality: locality,
+            buliderId: builder,
+            bedroom: '',
+            budget: '',
+            possission: '',
+            reraid: reraid,
+            userId: userID
+        };
+
+        obj.bedroom = $scope.bedtype != undefined ? $scope.bedtype.bhk_IDPK : '';
+        obj.budget = $scope.budgettype != undefined ? $scope.budgettype.budget_IDPK : '';
+        obj.possission = $scope.possissiontype != undefined ? $scope.possissiontype.possission_IDPK : '';
+
+        cityFactory.getProjectDetailsWithFilter($scope.selectCity.city, obj, function(success) {
+            console.log(success);
+            if (success.data.deatils.length > 0) {
+                $scope.prop_val = true;
+               
+            } else {
+                $scope.prop_val = false;
+            }
+			$window.sessionStorage.setItem('properties',JSON.stringify(success.data.deatils));
+			 //$scope.properties = success.data.deatils;
+                 loadMap();
+				
+
+        });
+
+
+}
+	
+     
+	
+	$(function() {
+				 $('.open-popup').on('click',loadMap)
+				$(".open-popup").fullScreenPopup({
+					bgColor: '#fff'
+				});
+				loadCity();
+				
+			});
 
 });

@@ -12,12 +12,31 @@ app.factory('policyFactory', function(networking) {
     return factory;
 });
 
+app.directive('numbersOnly', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, element, attr, ngModelCtrl) {
+            function fromUser(text) {
+                if (text) {
+                    var transformedInput = text.replace(/[^0-9]/g, '');
 
-app.controller('policyCtrl',function(policyFactory, $scope,$modal, $log){
+                    if (transformedInput !== text) {
+                        ngModelCtrl.$setViewValue(transformedInput);
+                        ngModelCtrl.$render();
+                    }
+                    return transformedInput;
+                }
+                return undefined;
+            }            
+            ngModelCtrl.$parsers.push(fromUser);
+        }
+    };
+});
+app.controller('policyCtrl',function(policyFactory, $scope,$modal, $log,$cookies){
 
 	
 	//$('.test_design').niceSelect();
-	$('#first').carouseller({
+	/* $('#first').carouseller({
 					scrollSpeed: 850,
 					autoScrollDelay: -1800,
 					easing: 'easeOutBounce'
@@ -31,11 +50,11 @@ app.controller('policyCtrl',function(policyFactory, $scope,$modal, $log){
 					scrollSpeed: 800,
 					autoScrollDelay: 1600,
 					easing: 'linear'
-				});
+				}); */
 	//$(fourd).carouseller();
 	
 	
-	
+	//$cookies.set('key','others');
 	   $scope.user = {
         name: '',
         mobileno: '',
@@ -67,7 +86,7 @@ app.controller('policyCtrl',function(policyFactory, $scope,$modal, $log){
             policyFactory.addClientQuery(requestParam, function(success) {
                 var status = success.data.status;
                 if (status == "True") {
-					$scope.msgs = "You will intimate you soon";
+					$scope.msgs = "We will intimate you soon.";
 					angular.element("input").val(null);
 					angular.element("textarea").val(null);
                     $scope.open();

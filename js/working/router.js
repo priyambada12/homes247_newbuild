@@ -28,6 +28,7 @@ router.config(["$stateProvider", "$urlRouterProvider",
             }	
 			}).state('aboutUs', {
 				url: '/aboutUs',
+				
 				views: {
 				header: header,
                 content: {
@@ -48,12 +49,30 @@ router.config(["$stateProvider", "$urlRouterProvider",
                 footer: footer
             }
 			}).state('city', {
+				//url: '/city',
 				url: '/city/:cityname/:locality/:buliderId/:reraId',
+				/* params: {
+					cityname: null,
+					locality:null,
+					buliderId:null,
+					reraId:null,
+					}, */
 				views: {
                 header: header,
                 content: {
                     templateUrl: 'html/city.html',
 					controller: 'cityCtrl',
+					//params: {new_param: null}
+                },
+                footer: footer
+            }
+			}).state('map', {
+				url: '/map',
+				views: {
+                header: header,
+                content: {
+                    templateUrl: 'html/map.html',
+					controller: 'mapCtrl',
 					//params: {new_param: null}
                 },
                 footer: footer
@@ -117,7 +136,54 @@ router.config(["$stateProvider", "$urlRouterProvider",
             }
 				
 				
-			}).state('faq', {
+			}).state('homeloan', {
+				url: '/homeloan',
+				views: {
+                header: header,
+                content: {
+                   templateUrl: 'html/homeloan.html',
+					controller: 'calculatorCtrl'
+                },
+                footer: footer
+            }
+				
+				
+			}).state('vaastu', {
+				url: '/vaastu',
+				views: {
+                header: header,
+                content: {
+                   templateUrl: 'html/vaastutips.html',
+					controller: 'calculatorCtrl'
+                },
+                footer: footer
+            }
+				
+				
+			}).state('interior', {
+				url: '/interior',
+				views: {
+                header: header,
+                content: {
+                   templateUrl: 'html/interior.html',
+					controller: 'calculatorCtrl'
+                },
+                footer: footer
+            }
+				
+				
+			}).state('news', {
+				url: '/news',
+				views: {
+                header: header,
+                content: {
+                   templateUrl: 'html/news.html',
+					controller: 'calculatorCtrl'
+                },
+                footer: footer
+            }
+				
+			}) .state('faq', {
 				url: '/faq',
 				views: {
                 header: header,
@@ -241,7 +307,11 @@ router.config(["$stateProvider", "$urlRouterProvider",
             }
 				
 			}).state('property', {
+				//url: '/property',
 				url: '/property:param',
+				/* params: {
+					param:null,
+				}, */
 				views: {
                 header: header,
 				content: {
@@ -253,8 +323,29 @@ router.config(["$stateProvider", "$urlRouterProvider",
 				
 				
 				
+			}).state('similarprop', {
+				//url: '/similarproperty',
+				url: '/similarproperty:param',
+				/* params: {
+					param:null,
+				}, */
+				views: {
+                header: header,
+				content: {
+                    templateUrl: 'html/similar_property.html',
+					controller: 'propertyCtrl'
+                },
+                footer: footer
+            }
+				
+				
+				
 			}).state('enquiry', {
+				//url: '/enquiry',
 				url: '/enquiry:param',
+				/* params: {
+					param:null,
+				}, */
 				views: {
                 header: header,
 				content: {
@@ -279,6 +370,23 @@ router.config(["$stateProvider", "$urlRouterProvider",
                 footer: {
 					template:'<div></div>'
 				}
+            }
+				
+				
+			}).state('newStory', {
+				//url: '/newStory',
+				url: '/newStory/:param/:type',
+				/* params: {
+					param:null,
+					type:null,
+				}, */
+				views: {
+                header: header,
+				content: {
+                    templateUrl: 'html/newStories.html',
+					controller: 'storiesCtrl'
+                },
+                 footer: footer
             }
 				
 				

@@ -1,4 +1,5 @@
- 
+ <!-- <div loading-indicatorfooter class="waiting-box">
+	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
  <div class="clearfix"></div>
  <div class="footer_main">
     	<div class="container">
@@ -20,12 +21,9 @@ Our work does not end here. We assist you with home loans and property registrat
                 <div class="col-lg-7 col-md-7 col-sm-7">                	
                     <div class="footer_right_links">
                     	<h1>Real Estate In India</h1>
-                        <ul>
-                        	<li><a href="#">Properties For Sale In Bangalore</a></li>
-                            <li><a href="#">Properties For Sale In Greater Noida</a></li>
-                            <li><a href="#">Properties For Sale In Mumbai</a></li>
-                            <li><a href="#">Properties For Sale In Pune</a></li>
-                            <li><a href="#">Properties For Sale In Noida</a></li>
+                        <ul ng-repeat="city_details in cities">
+                        	<li><a ui-sref="city({cityname:city_details.city,locality:'',buliderId:'',reraId:''})">Properties For Sale In {{city_details.city}}</a></li>
+                            
                         </ul>
                     </div>
                     <div class="footer_right_links">
@@ -40,15 +38,12 @@ Our work does not end here. We assist you with home loans and property registrat
                     </div>
                     <div class="footer_right_links">
                     	<h1>Real Estate In India</h1>
-                        <ul>
-                        	<li><a href="#">Property in Bangalore</a></li>
-                            <li><a href="#">Property in Greater Noida</a></li>
-                            <li><a href="#">Property in Mumbai</a></li>
-                            <li><a href="#">Property in Pune</a></li>
-                            <li><a href="#">Cities in India</a></li>
+                        <ul ng-repeat="city_details in cities">
+                        	<li><a ui-sref="city({cityname:city_details.city,locality:'',buliderId:'',reraId:''})">Property in {{city_details.city}}</a></li>
+                          
                         </ul>
                     </div>
-                    <div class="footer_right_links">
+                    <div class="footer_right_links mrgLft15">
                     	<h1>Builders</h1>
                         <ul>
                         	<li><a href="#">Prestige Group</a></li>
@@ -88,19 +83,19 @@ Our work does not end here. We assist you with home loans and property registrat
                 	<div class="footer_right_down">
                     	<h3>Quick Links</h3>
                         <ul>
-                        	<li><a href="#">Home</a></li>
+                        	<li><a ng-href="#/dashboard">Home</a></li>
                             <li><a href="#">User Agreement</a></li>
                             <li><a href="#">Guide</a></li>
-                            <li><a href="#">Contact us</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a ng-href="#/contactUs">Contact us</a></li>
+                            <li><a ng-href="#/policy">Privacy Policy</a></li>
                             <li><a href="#">Disclaimer</a></li>
                         </ul>
                     </div>
                     <div class="footer_right_down">
                     	<h3>Resources</h3>
                         <ul>
-                        	<li><a href="#">Home Loan</a></li>
-                            <li><a href="#">NRI Services</a></li>
+                        	<li><a ng-href="#/calculator">Home Loan</a></li>
+                            <li><a ng-href="#/services">NRI Services</a></li>
                             <li><a href="#">How To Buy</a></li>
                         </ul>
                     </div>

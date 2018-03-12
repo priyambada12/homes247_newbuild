@@ -329,7 +329,7 @@ app.directive("gLogin",
 }); 
 
 app.controller('signUpCtrl',function($scope,signupFactory,$state,$modal, $log,$rootScope,$cookies){
-
+	//$cookies.set('key','others');
 	$('body').attr('id', 'signup_bg');
 	
 $scope.signup = {

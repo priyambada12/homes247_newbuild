@@ -1,9 +1,9 @@
 //(function(){
 var app = angular.module('cityInfoApp',[]);
-app.controller('cityInfoCtrl',function(){
+app.controller('cityInfoCtrl',function($cookies){
 
-	
-	$('.test_design').niceSelect();
+	//$cookies.set('key','others');
+	/* $('.test_design').niceSelect();
 	$('#first').carouseller({
 					scrollSpeed: 850,
 					autoScrollDelay: -1800,
@@ -20,7 +20,7 @@ app.controller('cityInfoCtrl',function(){
 					easing: 'linear'
 				});
 				
-	$(fourd).carouseller();
+	$(fourd).carouseller(); */
 	
 });
 //});

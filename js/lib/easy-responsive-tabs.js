@@ -121,3 +121,8 @@
         }
     });
 })(jQuery);
+
+
+$(document).ready(function() {
+		$('.test_design').niceSelect();
+		});

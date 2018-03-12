@@ -28,7 +28,8 @@ app.controller('myaccountsCtrl', function() {
 
 });
 
-app.controller('favCtrl', function($scope,$cookies,settingFactory,urls) {
+app.controller('favCtrl', function($scope,$cookies,settingFactory,urls,$state) {
+	//$cookies.set('key','others');
 	$scope.propertyimage=urls.imagesURL+"uploadPropertyImgs/";
 	$scope.accounts =JSON.parse($cookies.get('user'));
 	$scope.recentView=true;
@@ -49,6 +50,13 @@ app.controller('favCtrl', function($scope,$cookies,settingFactory,urls) {
 	},function(error){
 		console.log(error);
 	});
+	
+	$scope.getpropertydata = function(property){
+		$state.go('property', {
+                    param: property.propertyId
+                });
+	};
+	
 });
 
 app.controller('settingCtrl', function($scope,$cookies,settingFactory,$modal, $log) {
@@ -106,7 +114,7 @@ app.controller('settingCtrl', function($scope,$cookies,settingFactory,$modal, $l
     
 });
 
-app.controller('recentlyViewedCtrl', function($scope,$cookies,settingFactory,urls) {
+app.controller('recentlyViewedCtrl', function($scope,$cookies,settingFactory,urls,$state) {
 	$scope.propertyimage=urls.imagesURL+"uploadPropertyImgs/";
 	$scope.recentView=true;
 	$scope.accounts =JSON.parse($cookies.get('user'));
@@ -130,6 +138,12 @@ app.controller('recentlyViewedCtrl', function($scope,$cookies,settingFactory,url
 		console.log(error);
 	});
 	
+	
+	$scope.getpropertydata = function(property){
+		$state.go('property', {
+                    param: property.propertyId
+                });
+	};
 
 });
 

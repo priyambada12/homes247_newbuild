@@ -1,9 +1,9 @@
 //(function(){
-var app = angular.module('aboutUsApp', ['ui.bootstrap','modalApp']);
+var aboutapp = angular.module('aboutUsApp', ['ui.bootstrap','modalApp']);
 
 
-app.controller('aboutusCtrl', function($scope, networkFactory,$modal, $log) {
-	
+aboutapp.controller('aboutusCtrl', function($scope, networkFactory,$modal, $log,$cookies) {
+	//$cookies.put('key','others');
     $scope.user = {
         name: '',
         mobileno: ''
@@ -25,7 +25,7 @@ app.controller('aboutusCtrl', function($scope, networkFactory,$modal, $log) {
             networkFactory.addCallbackDetails(requestParam, function(success) {
                 var status = success.data.status;
                 if (status == "True") {
-					$scope.msgs = "You will intimate you soon";
+					$scope.msgs = "we will intimate you soon.";
                     $scope.open();
                 }
             }, function(error) {
@@ -37,6 +37,7 @@ app.controller('aboutusCtrl', function($scope, networkFactory,$modal, $log) {
 
     };
     //$('.test_design').niceSelect();
+	/* 
     $('#first').carouseller({
         scrollSpeed: 850,
         autoScrollDelay: -1800,
@@ -52,7 +53,7 @@ app.controller('aboutusCtrl', function($scope, networkFactory,$modal, $log) {
         scrollSpeed: 800,
         autoScrollDelay: 1600,
         easing: 'linear'
-    });
+    }); */
 
     //$(fourd).carouseller();
 	

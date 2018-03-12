@@ -1,19 +1,30 @@
+ <!-- <div loading-indicatorenquiry class="waiting-box">
+	 <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
+ <div class="col-lg-4 col-md-4 col-sm-4"></div>
  <div class="col-lg-4 col-md-4 col-sm-4">
                 	<div class="property_details_form">
                     	<h2>Interested to buy this property !</h2>
-                        <form>
+                        <form name="enquiryForm">
 
-						<input placeholder="Name" type="text" ng-model="enquiry.name" />                            
+						<input placeholder="Name" type="text" ng-model="enquiry.name" name="uname" required ng-minlength="3" />                            
                             <select class="test_design">
                             	<option>+91 INDIA</option>
                             </select>
-                            <input placeholder="Mobile Number" class="mob_nu" type="text" ng-model="enquiry.number"/>
+                            <input placeholder="Mobile Number" class="mob_nu" type="text" ng-model="enquiry.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13"/>
                             <div class="clearfix"></div>
-							<a class="gcb_btn" ng-click="getcallBackForProperties(enquiry);">Get Call Back</a>
+							<span ng-show="enquiryForm.uname.$dirty && enquiryForm.uname.$error.required">This is a required field</span>
+							<span ng-show="enquiryForm.uname.$dirty && enquiryForm.uname.$error.minlength">Minimum length required is 3</span>
+            				
+							<span ng-show="enquiryForm.phno.$dirty && enquiryForm.phno.$error.required">This is a required field</span>
+							<span ng-show="enquiryForm.phno.$dirty && enquiryForm.phno.$error.minlength">Minimum length required is 10</span>
+							<span ng-show="enquiryForm.phno.$dirty && enquiryForm.phno.$error.maxlength">Mobile Number is too long</span>
+		
+							<a class="gcb_btn" ng-click="getcallBackForProperties();">Get Call Back</a>
 							<a class="read_d" href="#">read disclaimer</a>
                         </form>
                     </div>
                 </div>
+				<div class="col-lg-4 col-md-4 col-sm-4"></div>
 				
 				 <script type="text/ng-template" id="myModalContent.html">
          <div class="modal-header">
@@ -27,4 +38,10 @@
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
+	
+		<script type="text/javascript">
+		$(document).ready(function() {
+		$('.test_design').niceSelect();
+		});
+</script>
 	 

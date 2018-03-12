@@ -1,50 +1,47 @@
-
- <div class="about_us_banner">
+<div loading-indicator class="waiting-box">
+	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> 
+    
+    <div class="about_us_banner">
     	<img src="images/bangalore_header_bg.jpg" alt="" />
-        <h2>Bengaluru</h2>
+        <h2>{{city_name}}
+        	<a ng-href="#/cityInfo">More about {{city_name}}</a>
+        </h2>
+        
     </div>
     
     <div class="city_search_filter">
     	<div class="container">
         	<div class="row">
-            	<div class="col-lg-12 col-md-12 col-sm-12">
-            	<div class="offers_filters_box">
+            	<div class="col-lg-3 col-md-3 col-sm-3">
                 	<div class="city_filter_box">
                     	<div class="icon_city"><img src="images/bed_icon_filter.png" alt="" /></div>
-                        <select class="test_design">
-                            	<option>Bedroom</option>
+                        <select class="select_design" ng-options="bedroom.bhk_numbers for bedroom in bedrooms" ng-model="bedroom" ng-change="filterProperties();">
+                            	<option value="">Select Option</option>
                             </select>
                     </div>
                 </div>
-                <div class="offers_filters_box">
+                <div class="col-lg-3 col-md-3 col-sm-3">
                 	<div class="city_filter_box">
                     	<div class="icon_city"><img src="images/rs_icon_filter.png" alt="" /></div>
-                        <select class="test_design">
-                            	<option>Budget</option>
+                        <select class="select_design" ng-options="budget.budget_value for budget in budgets" ng-model="budget" ng-change="filterProperties();">
+                            	<option value="">Select Option</option>
                             </select>
                     </div>
                 </div>
-                <div class="offers_filters_box">
+                <div class="col-lg-4 col-md-4 col-sm-4">
                 	<div class="city_filter_box">
                     	<div class="icon_city"><img src="images/possession-_icon_filter.png" alt="" /></div>
-                        <select class="test_design">
-                            	<option>Possession within</option>
+                        <select class="select_design" 
+						ng-options="possission.possission_value for possission in possissions" 
+						ng-model="possission" ng-change="filterProperties();" >
+                            	<option value="">Select Option</option>
                             </select>
                     </div>
                 </div>
-                <div class="offers_filters_box">
-                	<div class="city_filter_box">
-                    	<div class="icon_city"><img src="images/city_icon_filter.png" alt="" /></div>
-                        <select class="test_design">
-                            	<option>City</option>
-                            </select>
-                    </div>
-                </div>
-                <div class="offers_filters_box">
+                <div class="col-lg-2 col-md-2 col-sm-2">
                 	<div class="city_filter_reset">
-                    	<a href="#"><img src="images/reset_icon_filter.png" alt="" /> Reset</a>
+                    	<a ng-click ="resetDropDown()"><img src="images/reset_icon_filter.png" alt="" /> Reset</a>
                     </div>
-                </div>
                 </div>
             </div>
             <div class="row">
@@ -53,15 +50,15 @@
                     	<p><span><img src="images/disclaimer_icon.png" alt="" /></span> Disclaimer</p>                       
                     </div>
                     <div class="disclaimer_icon">
-                    	<p><span><img src="images/view_map_icon.png" alt="" /></span> View Map</p>                       
+                    	<p><a class="open-popup" ng-click="mapview();"><span><img src="images/view_map_icon.png" alt="" /></span> View Map</a></p>                       
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                 	<div class="properties_per_page">
                     	<p>Properties per page</p>
-                        <select>
-                        	<option>10</option>
-                            <option>50</option>
+                        <select class="select_design" ng-options="pagesize.value for pagesize in sizeselect" 
+						ng-model="sizevalue" ng-change="changepageSize(sizevalue);">
+                        	
                         </select>
                     </div>
                 </div>
@@ -71,46 +68,47 @@
             </div>
             <div class="row">
             	<div class="col-lg-9 col-md-9 col-sm-9">
-                	<h1>Offers</h1>
+                	<h1>Property for Sale in Bengaluru (<span>{{properties.length }} projects</span>)</h1>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3">
                 	<div class="sort_by_city">
-                    	<h5>Sort by :</h5>
-                        <select class="test_design">
+					<select class="select_design">
                         	<option>Relevance</option>
                         </select>
+                    	<h5>Sort by :</h5>                        
                     </div>
                 </div>
             </div>    
-            <div class="row">
-            	<div class="col-lg-6 col-md-6 col-sm-6">
-                	<div class="city_property_detail_box">
+			<div ng-hide ="prop_val"><h1 style="color: red;">Nothing to show</h1></div>
+            <div class="row" ng-show ="prop_val">
+            	<div class="col-lg-6 col-md-6 col-sm-6" ng-repeat = "property in pagedItems[currentPage] track by $index">
+				
+                	<div class="city_property_detail_box" ng-repeat = "image in property.images | limitTo:1">
                     	<div class="star_imgs_details">
-                        	<a href="#"><img src="images/start_icon_2.png" alt="" /></a>
+                        	<a ng-click="userFavourite(property,$parent.$index);" ng-model="property.user_fav" id="{{$parent.$index}}" >
+							
+							<img src="images/start_icon_2.png" alt="" ng-if="!property.user_fav"/>
+							<img src="images/star_selected.png" alt="" ng-if="property.user_fav"/></a>
                             <a href="#"><img src="images/img_viewer_img.png" alt="" />
-                            	<span>50</span>
+                            	<span>{{property.images.length}}</span>
                             </a>
                         </div>
-                    	<a class="image" href="#"><img src="images/city_property_image.jpg" alt="" /></a>
+                    	<a class="image" href="#"><img ng-src="{{propertyimage}}{{image.name}}" alt="" 
+						style="width: 553px;height: 250px;"/></a>
                         <div class="property_important_info">
-                        	<h2>Prestige Lakeside Apartment
-                            	<small><img src="images/search_location_icon.png" /> HSR, Bengaluru</small>
+                        	<h2>{{property.propertyName}}
+                            	<small><img src="images/search_location_icon.png" /> {{property.locality_name}},{{property.city_name}}</small>
                             </h2>
-                            <h3>Prestige Group</h3>
-                            <h4>RERA ID : PR/KN/17032456/</h4>
+                             <h3>Prestige Group</h3> 
+                           <h4>RERA ID : {{property.RERA_ID}}</h4>
                         </div>
                         <div class="property_more_details">
                         	<div class="left_details">
                             	<div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
+                            	<p>{{property.BHK}} BHK <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>{{property.dimension}} sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> {{property.price_min}}-{{property.price_max}}</h6>
                             	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <h5><strong>Exciting Offers</strong> Offer Price -     5500/- per Sq.Ft.</h5>
+                                
+                                <h5><strong>Exciting Offers</strong> Offer Price -{{property.offerPrice}}/- per Sq.Ft.</h5>
                             </div>
                             
                             <div class="right_details">
@@ -125,422 +123,44 @@
                                     <p>Ready to move in</p>
                                 </div>
                                 <ul>
-                                	<li><a href="#">View Details</a></li>
-                                    <li class="active"><a href="#">Enquire Now</a></li>
+                                	<li><div ng-click="getPropertyID(property.property_info_IDPK);">View Details</div></li>
+                                    <li class="active"><a ui-sref="enquiry({param:property.property_info_IDPK})">Enquire Now</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                	<div class="city_property_detail_box">
-                    	<a class="image" href="#"><img src="images/city_property_image.jpg" alt="" /></a>
-                        <div class="property_important_info">
-                        	<h2>Prestige Lakeside Apartment
-                            	<small><img src="images/search_location_icon.png" /> HSR, Bengaluru</small>
-                            </h2>
-                            <h3>Prestige Group</h3>
-                            <h4>RERA ID : PR/KN/17032456/</h4>
-                        </div>
-                        <div class="property_more_details">
-                        	<div class="left_details">
-                            	<div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <h5><strong>Exciting Offers</strong> Offer Price -     5500/- per Sq.Ft.</h5>
-                            </div>
-                            
-                            <div class="right_details">
-                            	<div class="ready_move">
-                                	<span><img src="images/last_month_img.png" alt="" /></span>
-                                    <p>
-                                    	<small>18.5 %</small>
-                                    in last 49 months</p>
-                                </div>
-                                <div class="ready_move">
-                                	<span><img src="images/ready_to_move.png" alt="" /></span>
-                                    <p>Ready to move in</p>
-                                </div>
-                                <ul>
-                                	<li><a href="#">View Details</a></li>
-                                    <li class="active"><a href="#">Enquire Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+              
                 </div>
-                
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                	<div class="city_property_detail_box">
-                    	<a class="image" href="#"><img src="images/city_property_image.jpg" alt="" /></a>
-                        <div class="property_important_info">
-                        	<h2>Prestige Lakeside Apartment
-                            	<small><img src="images/search_location_icon.png" /> HSR, Bengaluru</small>
-                            </h2>
-                            <h3>Prestige Group</h3>
-                            <h4>RERA ID : PR/KN/17032456/</h4>
-                        </div>
-                        <div class="property_more_details">
-                        	<div class="left_details">
-                            	<div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <h5><strong>Exciting Offers</strong> Offer Price -     5500/- per Sq.Ft.</h5>
-                            </div>
-                            
-                            <div class="right_details">
-                            	<div class="ready_move">
-                                	<span><img src="images/last_month_img.png" alt="" /></span>
-                                    <p>
-                                    	<small>18.5 %</small>
-                                    in last 49 months</p>
-                                </div>
-                                <div class="ready_move">
-                                	<span><img src="images/ready_to_move.png" alt="" /></span>
-                                    <p>Ready to move in</p>
-                                </div>
-                                <ul>
-                                	<li><a href="#">View Details</a></li>
-                                    <li class="active"><a href="#">Enquire Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                	<div class="city_property_detail_box">
-                    	<a class="image" href="#"><img src="images/city_property_image.jpg" alt="" /></a>
-                        <div class="property_important_info">
-                        	<h2>Prestige Lakeside Apartment
-                            	<small><img src="images/search_location_icon.png" /> HSR, Bengaluru</small>
-                            </h2>
-                            <h3>Prestige Group</h3>
-                            <h4>RERA ID : PR/KN/17032456/</h4>
-                        </div>
-                        <div class="property_more_details">
-                        	<div class="left_details">
-                            	<div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <h5><strong>Exciting Offers</strong> Offer Price -     5500/- per Sq.Ft.</h5>
-                            </div>
-                            
-                            <div class="right_details">
-                            	<div class="ready_move">
-                                	<span><img src="images/last_month_img.png" alt="" /></span>
-                                    <p>
-                                    	<small>18.5 %</small>
-                                    in last 49 months</p>
-                                </div>
-                                <div class="ready_move">
-                                	<span><img src="images/ready_to_move.png" alt="" /></span>
-                                    <p>Ready to move in</p>
-                                </div>
-                                <ul>
-                                	<li><a href="#">View Details</a></li>
-                                    <li class="active"><a href="#">Enquire Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                	<div class="city_property_detail_box">
-                    	<a class="image" href="#"><img src="images/city_property_image.jpg" alt="" /></a>
-                        <div class="property_important_info">
-                        	<h2>Prestige Lakeside Apartment
-                            	<small><img src="images/search_location_icon.png" /> HSR, Bengaluru</small>
-                            </h2>
-                            <h3>Prestige Group</h3>
-                            <h4>RERA ID : PR/KN/17032456/</h4>
-                        </div>
-                        <div class="property_more_details">
-                        	<div class="left_details">
-                            	<div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <h5><strong>Exciting Offers</strong> Offer Price -     5500/- per Sq.Ft.</h5>
-                            </div>
-                            
-                            <div class="right_details">
-                            	<div class="ready_move">
-                                	<span><img src="images/last_month_img.png" alt="" /></span>
-                                    <p>
-                                    	<small>18.5 %</small>
-                                    in last 49 months</p>
-                                </div>
-                                <div class="ready_move">
-                                	<span><img src="images/ready_to_move.png" alt="" /></span>
-                                    <p>Ready to move in</p>
-                                </div>
-                                <ul>
-                                	<li><a href="#">View Details</a></li>
-                                    <li class="active"><a href="#">Enquire Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                	<div class="city_property_detail_box">
-                    	<a class="image" href="#"><img src="images/city_property_image.jpg" alt="" /></a>
-                        <div class="property_important_info">
-                        	<h2>Prestige Lakeside Apartment
-                            	<small><img src="images/search_location_icon.png" /> HSR, Bengaluru</small>
-                            </h2>
-                            <h3>Prestige Group</h3>
-                            <h4>RERA ID : PR/KN/17032456/</h4>
-                        </div>
-                        <div class="property_more_details">
-                        	<div class="left_details">
-                            	<div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <h5><strong>Exciting Offers</strong> Offer Price -     5500/- per Sq.Ft.</h5>
-                            </div>
-                            
-                            <div class="right_details">
-                            	<div class="ready_move">
-                                	<span><img src="images/last_month_img.png" alt="" /></span>
-                                    <p>
-                                    	<small>18.5 %</small>
-                                    in last 49 months</p>
-                                </div>
-                                <div class="ready_move">
-                                	<span><img src="images/ready_to_move.png" alt="" /></span>
-                                    <p>Ready to move in</p>
-                                </div>
-                                <ul>
-                                	<li><a href="#">View Details</a></li>
-                                    <li class="active"><a href="#">Enquire Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                	<div class="city_property_detail_box">
-                    	<a class="image" href="#"><img src="images/city_property_image.jpg" alt="" /></a>
-                        <div class="property_important_info">
-                        	<h2>Prestige Lakeside Apartment
-                            	<small><img src="images/search_location_icon.png" /> HSR, Bengaluru</small>
-                            </h2>
-                            <h3>Prestige Group</h3>
-                            <h4>RERA ID : PR/KN/17032456/</h4>
-                        </div>
-                        <div class="property_more_details">
-                        	<div class="left_details">
-                            	<div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <h5><strong>Exciting Offers</strong> Offer Price -     5500/- per Sq.Ft.</h5>
-                            </div>
-                            
-                            <div class="right_details">
-                            	<div class="ready_move">
-                                	<span><img src="images/last_month_img.png" alt="" /></span>
-                                    <p>
-                                    	<small>18.5 %</small>
-                                    in last 49 months</p>
-                                </div>
-                                <div class="ready_move">
-                                	<span><img src="images/ready_to_move.png" alt="" /></span>
-                                    <p>Ready to move in</p>
-                                </div>
-                                <ul>
-                                	<li><a href="#">View Details</a></li>
-                                    <li class="active"><a href="#">Enquire Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                	<div class="city_property_detail_box">
-                    	<a class="image" href="#"><img src="images/city_property_image.jpg" alt="" /></a>
-                        <div class="property_important_info">
-                        	<h2>Prestige Lakeside Apartment
-                            	<small><img src="images/search_location_icon.png" /> HSR, Bengaluru</small>
-                            </h2>
-                            <h3>Prestige Group</h3>
-                            <h4>RERA ID : PR/KN/17032456/</h4>
-                        </div>
-                        <div class="property_more_details">
-                        	<div class="left_details">
-                            	<div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <h5><strong>Exciting Offers</strong> Offer Price -     5500/- per Sq.Ft.</h5>
-                            </div>
-                            
-                            <div class="right_details">
-                            	<div class="ready_move">
-                                	<span><img src="images/last_month_img.png" alt="" /></span>
-                                    <p>
-                                    	<small>18.5 %</small>
-                                    in last 49 months</p>
-                                </div>
-                                <div class="ready_move">
-                                	<span><img src="images/ready_to_move.png" alt="" /></span>
-                                    <p>Ready to move in</p>
-                                </div>
-                                <ul>
-                                	<li><a href="#">View Details</a></li>
-                                    <li class="active"><a href="#">Enquire Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                	<div class="city_property_detail_box">
-                    	<a class="image" href="#"><img src="images/city_property_image.jpg" alt="" /></a>
-                        <div class="property_important_info">
-                        	<h2>Prestige Lakeside Apartment
-                            	<small><img src="images/search_location_icon.png" /> HSR, Bengaluru</small>
-                            </h2>
-                            <h3>Prestige Group</h3>
-                            <h4>RERA ID : PR/KN/17032456/</h4>
-                        </div>
-                        <div class="property_more_details">
-                        	<div class="left_details">
-                            	<div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <h5><strong>Exciting Offers</strong> Offer Price -     5500/- per Sq.Ft.</h5>
-                            </div>
-                            
-                            <div class="right_details">
-                            	<div class="ready_move">
-                                	<span><img src="images/last_month_img.png" alt="" /></span>
-                                    <p>
-                                    	<small>18.5 %</small>
-                                    in last 49 months</p>
-                                </div>
-                                <div class="ready_move">
-                                	<span><img src="images/ready_to_move.png" alt="" /></span>
-                                    <p>Ready to move in</p>
-                                </div>
-                                <ul>
-                                	<li><a href="#">View Details</a></li>
-                                    <li class="active"><a href="#">Enquire Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                	<div class="city_property_detail_box">
-                    	<a class="image" href="#"><img src="images/city_property_image.jpg" alt="" /></a>
-                        <div class="property_important_info">
-                        	<h2>Prestige Lakeside Apartment
-                            	<small><img src="images/search_location_icon.png" /> HSR, Bengaluru</small>
-                            </h2>
-                            <h3>Prestige Group</h3>
-                            <h4>RERA ID : PR/KN/17032456/</h4>
-                        </div>
-                        <div class="property_more_details">
-                        	<div class="left_details">
-                            	<div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <div>
-                            	<p>1 BHK + 1T <i class="fa fa-angle-down" aria-hidden="true"></i></p> <p>905 sqft</p> <h6><i class="fa fa-inr" aria-hidden="true"></i> 25 L - 40 L</h6>
-                            	</div>
-                                <h5><strong>Exciting Offers</strong> Offer Price -     5500/- per Sq.Ft.</h5>
-                            </div>
-                            
-                            <div class="right_details">
-                            	<div class="ready_move">
-                                	<span><img src="images/last_month_img.png" alt="" /></span>
-                                    <p>
-                                    	<small>18.5 %</small>
-                                    in last 49 months</p>
-                                </div>
-                                <div class="ready_move">
-                                	<span><img src="images/ready_to_move.png" alt="" /></span>
-                                    <p>Ready to move in</p>
-                                </div>
-                                <ul>
-                                	<li><a href="#">View Details</a></li>
-                                    <li class="active"><a href="#">Enquire Now</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>   
-            <div class="row">
+				<div class="row">
             	<div class="col-lg-12">
                 	<div class="pagination_main">
-                    	 <ul class="pagination">
-                              <li><a href="#">1</a></li>
-                              <li><a href="#">2</a></li>
-                              <li><a href="#">3</a></li>
-                              <li><a href="#">4</a></li>
-                              <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                            </ul> 
-                    </div>
+                            <ul class="pagination">
+                                <li ng-class="{disabled: currentPage == 0}">
+                                    <a href ng-click="prevPage()">«</a>
+                                </li>
+                            
+                                <li ng-repeat="n in range(pagedItems.length, currentPage, currentPage + gap) "
+                                    ng-class="{active: n == currentPage>0}"
+                                ng-click="setPage()">
+                                
+                                    <a href ng-bind="n + 1">1</a>
+                                
+                                </li>
+                             
+                                <li ng-class="{disabled: (currentPage) == pagedItems.length - 1}">
+                                    <a href ng-click="nextPage()">»</a>
+                                </li>
+                            </ul>
+                        </div>
                 </div>
-            </div>     
+            </div>  
+            </div>   
+               
         </div>
     </div>
-   
     
+   
     <div class="about_contact_us">
     <div class="container">
     	<div class="row">
@@ -548,15 +168,22 @@
             <div class="col-lg-8 col-md-8 col-sm-8">
             	
                 	<div class="call_back_form">
-                    	<h1 style="font-size:30px;">Claim your offer Now!</h1>
-                    	<form>
-                        	<input placeholder="Name" type="text" />                            
-                            <select class="test_design">
+                    	<h1 style="font-size:30px;">How About Saving Your Time!</h1>
+                    	<form name="offerForm">
+						<input placeholder="Name" type="text" ng-model="user.name" name="uname" required ng-minlength="3" />                            
+                            <select class="select_design">
                             	<option>+91 INDIA</option>
                             </select>
-                            <input placeholder="Mobile Number" type="text" />
+                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13"/>
                             <div class="clearfix"></div>
-                            <a class="btn_style" href="#">Get Call Back</a>
+							<span ng-show="offerForm.uname.$dirty && offerForm.uname.$error.required">This is a required field</span>
+							<span ng-show="offerForm.uname.$dirty && offerForm.uname.$error.minlength">Minimum length required is 3</span>
+            				
+							<span ng-show="offerForm.phno.$dirty && offerForm.phno.$error.required">This is a required field</span>
+							<span ng-show="offerForm.phno.$dirty && offerForm.phno.$error.minlength">Minimum length required is 10</span>
+							<span ng-show="offerForm.phno.$dirty && offerForm.phno.$error.maxlength">Mobile Number is too long</span>
+		
+                            <button class="btn_style" ng-click="callBack(user);">Get Call Back</button>
                         </form>   
                         <p style="text-align:center; margin-top: 30px;">All the request are handled in just 5 minutes, Please <a href="#">click here</a> to send an email inquiry</p>                     
                     </div>
@@ -565,8 +192,8 @@
         </div>
     </div>
     </div>
-
- <script type="text/ng-template" id="myModalContent.html">
+	
+	 <script type="text/ng-template" id="myModalContent.html">
          <div class="modal-header">
            <h3 class="modal-title">Message</h3> 
         </div> 
@@ -578,4 +205,13 @@
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
+	
+
+
+		<!-- <script type="text/javascript">
+		$(document).ready(function() {
+		$('.test_design').dropdown();
+		});
+</script> -->
 	 
+  

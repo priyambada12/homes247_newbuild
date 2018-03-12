@@ -1,4 +1,5 @@
-
+<!-- <div loading-indicatoremi class="waiting-box">
+	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
        <div class="container">
        		<div class="row">
             	<div class="col-lg-12">
@@ -6,7 +7,7 @@
                     	<div id="horizontalTab">
                         <ul class="resp-tabs-list">
                         <li>Home Loan</li>
-                        <li>EMI Calculator</li>
+                        <li class="resp-tab-active">EMI Calculator</li>
                         <li>Interiors</li>
                         <li>Vaastu Tips</li>
                         <li>News</li>
@@ -43,21 +44,21 @@ On the other hand, we denounce with righteous indignation and dislike men who ar
                                             </select>
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Loan Amount</h3>
-                                                <input placeholder="15,00,000" type="text" />
+                                                <input placeholder="Enter amount" valid-number type="text" ng-model="emi.amount" />
                                                 <div class="loan_emi_scale">
                                             	<img src="images/loan_emi_graph.png" alt="" />
                                            		 </div>
                                             </div>
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Loan Tenure (in yrs)</h3>
-                                                <input placeholder="5" type="text" />
+                                                <input placeholder="year" valid-number type="text" ng-model="emi.term" />
                                                 <div class="loan_emi_scale">
                                             	<img src="images/loan_emi_graph2.png" alt="" />
                                            		 </div>
                                             </div>
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Interest Rate (p.a)</h3>
-                                                <input placeholder="5" type="text" />
+                                                <input placeholder="rate of interest" valid-number type="text" ng-model="emi.intrestrate"/>
                                                 <div class="loan_emi_scale">
                                             	<img src="images/loan_emi_graph3.png" alt="" />
                                            		 </div>
@@ -69,30 +70,30 @@ On the other hand, we denounce with righteous indignation and dislike men who ar
                                 	<div class="principal_amount">
                                     	<img src="images/img_1.png" alt="" />
                                         <h4>Principal amount
-                                        	<strong>15,00,000</strong>
+                                        	<strong>{{emi.amount}}</strong>
                                         </h4>
                                     </div>
                                     <div class="monthly_emi_result">
-                                    	<h4>Monthly EMI : 25,758</h4>
+                                    	<h4>Monthly EMI : {{monthlyAmount|currency:"&#8377;"}}</h4>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                 	<div class="emi_indicators_main">
                                     	<div class="emi_indicators_box">
                                         	<span></span>
-                                            <h6>Principal : <strong>15.0 L</strong></h6>
+                                            <h6>Principal : <strong>{{emi.amount|currency:"&#8377;"}}</strong></h6>
                                         </div>
                                         <div class="emi_indicators_box">
                                         	<span style="background:#0a3544;"></span>
-                                            <h6>Interest <br />Payable : <strong>2.5 L</strong></h6>
+                                            <h6>Interest <br />Payable : <strong>{{interestpayable |currency:"&#8377;"}}</strong></h6>
                                         </div>
                                         <div class="emi_indicators_box">
-                                            <h6>Total Amount <br />Payable : <strong>17.5 L</strong></h6>
+                                            <h6>Total Amount <br />Payable : <strong>{{totalAmount|currency:"&#8377;"}}</strong></h6>
                                         </div>
                                     </div>
                                     
                                     <div class="apply_now_btn">
-                                    	<a href="#">Apply Now</a>
+                                    	<a ng-click ="getrate(emi);">Apply Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -316,7 +317,47 @@ Bedrooms:
                     </div>
                 </div>
                 <div class="row">
+				<form name="moreForm">
                 	<div class="col-lg-4 col-md-4 col-sm-4">
+                    	<div class="clarify_query_form">
+                        	<div class="input_div">
+                            	<input placeholder="Name" type="text" ng-model ="user.name" name="uname" required ng-minlength="3" />
+								<span ng-show="moreForm.uname.$dirty && moreForm.uname.$error.required">This is a required field</span>
+								<span ng-show="moreForm.uname.$dirty && moreForm.uname.$error.minlength">Minimum length required is 3</span>
+            				
+                            </div>                            
+                            <div class="input_div">
+                            	<select class="test_design">
+                                	<option>+91 INDIA</option>
+                                </select>
+                            	<input class="inhalf" placeholder="Mobile Number" type="text" numbers-only ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13" />
+								<span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.required">This is a required field</span>
+							    <span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.minlength">Minimum length required is 10</span>
+							    <span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.maxlength">Mobile Number is too long</span>
+		
+                            </div>
+                            <div class="input_div">
+                            	<input placeholder="Email Id" type="email" name="email" ng-model ="user.email" />
+								<span ng-show="moreForm.email.$dirty && moreForm.email.$error.required">This is a required field</span>
+							    <span ng-show="moreForm.$error.email">Enter a valid Email Address</span>
+                            
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                    	<div class="clarify_query_form">
+                        	<div class="input_div">
+                            	<textarea placeholder="Your message" ng-model="user.msg" name="msg" required></textarea>
+								<span ng-show="moreForm.msg.$dirty && moreForm.msg.$error.required">This is a required field</span>
+                            </div>
+                            <div class="input_div">
+                            	<p>All email enquiries will be taken care in one business day</p>
+                            	<a ng-click="userQuery(user)">Submit</a>
+                            </div>
+                        </div>
+                    </div>
+					</form>
+                	<!-- <div class="col-lg-4 col-md-4 col-sm-4">
                     	<div class="clarify_query_form">
                         	<div class="input_div">
                             	<input placeholder="Name" type="text" />
@@ -342,8 +383,49 @@ Bedrooms:
                             	<a href="#">Submit</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
        </div>
+	   
+	    <script type="text/ng-template" id="myModalContent.html">
+         <div class="modal-header">
+           <h3 class="modal-title">Message</h3> 
+        </div> 
+        <div class="modal-body">
+            <b>{{ message}}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+    
+	<script>
+	 $('#horizontalTab').easyResponsiveTabs({
+type: 'default', //Types: default, vertical, accordion           
+width: 'auto', //auto or any width like 600px
+fit: true,   // 100% fit in a container
+closed: 'accordion', // Start closed if in accordion view
+activate: function(event) { // Callback function if tab is switched
+var $tab = $(this);
+var $info = $('#tabInfo');
+var $name = $('span', $info);
+$name.text($tab.text());
+$info.show();
+}
+});
+$('#verticalTab').easyResponsiveTabs({
+type: 'vertical',
+width: 'auto',
+fit: true
+});
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+		$('.test_design').niceSelect();
+		});
+</script>
+    
 

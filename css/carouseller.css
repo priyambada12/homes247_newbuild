@@ -28,18 +28,19 @@
 .carouseller .carousel-block { display: inline-block; position: relative;}
 .carouseller .carousel-block:nth-child(n+7) { display: none;}
 .carouseller .carousel-wrapper { overflow: hidden; position: relative; margin: 0 35px;}
-.home_mini_banner .carouseller .carousel-wrapper { box-shadow: 0 7px 7px #eaeaea;}
+/*.home_mini_banner .carouseller .carousel-wrapper { box-shadow: 0 7px 7px #eaeaea;}*/
 .carouseller .carousel-button-left, .carouseller .carousel-button-right {
-	position: absolute; margin: 0; bottom: 25px;
+	position: absolute; margin: 0; top: 50%;
     background: none repeat scroll 0 0 transparent;
     font-size: 80px;
     opacity: 1;
     text-align: center;
 	color: #fff;
 	text-decoration: none;
+	margin-top: -23px;
 }
-.carouseller .carousel-button-left { left: -10px;}
-.carouseller .carousel-button-right { right: -10px;}
+.carouseller .carousel-button-left { right: -10px;}
+.carouseller .carousel-button-right { left: -10px;}
 .carouseller .carousel-button-left:hover, .carouseller .carousel-button-right:hover { opacity: 0.8;}
 .carousel-block { text-align: center;}
 
