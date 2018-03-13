@@ -67,7 +67,7 @@ $state, urls, $modal, $log, $cookies, $window, networkFactory){
         offerFactory.getProjectDetails(function(success) {
             console.log(success);
             var projectDetails = success.data.deatils;
-			$window.sessionStorage.setItem('properties',JSON.stringify(projectDetails));
+			
             console.log(projectDetails);
 			var properties =[];
             if (projectDetails.length > 0) {
@@ -78,6 +78,7 @@ $state, urls, $modal, $log, $cookies, $window, networkFactory){
 					}
 				}
                 $scope.properties = properties;
+				$window.sessionStorage.setItem('offers',JSON.stringify(properties));
 				var cityname = $scope.properties[0].city_name;
 				$scope.city_name = cityname;
                  $scope.currentPage = 0;
@@ -179,7 +180,7 @@ $state, urls, $modal, $log, $cookies, $window, networkFactory){
             } else {
                 $scope.prop_val = false;
             }
-			$window.sessionStorage.setItem('properties',JSON.stringify(success.data.deatils));
+			$window.sessionStorage.setItem('offers',JSON.stringify(success.data.deatils));
 			  var projectDetails= success.data.deatils;
 			  var properties=[];
 			 for(var index=0; index<projectDetails.length;index++){
@@ -335,25 +336,171 @@ $state, urls, $modal, $log, $cookies, $window, networkFactory){
         $scope.currentPage = this.n;
     };
 
-	$scope.mapview = function(){
-		$state.go('map');
+function loadCity(){
+	networkFactory.getCityDetails(function(success) {
+        console.log(success.data);
+		$scope.cities = success.data.locations;
+		$scope.selectCity = $scope.cities [0];
+		//$scope.cityProperty = $scope.currentCity;
+		$scope.getBuilders($scope.selectCity);
+	});
+}
+
+	var map;
+      function loadMap() {
+		  var locations=JSON.parse($window.sessionStorage.getItem('offers'));
+		  //alert("loaing");
+        map = new google.maps.Map(document.getElementById('googleMap'), {
+          center: {lat:12.972442, lng:77.580643},
+          zoom: 10,
+		  mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+		loadmarker();
+		 }
+		function loadmarker(){
+		var infowindow = new google.maps.InfoWindow();
+
+  var marker, i;
+	var locations=JSON.parse($window.sessionStorage.getItem('offers'));
+	//alert(locations.length);
+    for (i = 0; i < locations.length; i++) {  
+	map.panTo(new google.maps.LatLng(locations[i].latitude, locations[i].longitude));
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
+        map: map
+      });
+	
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i].address);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+		}
+
+$scope.getBuilders = function(cities){
+
+	 	 var ctrl = this;
+         ctrl.client ={name:'', id:'',type:''};
+	 	//var builder = $scope.currentCity;
+		//alert(cities.city);
+		networkFactory.getBuilderDetails({'city_id':cities.id},function(success){
+			console.log(success.data.autolist);
+			$scope.autolist = success.data.autolist;
+		});
+
+}
+$scope.setClientData = function(item){
+		
+			 if (item){
+                       console.log(item);
+                       $scope.builderData =item;
+                        // console.log(item);
+                     }
+		
+	};
+$scope.getProjects = function(cities){
+	//alert(cities.city);
+		var propData = $scope.builderData;
+		var requests = {locality:'',buliderId:'',reraId:''};
+		if(propData!= undefined && propData.hasOwnProperty('type')){
+				if(propData.type=='bulider_name') {requests.buliderId=propData.id}
+				if(propData.type=='city_name'){requests.locality=propData.id}
+				if(propData.type=='reraId'){requests.reraId=propData.id}
+		}
+		offerFactory.getProjectDetailsWithFilter(cities.city, requests, function(success) {
+            console.log(success);
+			var projectDetails = success.data.deatils;
+            var properties =[];
+            if (projectDetails.length > 0) {
+                $scope.prop_val = true;
+				for(var index=0; index<projectDetails.length;index++){
+					if(projectDetails[index].offerPrice != null){
+						properties.push(projectDetails[index]);
+					}
+				}
+                $scope.properties = properties;
+				$window.sessionStorage.setItem('offers',JSON.stringify(properties));
+				
+            } else {
+                $scope.prop_val = false;
+            }
+			 //$scope.properties = success.data.deatils;
+                 loadMap();
+				
+
+        });
+		
+		
+		
 	};
 	
-    $(".open-popup").fullScreenPopup({
-        bgColor: '#fff'
-    });
+$scope.resetMapField = function(){
+	 if (angular.isDefined($scope.bedtype)) {
+            delete $scope.bedtype;
+        }
+        if (angular.isDefined($scope.budgettype)) {
+            delete $scope.budgettype;
+        }
+        if (angular.isDefined($scope.possissiontype)) {
+            delete $scope.possissiontype;
+        }
+	$scope.filtermapProperties();
+};
 
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-36251023-1']);
-    _gaq.push(['_setDomainName', 'jqueryscript.net']);
-    _gaq.push(['_trackPageview']);
+$scope.filtermapProperties = function(){
+ var obj = {
+            locality: locality,
+            buliderId: builder,
+            bedroom: '',
+            budget: '',
+            possission: '',
+            reraid: reraid,
+            userId: userID
+        };
 
-    var ga = document.createElement('script');
-    ga.type = 'text/javascript';
-    ga.async = true;
-    //ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
+        obj.bedroom = $scope.bedtype != undefined ? $scope.bedtype.bhk_IDPK : '';
+        obj.budget = $scope.budgettype != undefined ? $scope.budgettype.budget_IDPK : '';
+        obj.possission = $scope.possissiontype != undefined ? $scope.possissiontype.possission_IDPK : '';
+
+        offerFactory.getProjectDetailsWithFilter($scope.selectCity.city, obj, function(success) {
+            var projectDetails = success.data.deatils;
+            var properties =[];
+            if (projectDetails.length > 0) {
+                $scope.prop_val = true;
+				for(var index=0; index<projectDetails.length;index++){
+					if(projectDetails[index].offerPrice != null){
+						properties.push(projectDetails[index]);
+					}
+				}
+                $scope.properties = properties;
+				$window.sessionStorage.setItem('offers',JSON.stringify(properties));
+				
+            } else {
+                $scope.prop_val = false;
+            }
+			 //$scope.properties = success.data.deatils;
+                 loadMap();
+				
+
+        });
+
+
+}
+	
+     
+	
+	$(function() {
+				 $('.open-popup').on('click',loadMap)
+				$(".open-popup").fullScreenPopup({
+					bgColor: '#fff'
+				});
+				loadCity();
+				
+			});
+
+    
 	
 
 });

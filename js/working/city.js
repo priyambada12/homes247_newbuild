@@ -35,7 +35,7 @@ cityapp.factory('cityFactory', function(networking) {
 
     return factory;
 });
-cityapp.directive('clientSearchComplete',function($filter){
+cityapp.directive('clientAutoComplete',function($filter){
 	return {
 				
                 restrict: 'A',       
@@ -47,7 +47,7 @@ cityapp.directive('clientSearchComplete',function($filter){
                             var params = request.term;
                             
                             //simulates api call with odata $filter
-                            var datalist = scope.autolist;
+                            var data = scope.autolist;
                             scope.$watch('autolist', function(newValue, oldValue) {
    										 console.log(newValue);
    										 console.log(oldValue);
@@ -58,8 +58,8 @@ cityapp.directive('clientSearchComplete',function($filter){
 									  //  angular.copy(someVar, $scope.someVar);
 
 									});                                     
-                            if (datalist) { 
-                                var result = $filter('filter')(datalist, {name:params});
+                            if (data) { 
+                                var result = $filter('filter')(data, {name:params});
                                 angular.forEach(result, function (item) {
                                     item['value'] = item['name'];
                                 });                       
@@ -100,13 +100,18 @@ cityapp.controller('cityCtrl', function($scope, cityFactory, $stateParams, $stat
         console.log(clients[0].user_registration_IDPK);
         var userID = clients[0].user_registration_IDPK;
     }
-	console.log($state.params);
-    console.log($stateParams.cityname + " " + $stateParams.locality + " " + $stateParams.buliderId + " " + $stateParams.reraId);
-    var cityname = $stateParams.cityname;
+	
+	var cityname= $stateParams.cityname==""?$cookies.get("citydeta"):$stateParams.cityname;
+	$cookies.put("citydeta",$stateParams.cityname);
+	//var cityname = $stateParams.cityname;
     $scope.city_name = cityname;
     var locality = $stateParams.locality;
     var builder = $stateParams.buliderId;
     var reraid = $stateParams.reraId;
+	console.log($state.params);
+    console.log($stateParams.cityname + " " + $stateParams.locality + " " + $stateParams.buliderId + " " + $stateParams.reraId);
+    $cookies.put("citydeta",$stateParams.cityname);
+	
     //$scope.getProjects = function($stateParams.citynamecurrentcity){
 
     if (locality != '' || builder != '' || reraid != '') {
@@ -411,6 +416,7 @@ cityapp.controller('cityCtrl', function($scope, cityFactory, $stateParams, $stat
 
 	var map;
       function loadMap() {
+		  var locations=JSON.parse($window.sessionStorage.getItem('properties'));
 		  //alert("loaing");
         map = new google.maps.Map(document.getElementById('googleMap'), {
           center: {lat:12.972442, lng:77.580643},
@@ -426,11 +432,12 @@ cityapp.controller('cityCtrl', function($scope, cityFactory, $stateParams, $stat
 	var locations=JSON.parse($window.sessionStorage.getItem('properties'));
 	//alert(locations.length);
     for (i = 0; i < locations.length; i++) {  
+	map.panTo(new google.maps.LatLng(locations[i].latitude, locations[i].longitude));
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
         map: map
       });
-
+	
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           infowindow.setContent(locations[i].address);
@@ -455,7 +462,7 @@ $scope.getBuilders = function(cities){
 $scope.setClientData = function(item){
 		
 			 if (item){
-                       
+                       console.log(item);
                        $scope.builderData =item;
                         // console.log(item);
                      }
@@ -466,11 +473,26 @@ $scope.getProjects = function(cities){
 		var propData = $scope.builderData;
 		var requests = {locality:'',buliderId:'',reraId:''};
 		if(propData!= undefined && propData.hasOwnProperty('type')){
-		if(propData.type=='bulider_name') {requests.buliderId=propData.id}
-		if(propData.type=='city_name'){requests.locality=propData.id}
-		if(propData.type=='reraId'){requests.reraId=propData.id}
-		
+				if(propData.type=='bulider_name') {requests.buliderId=propData.id}
+				if(propData.type=='city_name'){requests.locality=propData.id}
+				if(propData.type=='reraId'){requests.reraId=propData.id}
 		}
+		cityFactory.getProjectDetailsWithFilter(cities.city, requests, function(success) {
+            console.log(success);
+            if (success.data.deatils.length > 0) {
+                $scope.prop_val = true;
+               
+            } else {
+                $scope.prop_val = false;
+            }
+			$window.sessionStorage.setItem('properties',JSON.stringify(success.data.deatils));
+			 //$scope.properties = success.data.deatils;
+                 loadMap();
+				
+
+        });
+		
+		
 		
 	};
 	

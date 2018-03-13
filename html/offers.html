@@ -50,7 +50,7 @@
                     	<p><span><img src="images/disclaimer_icon.png" alt="" /></span> Disclaimer</p>                       
                     </div>
                     <div class="disclaimer_icon">
-                    	<p><a class="open-popup" ng-click="mapview();"><span><img src="images/view_map_icon.png" alt="" /></span> View Map</a></p>                       
+                    	<p><a class="open-popup" href="#popup"><span><img src="images/view_map_icon.png" alt="" /></span> View Map</a></p>                                              
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -192,6 +192,70 @@
         </div>
     </div>
     </div>
+	
+	
+	<!--********** Full Map Popup Code ****************-->
+    <div id="popup" style="display: none;">
+			<div class="full_map_popup">
+            	<div class="map_popup_top_row">
+                	<div class="inner_header_search">
+                        <div class="location_icon"><img src="images/search_location_icon.png" alt="" /></div>
+                        <select class="ui selection dropdown" ng-options="citydata as citydata.city for citydata in cities track by citydata.city"
+							ng-model="selectCity" ng-change="getBuilders(selectCity);">
+                            <option>Bengaluru</option>
+                        </select>
+                        <div class="search_input_box">
+                            <input client-auto-complete class="form-control" ng-model="ctrl.client.name" 
+						placeholder="Enter a location, builder, project or a RERA ID" type="text">
+                        </div>
+                        <div class="search_btn"><a ng-click="getProjects(selectCity)"><img src="images/search_icon.png" alt="" /></a></div>
+                    </div>                    
+                    <div class="row map_popup_filter">
+            	<div class="filter_col">
+                	<div class="city_filter_box">
+                    	<div class="icon_city"><img src="images/bed_icon_2.png" alt="" /></div>
+                        <select class="select_design" ng-options="bedroom.bhk_numbers for bedroom in bedrooms" 
+						ng-model="bedtype" ng-change="filtermapProperties();">
+                            	<option value="">Select Option</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="filter_col">
+                	<div class="city_filter_box">
+                    	<div class="icon_city"><img src="images/rs_icon_filter_2.png" alt="" /></div>
+                        <select class="select_design" ng-options="budget.budget_value for budget in budgets" 
+						ng-model="budgettype" ng-change="filtermapProperties();">
+                            	<option value="">Select Option</option>
+                            </select>
+                </div>
+                    </div>
+                <div class="filter_col fc_big">
+                	<div class="city_filter_box">
+                    	<div class="icon_city"><img src="images/possession-_icon_filter_2.png" alt="" /></div>
+                        <select class="select_design" 
+						ng-options="possission.possission_value for possission in possissions" 
+						ng-model="possissiontype" ng-change="filtermapProperties();" >
+                            	<option value="">Select Option</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="filter_col">
+                	<div class="city_filter_reset">
+                    	<a ng-click="resetMapField();"><img src="images/reset_icon_filter_2.png" alt="" /> Reset</a>
+                    </div>
+                </div>
+            </div>
+                </div>
+                <div class="map_popup_body">
+                	<div id="googleMap" style="width:100%;height:100%;position: absolute;" ></div>
+                    <!-- <div class="map_popup_right">
+					<div id="googleMap" style="width:100%;height:500px;"></div>
+                    	<!-- <img src="images/popup_map_img.jpg" alt="" /> 
+                    </div> -->
+                </div>
+            </div>
+			
+		</div>
 	
 	 <script type="text/ng-template" id="myModalContent.html">
          <div class="modal-header">

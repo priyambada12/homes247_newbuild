@@ -206,8 +206,8 @@
                             <option>Bengaluru</option>
                         </select>
                         <div class="search_input_box">
-                            <input client-search-complete  ng-model="ctrl.client" 
-							placeholder="Enter a location, builder, project or a RERA ID" type="text" />
+                            <input client-auto-complete class="form-control" ng-model="ctrl.client.name" 
+						placeholder="Enter a location, builder, project or a RERA ID" type="text">
                         </div>
                         <div class="search_btn"><a ng-click="getProjects(selectCity)"><img src="images/search_icon.png" alt="" /></a></div>
                     </div>                    

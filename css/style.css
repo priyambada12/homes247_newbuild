@@ -5923,8 +5923,32 @@ padding-bottom: 45px;
 }
 
 
-
-
-
-
 /* Code Ends here*/
+
+
+
+#fixRightSidebar {
+ background-color:#eee;
+ height:100%;
+ position:fixed;
+ right:0;
+}
+
+.top_row_right li{
+margin: 0 15px 0 0;
+}
+.top_row_right li a span{
+margin: 0px;
+}
+.top_section_main{
+padding: 0 0 0 25px;
+}
+.burger_icon {
+   float: left;
+   margin: 20px 25px 0 0;
+   cursor: pointer;
+}
+.inner_header_search{
+width: 500px;
+}
+}
