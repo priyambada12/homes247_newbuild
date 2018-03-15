@@ -3144,6 +3144,7 @@ ul.nav_links li a {
 	color:#e5652e;
 	font-weight:400;
 	margin:10px 0 0px 0;
+	display:flex;
 }
 
 .about_property_row .aap h6{
