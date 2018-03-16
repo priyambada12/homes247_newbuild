@@ -48,6 +48,10 @@ app.directive('clientAutoComplete',function($filter){
 });
 app.controller('sidebarCtrl',function($scope,$cookies,$state,networkFactory,$location,$window){
 	
+	
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
+	
 	$scope.user_favs=false;
 	var url = $location.absUrl().split('#/')[1];
 	//alert(url);

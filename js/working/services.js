@@ -1,8 +1,11 @@
 //(function(){
 var app = angular.module('servicesApp',[]);
 
-app.controller('servicesCtrl',function($scope,policyFactory,$modal,$log,$cookies){
-//$cookies.set('key','others');
+app.controller('servicesCtrl',function($scope,policyFactory,$modal,$log,$cookies,$window){
+	
+	
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
 	
 	/* $('.test_design').niceSelect();
 	$('#first').carouseller({

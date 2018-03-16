@@ -1,7 +1,10 @@
 //(function(){
 var app = angular.module('contactUsApp',['ui.bootstrap','modalApp']);
-app.controller('contactUsCtrl',function($scope, networkFactory,$modal, $log,$cookies){
-
+app.controller('contactUsCtrl',function($scope, networkFactory,$modal, $log,$cookies,$window){
+	
+		$window.scrollTo(0, 0);
+		$('body').attr('id', '');
+	
 //	$cookies.set('key','others');
 //s$('.test_design').niceSelect();
 	/* $('#first').carouseller({

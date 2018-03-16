@@ -141,9 +141,10 @@ app.directive('clientAutoComplete',function($filter){
 
             };
 });
-app.controller('dashboardCtrl', function($scope,$timeout, networkFactory,$state,urls,$modal, $log,$cookies,cityFactory) {
+app.controller('dashboardCtrl', function($scope,$timeout,$window, networkFactory,$state,urls,$modal, $log,$cookies,cityFactory) {
 
     //$('.test_design').niceSelect();
+	$window.scrollTo(0, 0);
 	$('body').attr('id', '');
 	
 
@@ -300,7 +301,7 @@ $(function() {
       autoplay: true,
       infinite: true,
       autoplaySpeed: 1000,
-      slidesToShow: 2,
+      slidesToShow: 3,
       slidesToScroll: 1,
       method: {}
     };

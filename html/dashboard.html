@@ -182,8 +182,9 @@
 		<!-- SLICK-SLIDER -->
 				
 				<div class="content">
-				<slick class="slider" settings="slickConfig4" ng-if="slickConfig4Loaded">
-					<div class="span6 carousel-block"  ng-repeat="newProp in newProperties" >		
+				<slick class="slider" settings="slickConfig4" ng-if="slickConfig4Loaded"  style="margin-bottom: 30px;">
+				<!-- <slick class="slider" settings="slickConfig4" ng-if="slickConfig4Loaded"> -->
+					<div class="span4 carousel-block"  ng-repeat="newProp in newProperties" >		
                     	<div class="new_project_details_box">				
                         <div class="view view-eighth" ng-repeat = "image in newProp.images | limitTo:1">
                     <img class="new_pimg" ng-src="{{propertyimage}}{{image.name}}" alt="" />

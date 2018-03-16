@@ -28,8 +28,11 @@ app.controller('myaccountsCtrl', function() {
 
 });
 
-app.controller('favCtrl', function($scope,$cookies,settingFactory,urls,$state) {
-	//$cookies.set('key','others');
+app.controller('favCtrl', function($scope,$cookies,settingFactory,urls,$state,$window) {
+	
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
+	
 	$scope.propertyimage=urls.imagesURL+"uploadPropertyImgs/";
 	$scope.accounts =JSON.parse($cookies.get('user'));
 	$scope.recentView=true;
@@ -59,7 +62,11 @@ app.controller('favCtrl', function($scope,$cookies,settingFactory,urls,$state) {
 	
 });
 
-app.controller('settingCtrl', function($scope,$cookies,settingFactory,$modal, $log) {
+app.controller('settingCtrl', function($scope,$cookies,settingFactory,$modal, $log,$window) {
+	
+	
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
 	
 	$scope.accounts =JSON.parse($cookies.get('user'));
 	var userID = $scope.accounts[0].user_registration_IDPK;
@@ -114,7 +121,12 @@ app.controller('settingCtrl', function($scope,$cookies,settingFactory,$modal, $l
     
 });
 
-app.controller('recentlyViewedCtrl', function($scope,$cookies,settingFactory,urls,$state) {
+app.controller('recentlyViewedCtrl', function($scope,$cookies,settingFactory,urls,$state,$window) {
+	
+	
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
+	
 	$scope.propertyimage=urls.imagesURL+"uploadPropertyImgs/";
 	$scope.recentView=true;
 	$scope.accounts =JSON.parse($cookies.get('user'));
@@ -147,7 +159,12 @@ app.controller('recentlyViewedCtrl', function($scope,$cookies,settingFactory,url
 
 });
 
-app.controller('referEarnCtrl', function($scope,$cookies,settingFactory,$modal, $log) {
+app.controller('referEarnCtrl', function($scope,$cookies,settingFactory,$modal, $log,$window) {
+	
+	
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
+	
     $scope.userRefer = {userID:'',name:'',number:'',msg:''}
 	$scope.accounts =JSON.parse($cookies.get('user'));
 	var user_id = $scope.accounts[0].user_registration_IDPK;

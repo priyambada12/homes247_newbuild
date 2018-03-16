@@ -39,7 +39,11 @@ app.factory('offerFactory', function(networking) {
 });
 app.controller('offersCtrl',function($scope, offerFactory, $stateParams, 
 $state, urls, $modal, $log, $cookies, $window, networkFactory){
-	//$cookies.set('key','others');
+	
+	
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
+	
 	$scope.sizeselect=[{value:5},{value:10}];
 	$scope.sizevalue = $scope.sizeselect[0];
 	$scope.itemsPerPage = $scope.sizevalue.value;

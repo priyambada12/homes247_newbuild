@@ -20,10 +20,11 @@ app.factory('blogsFactory', function(networking) {
     return factory;
 });
 
-app.controller('blogsCtrl',function($scope,blogsFactory,urls,$cookies){
-	//$cookies.set('key','others');
+app.controller('blogsCtrl',function($scope,blogsFactory,urls,$cookies,$window){
 	
-	//$scope.imagepath = urls.imagesURL + "stories/";
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
+	
 	$scope.imagepath = urls.imagesURL + "New%20folder/";
 	blogsFactory.gettop_stories(function(success){
 		console.log(success.data);

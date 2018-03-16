@@ -91,8 +91,12 @@ propertyapp.directive('validNumber', function() {
       };
     });
 propertyapp.controller('propertyCtrl', function($scope, propertyFactory, $stateParams,urls,$modal,
- $log,networkFactory,$cookies) {
-	//$cookies.set('key','others');
+												$log,networkFactory,$cookies,$window) {
+	 
+	 
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
+	 
 	$scope.ph_numbr = /^\+?\d{10}$/;
 	$scope.propertyimage=urls.imagesURL+"uploadPropertyImgs/";
 	$scope.uploadBHKImages = urls.imagesURL+"uploadBHKImgs/";
@@ -124,8 +128,11 @@ propertyapp.controller('propertyCtrl', function($scope, propertyFactory, $stateP
 			$scope.location = $scope.propDetails[0].locality_name;
 			$scope.city_name=   $scope.propDetails[0].city_name;
 			var localityId = $scope.propDetails[0].LoaclityId;
-			$scope.tab =  $scope.propDetails[0].BHK_Deatils[0].BHK;
+			var BHKType = $scope.propDetails[0].BHK_Deatils;
+			$scope.tab =  BHKType.length>0?BHKType[0].BHK:undefined;
 			$scope.getSimilarProjects(localityId);
+			
+			
 			
         }
     }, function(error) {
@@ -252,6 +259,86 @@ propertyapp.controller('propertyCtrl', function($scope, propertyFactory, $stateP
     return true;
 } 
 
+
+
+	  var map;
+      var infowindow;
+	  var searchNearbyPlaces=[];
+
+function initialize() {
+	//alert("map loaded");
+	var latitude = parseFloat($scope.propDetails[0].latitude);
+    var longitude = parseFloat($scope.propDetails[0].longitude);
+	console.log(latitude+" "+longitude);
+	var latlng = {lat: latitude, lng: longitude};
+	map = new google.maps.Map(document.getElementById('neighbour-map'), {
+          center: latlng,
+          zoom: 15
+        });
+    
+			
+			
+		infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: latlng,
+          radius: 500,
+		  type: ['shopping_mall']
+         
+        }, callback);
+		
+		service.nearbySearch({
+          location: latlng,
+          radius: 500,
+		  type: ['restaurant']
+          
+        }, callback);
+		service.nearbySearch({
+          location: latlng,
+          radius: 500,
+		  type: ['atm']
+          
+        }, callback);
+		service.nearbySearch({
+          location: latlng,
+          radius: 500,
+		  type: ['hospital']
+         
+        }, callback);
+		service.nearbySearch({
+          location: latlng,
+          radius: 500,
+		  type: ['school']
+         
+        }, callback); 
+		}
+		
+	  
+     
+      function callback(results, status) {
+		console.log(status);
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+		  console.log(results[i]);
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+		  console.log(place);
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+
 	
 		$scope.open = function (size) {
     var modalInstance;
@@ -276,7 +363,11 @@ propertyapp.controller('propertyCtrl', function($scope, propertyFactory, $stateP
       $log.info('Modal dismissed at: ' + new Date());
     });
   };
-  
+	
+	$(function(){
+		google.maps.event.addDomListener(window, "load", initialize);
+	});
+	
    $scope.hitimages =function() {
  //alert("clicked");
  /* var timer = setTimeout(slideshow, 10000);

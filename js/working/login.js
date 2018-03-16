@@ -12,8 +12,10 @@ app.factory('loginFactory',function(networking){
 
 app.controller('loginCtrl',function($scope,loginFactory,$state,$cookies,$modal, $log,
 		cityFactory,$window,$rootScope,signupFactory){
-			//$cookies.set('key','others');
+			
+	$window.scrollTo(0, 0);		
 	$('body').attr('id', 'signup_bg');
+	
 	$scope.user = {
 	email:'',
 	password:'',

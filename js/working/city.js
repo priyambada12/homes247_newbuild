@@ -80,10 +80,13 @@ cityapp.directive('clientAutoComplete',function($filter){
 
             };
 });
-cityapp.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, urls, $modal, $log, $cookies, $window, networkFactory) {
+cityapp.controller('cityCtrl', function($scope, cityFactory, $stateParams, $state, urls, $modal, 
+							$log, $cookies, $window, networkFactory) {
    // $cookies.set('key','others');
   // loadMap();
-  $('body').attr('id', '');
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
+  
     $scope.sizeselect=[{value:5},{value:10}];
 	$scope.sizevalue = $scope.sizeselect[0];
 	$scope.itemsPerPage = $scope.sizevalue.value;

@@ -32,8 +32,10 @@ app.directive('numbersOnly', function () {
         }
     };
 });
-app.controller('policyCtrl',function(policyFactory, $scope,$modal, $log,$cookies){
-
+app.controller('policyCtrl',function(policyFactory, $scope,$modal, $log,$cookies,$window){
+	
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
 	
 	//$('.test_design').niceSelect();
 	/* $('#first').carouseller({

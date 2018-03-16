@@ -74,9 +74,11 @@ calcapp.directive('validNumber', function() {
         }
     };
 });
-calcapp.controller('calculatorCtrl',function($cookies,$scope,moreFactory,$modal, $log){
+calcapp.controller('calculatorCtrl',function($cookies,$scope,moreFactory,$modal, $log,$window){
 	
-	
+		$window.scrollTo(0, 0);
+		$('body').attr('id', '');
+		
 		$scope.emi ={amount:'',intrestrate:'',term:''};
 		console.log($scope.emi);
 	     $scope.getrate=function(emi){

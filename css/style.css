@@ -5880,14 +5880,27 @@ margin-left: 15px;
 	border:0px!important;
 }
 .new_project_details_box .new_pimg{
-   max-height: 350px;
+   /* max-height: 350px;
    max-width: 570px;
    width: 570px;
-   height: 350px;
+   height: 350px; */
+   
+   max-height: 350px;
+  max-width: 570px;
+  width: 570px;
+  height: 350px;
+  margin:10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
    }
 
    .mask{
-   	cursor: pointer;
+   	/* cursor: pointer; */
+	
+	cursor: pointer;
+  margin: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
    }
 .new_project_info>ul>li>a{
    	cursor: pointer;
@@ -5951,4 +5964,13 @@ padding: 0 0 0 25px;
 .inner_header_search{
 width: 500px;
 }
+
+@media (min-device-width : 768px) and (max-device-width : 1024px) {
+.about_us_banner h2 a{
+margin: 0px;
+}
+}
+
+
+
 }

@@ -9,7 +9,10 @@ app.factory('faqFactory', function(networking) {
 	
     return factory;
 });
-app.controller('faqCtrl',function(faqFactory, $scope,$modal, $log,$cookies){
+app.controller('faqCtrl',function(faqFactory, $scope,$modal, $log,$cookies,$window){
+	
+	$window.scrollTo(0, 0);
+	$('body').attr('id', '');
 
 	//$cookies.set('key','others');
 	//$('.test_design').niceSelect();
