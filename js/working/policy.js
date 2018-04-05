@@ -32,10 +32,13 @@ app.directive('numbersOnly', function () {
         }
     };
 });
-app.controller('policyCtrl',function(policyFactory, $scope,$modal, $log,$cookies,$window){
-	
-	$window.scrollTo(0, 0);
-	$('body').attr('id', '');
+app.controller('policyCtrl',function(policyFactory, $scope,$modal, $log,$cookies){
+
+    $(function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        $('.ui.dropdown').dropdown();
+    });
 	
 	//$('.test_design').niceSelect();
 	/* $('#first').carouseller({

@@ -1,5 +1,5 @@
-  <div loading-indicator class="waiting-box">
-	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div>
+  
+<mi-loading promise="Loading"></mi-loading>
 <div class="slider_section_main">    	
         <div class="slider_search_main">
         	<h2>Find Happiness With Homes247.in</h2>
@@ -40,29 +40,37 @@
                             <div class="carousel-wrapper"> 
                                 <div class="carousel-items"> 
                                     <div class="span3 carousel-block">
+                                        <a ng-href="#/calculator">
                                         <div class="banner_min_slider_box">
                                             <h3>Get Value of Any Property</h3>
                                             <span><img src="images/icon_1.png" alt="" /></span>
                                             <p>know the accurate estimate of any property with Propworth App</p>
                                         </div>
+                                        </a>
                                     </div>
                                     <div class="span3 carousel-block">
-                                        <div class="banner_min_slider_box" style="border-color:#23c067;">
+                                        <a ng-href="#/faq">
+                                        <div class="banner_min_slider_box">
                                             <h3>Ask Your Questions here</h3>
                                             <span><img src="images/icon_2.png" alt="" /></span>
                                             <p>Discuss RERA & all your property concerns. Get answers from experts & users</p>
                                         </div>
+                                            </a>
                                     </div>
                                     <div class="span3 carousel-block">
+                                        <a ng-href="#/homeloan">
                                         <div class="banner_min_slider_box" style="border-color:#f76c6c;">
                                             <h3>Home Loans at Best Rates</h3>
                                             <span><img src="images/icon_3.png" alt="" /></span>
                                             <p>Finalized your Home? Get Great deals in Home Loans in your city</p>
                                         </div>
+                                            </a>
                                     </div>
                                     <div class="span3 carousel-block">
                                         <div class="banner_min_slider_box_video" style="border-color:#fff;">                                            
-                                            <div class="bg_img"><img src="images/mini_banner_img.jpg" alt="" /></div>
+                                            <div class="bg_img">
+                                            <iframe class="slick_frame" src="https://player.vimeo.com/video/33812159?autoplay=1&loop=1" webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder="0"></iframe>
+                                            </div>
                                             <h4>How Homes247 works?</h4>
                                         </div>
                                     </div>
@@ -96,7 +104,7 @@
 		<!-- SLICK-SLIDER -->
 			
 					<div class="content">
-					<slick class="slider" init-onload="true" settings="slickConfig3" ng-if="slickConfig3Loaded">
+					<slick class="slider prpty_india" init-onload="true" settings="slickConfig3" ng-if="slickConfig3Loaded">
 					<div class="span3 carousel-block" ng-repeat ="cityname in cities">
 					
 						<div class="hovereffect">	
@@ -106,6 +114,7 @@
                                <a class="info" ng-click="getProjects(cityname);">View projects</a>
                             </div>
                         </div>
+                        
 					</div>
 					</slick>
 					</div>
@@ -135,17 +144,20 @@
 	<!---	SLICK-SLIDER  --->
 			
 				<div class="content">
-				<slick class="slider" init-onload="true" settings="slickConfig2" ng-if="slickConfig2Loaded">
+				<slick class="slider top_prjct" init-onload="true" settings="slickConfig2" ng-if="slickConfig2Loaded">
+                    
 				<div class="span4 carousel-block" ng-repeat="property in topProperties" >	
 						<div class="top_projects_box" ng-repeat = "image in property.images | limitTo:1">
-                        	<a href="#" class="pi_main"><img ng-src="{{propertyimage}}{{image.name}}" alt="" class="propclass" ng-click="getPropertyID(property.property_info_IDPK);" /></a>
+                        	<a  class="pi_main"><img ng-src="{{propertyimage}}{{image.name}}" alt="" class="propclass" ng-click="getPropertyID(property.property_info_IDPK);" /></a>
                             <div class="top_project_info">
                             <div class="pi_left">
                             	<h2 class="propclass" ng-click="getPropertyID(property.property_info_IDPK);">{{property.propertyName}} <small>{{property.locality_name}},{{property.city_name}}</small></h2>
-                                <h3>
-                                	<span class="bed_img" ><img src="images/bed_icon.png" alt="" /></span>
-                                    {{property.bhk}}
-                                </h3>
+                                <p>
+                                	<span ng-repeat = "property in property.BHK_Deatils|unique : 'BHK' | orderBy:sorterFunc ">
+                                        <span>
+                                        {{property.BHK}}{{$last ? ' BHK' : ($index==propDetail.BHK_Deatils.length-2) ? ', ' : ', '}} </span>
+                                    </span>
+                                </p>
                             </div>
                             <div class="pi_right">
                             	<div class="pi_star"><a ng-click="userFav(property,$parent.$index);" id="{{$parent.$index}}">
@@ -161,6 +173,7 @@
                             </div>
                         </div>
 					</div>
+                    
 					</slick>
 					</div>
 	
@@ -182,9 +195,8 @@
 		<!-- SLICK-SLIDER -->
 				
 				<div class="content">
-				<slick class="slider" settings="slickConfig4" ng-if="slickConfig4Loaded"  style="margin-bottom: 30px;">
-				<!-- <slick class="slider" settings="slickConfig4" ng-if="slickConfig4Loaded"> -->
-					<div class="span4 carousel-block"  ng-repeat="newProp in newProperties" >		
+				<slick class="slider" settings="slickConfig4" ng-if="slickConfig4Loaded">
+					<div class="span6 carousel-block"  ng-repeat="newProp in newProperties" >		
                     	<div class="new_project_details_box">				
                         <div class="view view-eighth" ng-repeat = "image in newProp.images | limitTo:1">
                     <img class="new_pimg" ng-src="{{propertyimage}}{{image.name}}" alt="" />
@@ -193,7 +205,12 @@
                         	<h4>{{newProp.propertyName}}</h4>
                             <h3><img src="images/location_icon.png" alt="" /> {{newProp.locality_name}},{{newProp.city_name}}</h3>
                             <div class="clearfix"></div>
-                            <h6><img src="images/bed_icon_2.png" alt="" /> {{newProp.bhk}} </h6>
+                            <h6><img src="images/bed_icon_2.png" alt="" /> 
+                            <span ng-repeat = "newProp in newProp.BHK_Deatils|unique : 'BHK' | orderBy:sorterFunc ">
+                                        <span>
+                                        {{newProp.BHK}}{{$last ? ' BHK' : ($index==propDetail.BHK_Deatils.length-2) ? ', ' : ', '}} </span>
+                                    </span>
+                            </h6>
                             <h6><i class="fa fa-inr" aria-hidden="true"></i> {{newProp.price_min}} - {{newProp.price_max}}</h6>
                             <div class="clearfix"></div>
                             <ul>
@@ -201,7 +218,7 @@
                                 <li class="enquire"><a ui-sref="enquiry({param:newProp.property_info_IDPK})">Enquire Now</a></li>
                             </ul>
                         </div>
-                        <p class="new_ptest">{{newProp.discription}} <a ng-click="getPropertyID(newProp.property_info_IDPK);">view this property</a></p>
+                        <p class="new_ptest">{{ newProp.discription | limitTo: 100 }} <a ng-click="getPropertyID(newProp.property_info_IDPK);">view this property</a></p>
                     </div>
                 </div>
                 		</div>
@@ -222,42 +239,67 @@
             	<div class="col-lg-12 col-md-12 col-sm-12">
                 	<h1>Call Back</h1>
                 </div>
-            </div>
-            <div class="row">
+            
             	<div class="col-lg-5 col-md-5 col-sm-5">
                 	<div class="best_price_box">
-                    	<h5>Best Price</h5>
-                    	<div class="best_price_icon1"><img src="images/best_price_icon1.png" alt="" /></div>
-                        <div class="best_price_icon2"><img src="images/best_price_icon2.png" alt="" /></div>
-                        <div class="best_price_icon3"><img src="images/best_price_icon3.png" alt="" /></div>
-                        <div class="best_price_icon4"><img src="images/best_price_icon4.png" alt="" /></div>
-                        <div class="best_price_icon5"><img src="images/best_price_icon5.png" alt="" /></div>
-                        <div class="best_price_icon6"><img src="images/best_price_icon6.png" alt="" /></div>
+                    	<!--<h5>Best Price</h5>-->
+                        <div class="rw-words rw-words-1">
+                            <span>Best Price 1</span>
+                            <span>Best Price 2</span>
+                            <span>Best Price 3</span>
+                            <span>Best Price 4</span>
+                            <span>Best Price 5</span>
+                            <span>Best Price 6</span>
+                            </div>
+                    	<div class="bst_prce_cmn best_price_icon1 lp">
+                        	<img class="image_default" src="images/best_price_icon1-1.png" alt="" />
+                        	<img class="image_hover" src="images/best_price_icon1.png" alt="" />
+                        </div>
+                        <div class="bst_prce_cmn best_price_icon2 lp">
+                        	<img class="image_default" src="images/best_price_icon2.png" alt="" />
+                            <img class="image_hover" src="images/best_price_icon2_hover.png" alt="" />
+                        </div>
+                        <div class="bst_prce_cmn best_price_icon3 lp">
+                        	<img class="image_default" src="images/best_price_icon3.png" alt="" />
+                            <img class="image_hover" src="images/best_price_icon3_hover.png" alt="" />
+                        </div>
+                        <div class="bst_prce_cmn best_price_icon4 lp">
+                        	<img class="image_default" src="images/best_price_icon4.png" alt="" />
+                            <img class="image_hover" src="images/best_price_icon4_hover.png" alt="" />
+                        </div>
+                        <div class="bst_prce_cmn best_price_icon6 lp">
+                        	 <img class="image_default" src="images/best_price_icon5.png" alt="" />
+                            <img class="image_hover" src="images/best_price_icon5_hover.png" alt="" />
+                        </div>
+                        <div class="bst_prce_cmn best_price_icon5 lp"> 
+                            <img class="image_default" src="images/best_price_icon6.png" alt="" />
+                            <img class="image_hover" src="images/best_price_icon6_hover.png" alt="" />
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-7">
                 	<div class="call_back_form">
                     	<form name="contactForm">
-                        	<input placeholder="Name" name="uname" type="text" ng-model="user.name" required ng-minlength="3"/> 
+                        	<input placeholder="Name" name="uname" type="text" ng-model="user.name" only-letters-input required ng-minlength="3"/> 
 										
                             <select class="ui selection dropdown">
                             	<option>+91 INDIA</option>
                             </select>
-                            <input placeholder="Mobile Number" name="phno" type="text" ng-model="user.mobileno" required ng-minlength="10" ng-maxlength="13"/>
+                            <input placeholder="Mobile Number" name="phno" type="text" ng-model="user.mobileno" numbers-only required ng-minlength="10" ng-maxlength="13"/>
 							
                             <div class="clearfix"></div>
-							<span ng-show="contactForm.uname.$dirty && contactForm.uname.$error.required">This is a required field</span>
-							<span ng-show="contactForm.uname.$dirty && contactForm.uname.$error.minlength">Minimum length required is 3</span>
+							<span class="dash_err" ng-show="contactForm.uname.$dirty && contactForm.uname.$error.required">This is a required field</span>
+							<span class="dash_err" ng-show="contactForm.uname.$dirty && contactForm.uname.$error.minlength">Minimum length required is 3</span>
             				
-							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.required">This is a required field</span>
-							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.minlength">Minimum length required is 10</span>
-							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.maxlength">Mobile Number is too long</span>
+							<span class="dash_err_num" ng-show="contactForm.phno.$dirty && contactForm.phno.$error.required">This is a required field</span>
+							<span class="dash_err_num dash_err_nums" ng-show="contactForm.phno.$dirty && contactForm.phno.$error.minlength">Minimum length required is 10</span>
+							<span class="dash_err_num" ng-show="contactForm.phno.$dirty && contactForm.phno.$error.maxlength">Mobile Number is too long</span>
 		
                             <button class="btn_style" ng-click="callBack(user);">Get Call Back</button>
 							
                         </form>
                         <p>
-                        	All the request are handled in just 5 minutes, Please <a href="#">click here</a> to raise a ticket if we <br /> have missed the deadline.
+                        	All the request are handled in just 5 minutes.
                         </p>
                     </div>
                 </div>
@@ -270,7 +312,7 @@
         	<div class="row">
             	<div class="col-lg-12">
                 	<h1>Real Estate Regulatory Authority (RERA)</h1>
-                    <p>Get a brief summary of RERA & Its benefits <a href="#">here</a>. You can also browse through RERA registered projects in Top cities.</p>
+                    <p>Get a brief summary of RERA & Its benefits <a ng-href="#/rera">here</a>. You can also browse through RERA registered projects in Top cities.</p>
                 </div>
             </div>
         </div>
@@ -288,7 +330,9 @@
     <div class="carousel-inner">
       <div class="item active">
         <div class="testimonials_text">
-        				<div class="testi_media"><img src="images/video_img.jpg" alt="" /></div>
+        				<div class="testi_media">
+                        <iframe src="https://player.vimeo.com/video/9582761?autoplay=1&loop=1" width="450" height="203" webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder="0"></iframe>
+                        </div>
                     	<div class="testi_text">
                         	<p>
                             <sub>“</sub>
@@ -306,7 +350,9 @@ ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
       <div class="item">
         <div class="testimonials_text">
-        				<div class="testi_media"><img src="images/video_img.jpg" alt="" /></div>        					
+        				<div class="testi_media">
+                        <iframe src="https://player.vimeo.com/video/9582761?autoplay=1&loop=1" width="450" height="203" webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder="0"></iframe>
+                        </div>        					
                     	<div class="testi_text">
                         	<p>
                             <sub>“</sub>
@@ -324,7 +370,9 @@ ullamco laboris nisi ut aliquip ex ea commodo consequat.
     
       <div class="item">
         <div class="testimonials_text">
-        				<div class="testi_media"><img src="images/video_img.jpg" alt="" /></div>
+        				<div class="testi_media">
+                        <iframe src="https://player.vimeo.com/video/9582761?autoplay=1&loop=1" width="450" height="203" webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder="0"></iframe>
+                        </div>
                     	<div class="testi_text">
                         	<p>
                             <sub>“</sub>
@@ -374,7 +422,7 @@ ullamco laboris nisi ut aliquip ex ea commodo consequat.
             <div class="row">
             	<div class="col-lg-4 col-md-4 col-sm-4">
                 	<div class="blog_info_box">
-                    	<a href="#"><img src="images/blog_img_1.jpg" alt="" /></a>
+                    	<a ng-href="#/blogs"><img src="images/blog_img_1.jpg" alt="" /></a>
                         <h5>Date : 25 - Oct, 2017</h5>
                         <h6><i class="fa fa-comment" aria-hidden="true"></i> Interactions (10)</h6>
                         <div class="clearfix"></div>
@@ -383,7 +431,7 @@ ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                 	<div class="blog_info_box">
-                    	<a href="#"><img src="images/blog_img_2.jpg" alt="" /></a>
+                    	<a ng-href="#/blogs"><img src="images/blog_img_2.jpg" alt="" /></a>
                         <h5>Date : 25 - Oct, 2017</h5>
                         <h6><i class="fa fa-comment" aria-hidden="true"></i> Interactions (10)</h6>
                         <div class="clearfix"></div>
@@ -392,7 +440,7 @@ ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                 	<div class="blog_info_box">
-                    	<a href="#"><img src="images/blog_img_3.jpg" alt="" /></a>
+                    	<a ng-href="#/blogs"><img src="images/blog_img_3.jpg" alt="" /></a>
                         <h5>Date : 25 - Oct, 2017</h5>
                         <h6><i class="fa fa-comment" aria-hidden="true"></i> Interactions (10)</h6>
                         <div class="clearfix"></div>
@@ -414,6 +462,28 @@ ullamco laboris nisi ut aliquip ex ea commodo consequat.
             <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
+<script>
+	   $(function () {
+        var $looped = $('.lp');
+        var timeOut;
+        var index = 0;
+        function _loop(idx) {
+            $looped.removeClass('best_price_icon_hover').eq(idx).addClass('best_price_icon_hover');
+            timeOut = setTimeout(function () {
+                index = (idx + 1) % $looped.length;
+                _loop(index);
+            }, 3000);
+        };
+        _loop(index);
+
+        $(".lp").hover(function () {
+            $(".lp").removeClass("best_price_icon_hover");
+            $(this).addClass("best_price_icon_hover");
+        }, function () {
+            $(".lp").removeClass("best_price_icon_hover");
+        });
+    });
+</script>
 	
 	
 	 

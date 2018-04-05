@@ -1,0 +1,46 @@
+
+<div class="container homeloan_main">
+
+    <div class="row">
+        <div >
+            
+            <div class="col-lg-9 col-md-9 col-sm-9">
+                <div class="resp-tabs-container" >
+                    <div class="my_account_details">
+                        
+                       
+                            <div class="password_section">
+                                <h3>Update Password</h3>
+                                <form>
+                                    <input placeholder="New Password" type="password" ng-model ="newPwd" />
+                                    <input placeholder="Confirm password" type="password" ng-model ="cnfPwd" />
+									<div class="account_photo">
+                            
+                            <button type="button" ng-click="updatePassword()">Change</button>
+                        </div>	
+                                </form>
+                            </div>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+	 
+  <script type="text/ng-template" id="myModalContent.html">
+         <div class="modal-header">
+           <h3 class="modal-title">Message</h3> 
+        </div> 
+        <div class="modal-body">
+            <b>{{ message}}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+	 

@@ -20,6 +20,7 @@ OR
  <br /> <br />
 Government servants who are posted abroad on duty with the Indian missions and similar other agencies set up abroad by the Government of India where the officials draw their salaries out of Government resources;
  <br /> <br />
+                        <span ng-show="ngShowhide">
 OR
  <br /> <br />
 Government servants deputed abroad on assignments with foreign Governments or regional/international agencies like the World Bank, International Monetary Fund (IMF), World Health Organisation (WHO), Economic and Social Commission for Asia and the Pacific (ESCAP)
@@ -27,10 +28,10 @@ Government servants deputed abroad on assignments with foreign Governments or re
 
 OR
  <br /> <br />
-Government servants deputed abroad on assignments with foreign Governments or regional/international agencies like the World Bank, International Monetary Fund (IMF), World Health Organisation (WHO), Economic and Social Commission for Asia and the Pacific (ESCAP)
+Government servants deputed abroad on assignments with foreign Governments or regional/international agencies like the World Bank, International Monetary Fund (IMF), World Health Organisation (WHO), Economic and Social Commission for Asia and the Pacific (ESCAP)</span>
                     </p>
                     <div class="btn_nri">
-                    	<a href="#">Read More</a>
+                    	<a ng-click="toggleBtn = !toggleBtn">{{toggleText}}</a>
                     </div>
                   </div>               
             </div>
@@ -50,26 +51,26 @@ Government servants deputed abroad on assignments with foreign Governments or re
                 	<div class="col-lg-4 col-md-4 col-sm-4">
                     	<div class="clarify_query_form">
                         	<div class="input_div">
-                            	<input placeholder="Name" type="text" ng-model ="user.name" name="uname" required ng-minlength="3" />
-								<span ng-show="serviceForm.uname.$dirty && serviceForm.uname.$error.required">This is a required field</span>
-								<span ng-show="serviceForm.uname.$dirty && serviceForm.uname.$error.minlength">Minimum length required is 3</span>
+                            	<input placeholder="Name" type="text" ng-model ="user.name" name="uname" only-letters-input required ng-minlength="3" />
+								<span class="policy_cmnerror" ng-show="serviceForm.uname.$dirty && serviceForm.uname.$error.required">This is a required field</span>
+								<span class="policy_cmnerror" ng-show="serviceForm.uname.$dirty && serviceForm.uname.$error.minlength">Minimum length required is 3</span>
             				
                             </div>                            
                             <div class="input_div">
                             	<select class="test_design">
                                 	<option>+91 INDIA</option>
                                 </select>
-                            	<input class="inhalf" placeholder="Mobile Number" type="number" ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13" />
-								<span ng-show="serviceForm.phno.$dirty && serviceForm.phno.$error.required">This is a required field</span>
-							    <span ng-show="serviceForm.phno.$dirty && serviceForm.phno.$error.minlength">Minimum length required is 10</span>
-							    <span ng-show="serviceForm.phno.$dirty && serviceForm.phno.$error.maxlength">Mobile Number is too long</span>
+                            	<input class="inhalf" placeholder="Mobile Number" type="text" numbers-only ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13" />
+								<span class="policy_cmnerror" ng-show="serviceForm.phno.$dirty && serviceForm.phno.$error.required">This is a required field</span>
+							    <span class="num_error policy_cmnerror" ng-show="serviceForm.phno.$dirty && serviceForm.phno.$error.minlength">Minimum length required is 10</span>
+							    <span class="num_error policy_cmnerror" ng-show="serviceForm.phno.$dirty && serviceForm.phno.$error.maxlength">Mobile Number is too long</span>
 		
 								
                             </div>
                             <div class="input_div">
                             	<input placeholder="Email Id" type="email" name="email" ng-model ="user.email" required />
-								<span ng-show="serviceForm.email.$dirty && serviceForm.email.$error.required">This is a required field</span>
-							    <span ng-show="serviceForm.$error.email">Enter a valid Email Address</span>
+								<span class="policy_cmnerror" ng-show="serviceForm.email.$dirty && serviceForm.email.$error.required">This is a required field</span>
+							    <span class="policy_cmnerror" ng-show="serviceForm.$error.email">Enter a valid Email Address</span>
                             
                             </div> 
                         </div>
@@ -78,7 +79,7 @@ Government servants deputed abroad on assignments with foreign Governments or re
                     	<div class="clarify_query_form">
                         	<div class="input_div">
                             	<textarea placeholder="Your message" ng-model="user.msg" name="msg" required></textarea>
-								<span ng-show="serviceForm.msg.$dirty && serviceForm.msg.$error.required">This is a required field</span>
+								<span class="text_err policy_cmnerror" ng-show="serviceForm.msg.$dirty && serviceForm.msg.$error.required">This is a required field</span>
                             </div>
                             <div class="input_div">
                             	<p>All email enquiries will be taken care in one business day</p>

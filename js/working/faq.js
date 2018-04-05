@@ -9,11 +9,13 @@ app.factory('faqFactory', function(networking) {
 	
     return factory;
 });
-app.controller('faqCtrl',function(faqFactory, $scope,$modal, $log,$cookies,$window){
-	
-	$window.scrollTo(0, 0);
-	$('body').attr('id', '');
-
+app.controller('faqCtrl',function(faqFactory, $scope,$modal, $log,$cookies){
+        
+    $(function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        $('.ui.dropdown').dropdown();
+    });
 	//$cookies.set('key','others');
 	//$('.test_design').niceSelect();
 	/* $('#first').carouseller({

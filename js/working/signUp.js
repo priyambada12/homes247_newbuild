@@ -328,13 +328,24 @@ app.directive("gLogin",
 	}
 }); 
 
-app.controller('signUpCtrl',function($scope,signupFactory,$state,$modal, $log,$rootScope,$cookies,$window){
-	
-	
-	$window.scrollTo(0, 0);
-	
-	$('body').attr('id', 'signup_bg');
-	
+app.controller('signUpCtrl',function($scope,signupFactory,$state,$modal, $log,$rootScope,$cookies){
+	//$cookies.set('key','others');
+//	$('body').attr('id', 'signup_bg');
+     $(function() {
+         document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+	   $('a.panel').click(function () {
+
+		$('a.panel').removeClass('selected');
+		$(this).addClass('selected');
+		
+		current = $(this);
+		
+		$('#wrapper').scrollTo($(this).attr('href'), 500);		
+		
+		return false;
+	});
+           });
 $scope.signup = {
 	name:'',
 	number:'',
@@ -356,12 +367,13 @@ $rootScope.$on('event:social-sign-in-success',function(event, obj){
 
 $scope.doRegistration = function(signUp){
 	//signUp.source=1;
-	
+	alert("clicked");
 	signupFactory.signUpWithHomes247(signUp,function(success){
 		if(success.data.status == "True"){
 			if($scope.signup.source==1){
 			$scope.msgs ="Registered successfully";
 			$scope.open();
+			
 			
 			}else{
 				$scope.login();

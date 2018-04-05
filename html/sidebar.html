@@ -44,9 +44,11 @@
         </div>
 		<div class="inner_header_search" ng-if="showSearchBar">
             	<div class="location_icon"><img src="images/search_location_icon.png" alt="" /></div>
-            	<select class="ui selection dropdown" ng-options="citydata as citydata.city for citydata in cities track by citydata.city" 
-				ng-model="currentCity" ng-change="getBuilders(currentCity);"></select>
-					<!--  <option value="">Bengaluru</option>  -->
+            	<select class="inner_search ui selection dropdown" ng-options="citydata as citydata.city for citydata in cities track by citydata.city" 
+				ng-model="currentCity" ng-change="getBuilders(currentCity);">
+                    <option value="">Select</option>
+            </select>
+					    
                 <div class="search_input_box">
                 	<input client-auto-complete class="form-control" ng-model="ctrl.client" 
 					placeholder="Enter a location, builder, project or a RERA ID" type="text" />
@@ -56,13 +58,14 @@
         <div class="top_row_right">
         	<div class="top_row_right_phno">
             	<img src="images/call-icon.gif" alt="" />
-                <p>+91 85511 58621</p>
+                <p>+91 9164247247</p>
             </div>
             <ul>
-            	<li><a ng-href="#/offers"><span class="offer_icon"></span> Offers</a></li>
-                <li><a ng-href="#/services"><span class="nri_icon"></span> NRI services</a></li>
-                <li ng-show="user_favs"><a ng-href="#/myFav"><span class="favor_icon"></span> Favorites</a></li>
-                <li><a ng-click="userLoginType(valueType);" ng-model="valueType"><span class="signup_icon"></span> {{valueType}}</a></li>
+            	<li><a ng-href="#/offers"><span class="hdr_cmn offer_icon"></span><span ng-if="showOffers"> Offers</span></a></li>
+                <li><a ng-href="#/services"><span class="hdr_cmn nri_icon"></span><span ng-if="showNRI"> NRI services</span></a></li>
+                <li ng-show="user_favs"><a ng-href="#/myFav"><span class="hdr_cmn favor_icon"></span><span ng-if="showfav"> Favorites</span></a></li>
+                <li><a ng-click="userLoginType(valueType);" ng-model="valueType"><span class="hdr_cmn signup_icon"></span>
+                    <span ng-if="showsignup"> {{valueType}}</span></a></li>
             </ul>
         </div>
     </div>

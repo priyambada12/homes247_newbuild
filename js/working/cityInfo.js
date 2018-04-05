@@ -1,7 +1,11 @@
 //(function(){
 var app = angular.module('cityInfoApp',[]);
 app.controller('cityInfoCtrl',function($cookies){
-
+$(function() {
+        document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+        $('.ui.dropdown').dropdown();
+        });
 	//$cookies.set('key','others');
 	/* $('.test_design').niceSelect();
 	$('#first').carouseller({

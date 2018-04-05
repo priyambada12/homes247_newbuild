@@ -18,9 +18,14 @@ app.factory('offerFactory', function(networking) {
     factory.getPossission = function(callback) {
         return networking.callServerForUrlEncondedGETRequest('/get_possission', callback);
     };
-
+    factory.getcity = function(callback) {
+        return networking.callServerForUrlEncondedGETRequest('/search/', callback);
+    };
 	 factory.getProjectDetails = function(callback) {
         return networking.callServerForUrlEncondedGETRequest('/search/', callback);
+    };
+    factory.getlocality = function(requestData, callback) {
+        return networking.callServerForUrlEncondedPOSTRequest('/get_locality_basedLocation', requestData, callback);
     };
     factory.getProjectDetailsWithFilter = function(url, requestData, callback) {
         return networking.callServerForUrlEncondedGetWithRequestData('/search/' + url, requestData, callback);
@@ -37,13 +42,35 @@ app.factory('offerFactory', function(networking) {
 
     return factory;
 });
+
+app.filter("unique", function(){
+  return function(data) {
+    if(angular.isArray(data)) {
+      var result = [];
+      var key = {};
+      for(var i=0; i<data.length; i++) {
+        var val = data[i];
+        if(angular.isUndefined(key[val])) {
+          key[val] = val;
+          result.push(val);
+        }
+      }
+      if(result.length > 0) {
+        return result;
+      }
+    }
+    return data;
+  }
+})
+
 app.controller('offersCtrl',function($scope, offerFactory, $stateParams, 
 $state, urls, $modal, $log, $cookies, $window, networkFactory){
-	
-	
-	$window.scrollTo(0, 0);
-	$('body').attr('id', '');
-	
+    $(function() {
+         document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+        $('.ui.dropdown').dropdown();
+        });
+	//$cookies.set('key','others');
 	$scope.sizeselect=[{value:5},{value:10}];
 	$scope.sizevalue = $scope.sizeselect[0];
 	$scope.itemsPerPage = $scope.sizevalue.value;
@@ -51,7 +78,10 @@ $state, urls, $modal, $log, $cookies, $window, networkFactory){
     $scope.currentPage = 0;
     $scope.properties = [];
 	$scope.prop_val = true;
-   
+   $scope.sorterFunc = function(property){
+    return parseInt(property.BHK);
+};
+    $scope.sortorder = '';
     //console.log($state.params);
     $scope.propertyimage = urls.imagesURL + "uploadPropertyImgs/";
     var clientData = $cookies.get('user');
@@ -60,14 +90,87 @@ $state, urls, $modal, $log, $cookies, $window, networkFactory){
         console.log(clients[0].user_registration_IDPK);
         var userID = clients[0].user_registration_IDPK;
     }
+    var cityname, locality, builder, reraid;
+    if ($stateParams.cityname != undefined || $stateParams.locality != undefined || $stateParams.buliderId != undefined || $stateParams.reraId != undefined) {
+        cityname = $stateParams.cityname;
+        locality = $stateParams.locality;
+        builder = $stateParams.buliderId;
+        reraid = $stateParams.reraId;
+        $cookies.put('city_data', cityname);
+        $cookies.put('loc_data', locality);
+        $cookies.put('builder_data', builder);
+        $cookies.put('rera_data', reraid);
+    } else {
+        cityname = $cookies.get('city_data');
+        locality = $cookies.get('loc_data');
+        builder = $cookies.get('builder_data');
+        reraid = $cookies.get('rera_data');
+    }
     //console.log($stateParams.cityname + " " + $stateParams.locality + " " + $stateParams.buliderId + " " + $stateParams.reraId);
     
-    var locality = '';
-    var builder = '';
-    var reraid = '';
+//    var locality = '';
+//    var builder = '';
+//    var reraid = '';
     //$scope.getProjects = function($stateParams.citynamecurrentcity){
 
+    cityname=cityname =='null'?'':cityname;	
+	$scope.city_name = cityname;
+    console.log(cityname + " " + locality + " " + builder + " " + reraid);
+    $cookies.put("citydeta", cityname);
     
+    /* if (locality != "null" || builder != "null" || reraid != "null") {
+        var requests = {
+            locality: locality,
+            buliderId: builder,
+            reraId: reraid,
+			 userId: ''
+           // userId: userID
+        };
+        networkFactory.getProjectDetailsWithFilter(cityname, requests, function(success) {
+            console.log(success);
+            var projectDetails = success.data.deatils;
+          
+            if (projectDetails != undefined)
+			  $window.sessionStorage.setItem('properties', JSON.stringify(projectDetails));
+            if (projectDetails.length > 0) {
+                $scope.prop_val = true;
+                $scope.properties = projectDetails;
+
+                $scope.currentPage = 0;
+                $scope.gap = Math.ceil(projectDetails.length / $scope.itemsPerPage);
+                // now group by pages
+                $scope.groupToPages();
+            } else {
+                $scope.prop_val = false;
+            }
+
+        }, function(error) {
+            console.log(error);
+        });
+    } else {
+        networkFactory.getProjectDetailsWithFilter(cityname,  {
+            userId: ''//userID
+        },  function(success) {
+            console.log(success);
+            var projectDetails = success.data.deatils;
+            $window.sessionStorage.setItem('properties', JSON.stringify(projectDetails));
+            console.log(projectDetails);
+            if (projectDetails.length > 0) {
+                $scope.prop_val = true;
+                $scope.properties = projectDetails;
+                $scope.currentPage = 0;
+                $scope.gap = Math.ceil(projectDetails.length / $scope.itemsPerPage);
+                // now group by pages
+                $scope.groupToPages();
+            } else {
+                $scope.prop_val = false;
+            }
+
+        }, function(error) {
+            console.log(error);
+        });
+    } */
+        
         offerFactory.getProjectDetails(function(success) {
             console.log(success);
             var projectDetails = success.data.deatils;
@@ -77,7 +180,7 @@ $state, urls, $modal, $log, $cookies, $window, networkFactory){
             if (projectDetails.length > 0) {
                 $scope.prop_val = true;
 				for(var index=0; index<projectDetails.length;index++){
-					if(projectDetails[index].offerPrice != null){
+					if(projectDetails[index].offerPrice != null && projectDetails[index].offerPrice != ""){
 						properties.push(projectDetails[index]);
 					}
 				}
@@ -124,6 +227,19 @@ $state, urls, $modal, $log, $cookies, $window, networkFactory){
     offerFactory.getPossission(function(success) {
         $scope.possissions = success.data.possission;
     });
+    
+    offerFactory.getcity(function(success) {
+        $scope.cityDetails = success.data.deatils;
+    });
+    
+    var cityLocality = $cookies.get('city_id')!= undefined?$cookies.get('city_id'):1;
+	
+    offerFactory.getlocality({
+        cityId: cityLocality
+    }, function(success) {
+
+        $scope.localities = success.data.details;
+    });
 
     $scope.callBack = function(user) {
         console.log(user);
@@ -153,6 +269,52 @@ $state, urls, $modal, $log, $cookies, $window, networkFactory){
         }
 
     };
+    
+    $scope.filterProperties = function() {
+//       $scope.city_name;
+        var obj = {
+            locality: '',
+            buliderId: builder,
+            bedroom: '',
+            budget: '',
+            possission: '',
+            deatils:'',
+            reraid: reraid,
+            userId: userID
+        };
+		var city=$scope.deatils != undefined ? $scope.deatils.city_name:'';
+        obj.bedroom = $scope.bedroom != undefined ? $scope.bedroom.bhk_IDPK : '';
+        obj.budget = $scope.budget != undefined ? $scope.budget.budget_IDPK : '';
+        obj.possission = $scope.possission != undefined ? $scope.possission.possission_IDPK : '';
+        obj.deatils = $scope.deatils != undefined ? $scope.deatils.property_info_IDPK : '';
+        
+        offerFactory.getProjectDetailsWithFilter(city, obj, function(success) {
+            console.log(success);
+            
+            
+			$window.sessionStorage.setItem('offers',JSON.stringify(success.data.deatils));
+			  var projectDetails= success.data.deatils;
+			  var properties=[];
+			 for(var index=0; index<projectDetails.length;index++){
+					if(projectDetails[index].offerPrice != null && projectDetails[index].offerPrice != ""){
+						properties.push(projectDetails[index]);
+					}
+				}
+				$scope.properties =properties;
+				if ($scope.properties.length > 0) {
+                $scope.prop_val = true;
+               
+            } else {
+                $scope.prop_val = false;
+            }
+				$scope.currentPage = 0;
+				  $scope.gap = Math.ceil(properties.length/$scope.itemsPerPage);
+        		// now group by pages
+       			 $scope.groupToPages();
+
+        });
+    };
+
 	
 	$scope.changepageSize = function(size){
 		$scope.itemsPerPage =size.value;
@@ -161,46 +323,7 @@ $state, urls, $modal, $log, $cookies, $window, networkFactory){
         $scope.groupToPages();
 	};
 	
-    $scope.filterProperties = function() {
-        var obj = {
-            locality: locality,
-            buliderId: builder,
-            bedroom: '',
-            budget: '',
-            possission: '',
-            reraid: reraid,
-            userId: userID
-        };
-
-        obj.bedroom = $scope.bedroom != undefined ? $scope.bedroom.bhk_IDPK : '';
-        obj.budget = $scope.budget != undefined ? $scope.budget.budget_IDPK : '';
-        obj.possission = $scope.possission != undefined ? $scope.possission.possission_IDPK : '';
-
-        offerFactory.getProjectDetailsWithFilter($scope.city_name, obj, function(success) {
-            console.log(success);
-            if (success.data.deatils.length > 0) {
-                $scope.prop_val = true;
-               
-            } else {
-                $scope.prop_val = false;
-            }
-			$window.sessionStorage.setItem('offers',JSON.stringify(success.data.deatils));
-			  var projectDetails= success.data.deatils;
-			  var properties=[];
-			 for(var index=0; index<projectDetails.length;index++){
-					if(projectDetails[index].offerPrice != null){
-						properties.push(projectDetails[index]);
-					}
-				}
-				$scope.properties =properties;
-			  $scope.gap = Math.ceil(properties.length/$scope.itemsPerPage);
-                 $scope.currentPage = 0;
-                // now group by pages
-                 $scope.groupToPages();
-
-        });
-    };
-
+    
     $scope.getPropertyID = function(propertyID) {
 
         if (clientData == null) {
@@ -265,6 +388,9 @@ $state, urls, $modal, $log, $cookies, $window, networkFactory){
         }
         if (angular.isDefined($scope.possission)) {
             delete $scope.possission;
+        }
+        if (angular.isDefined($scope.deatils)) {
+            delete $scope.deatils;
         }
         $window.location.reload();
         //$scope.properties = JSON.parse($stateParams.param);
@@ -345,7 +471,7 @@ function loadCity(){
         console.log(success.data);
 		$scope.cities = success.data.locations;
 		$scope.selectCity = $scope.cities [0];
-		//$scope.cityProperty = $scope.currentCity;
+		$scope.cityProperty = $scope.currentCity;
 		$scope.getBuilders($scope.selectCity);
 	});
 }
@@ -460,6 +586,7 @@ $scope.filtermapProperties = function(){
             bedroom: '',
             budget: '',
             possission: '',
+            deatils:'',
             reraid: reraid,
             userId: userID
         };
@@ -467,8 +594,8 @@ $scope.filtermapProperties = function(){
         obj.bedroom = $scope.bedtype != undefined ? $scope.bedtype.bhk_IDPK : '';
         obj.budget = $scope.budgettype != undefined ? $scope.budgettype.budget_IDPK : '';
         obj.possission = $scope.possissiontype != undefined ? $scope.possissiontype.possission_IDPK : '';
-
-        offerFactory.getProjectDetailsWithFilter($scope.selectCity.city, obj, function(success) {
+        obj.deatils = $scope.deatils != undefined ? $scope.deatils.property_info_IDPK : '';
+        offerFactory.getProjectDetailsWithFilter($scope.city_name, obj, function(success) {
             var projectDetails = success.data.deatils;
             var properties =[];
             if (projectDetails.length > 0) {

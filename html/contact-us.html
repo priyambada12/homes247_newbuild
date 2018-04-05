@@ -14,21 +14,21 @@
                 	<div class="call_back_form">
                     	<h1 style="font-size:30px;">Expect a Call from us in 5 minutes</h1>
                     	<form name="contactForm">
-                        	<input placeholder="Name" type="text" ng-model="user.name" name="uname" required ng-minlength="3"/>                            
+                        	<input placeholder="Name" type="text" ng-model="user.name" name="uname" only-letters-input required ng-minlength="3"/>                     <span class="cntct_err" ng-show="contactForm.uname.$dirty && contactForm.uname.$error.required">This is a required field</span>
+							<span class="cntct_err" ng-show="contactForm.uname.$dirty && contactForm.uname.$error.minlength">Minimum length required is 3</span>      
                             <select class="select_design">
                             	<option>+91 INDIA</option>
                             </select>
-                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13"/>
-                            
+                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno" name="phno" numbers-only required ng-minlength="10" ng-maxlength="13"/>
+                                <span class="cntct_err_num" ng-show="contactForm.phno.$dirty && contactForm.phno.$error.required">This is a required field</span>
+							<span class="cntct_err_num cntct_err_nums" ng-show="contactForm.phno.$dirty && contactForm.phno.$error.minlength">Minimum length required is 10</span>
+							<span class="cntct_err_num" ng-show="contactForm.phno.$dirty && contactForm.phno.$error.maxlength">Mobile Number is too long</span>
 							
                             <a class="btn_style" ng-click="callBack(user);">Get Call Back</a>
 							 <div class="clearfix"></div>
-							<span ng-show="contactForm.uname.$dirty && contactForm.uname.$error.required">This is a required field</span>
-							<span ng-show="contactForm.uname.$dirty && contactForm.uname.$error.minlength">Minimum length required is 3</span>
+							
             				
-							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.required">This is a required field</span>
-							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.minlength">Minimum length required is 10</span>
-							<span ng-show="contactForm.phno.$dirty && contactForm.phno.$error.maxlength">Mobile Number is too long</span>
+							
 		
                         </form>  
                                              

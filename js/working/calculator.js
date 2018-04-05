@@ -1,5 +1,5 @@
 //(function(){
-var calcapp = angular.module('calculatorApp',[]);
+var calcapp = angular.module('calculatorApp',['rzModule','modalApp']);
 calcapp.factory('moreFactory', function(networking) {
     var factory = {};
     factory.addClientQuery = function(requestData, callback) {
@@ -74,11 +74,75 @@ calcapp.directive('validNumber', function() {
         }
     };
 });
-calcapp.controller('calculatorCtrl',function($cookies,$scope,moreFactory,$modal, $log,$window){
+calcapp.directive("preventTypingGreater", function() {
+  return {
+    link: function(scope, element, attributes) {
+      var oldVal = null;
+      element.on("keydown keyup", function(e) {
+    if (Number(element.val()) > Number(attributes.max) &&
+          e.keyCode != 46 // delete
+          &&
+          e.keyCode != 8 // backspace
+        ) {
+          e.preventDefault();
+          element.val(oldVal);
+        } else {
+          oldVal = Number(element.val());
+        }
+      });
+    }
+  };
+});
+calcapp.controller('calculatorCtrl',function($cookies,$scope,moreFactory,$modal, $log){
+    $scope.slider_ticks_values_at = {
+    value: 0,
+    options: {
+      ceil: 99999999,
+//        step: 100000,
+//      showTicksValues: true,
+    },
+  }
+    $scope.customSlider = {
+    value:0,
+    options: {
+      ceil: 35,
+//      step: 5,
+//      showTicks: true,
+    },
+  }
+    var formatToPercentage = function(value) {
+          return value + '%'
+        }
+  $scope.percentages = {
+      low: 0,
+      options: {
+      floor: 0,
+          ceil: 15,
+    translate: formatToPercentage,
+          showSelectionBar: true,
+  },
+  }
+	$(function() {
+         document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+        $('.ui.dropdown').dropdown();
+         $scope.selecteddata={
+    'Type':{
+      'MaxLength':8
+    }
+  }
+        $scope.selecteddate={
+    'Type':{
+      'MaxLength':2
+    }
+  }
+        $scope.selectedpercent={
+            'Type':{
+                'MaxLength':2
+            }
+        }
+        });
 	
-		$window.scrollTo(0, 0);
-		$('body').attr('id', '');
-		
 		$scope.emi ={amount:'',intrestrate:'',term:''};
 		console.log($scope.emi);
 	     $scope.getrate=function(emi){
@@ -92,7 +156,11 @@ calcapp.controller('calculatorCtrl',function($cookies,$scope,moreFactory,$modal,
 			}else if(emi.intrestrate == ''){$scope.msgs = "Enter the interest rate";
 				 $scope.open();}
 				 else if(emi.amount != '' && emi.intrestrate !='' && emi.term !='')	{ 
-			 var interest_payable= emi.amount*(emi.intrestrate/100)*emi.term;
+				 var roi = emi.intrestrate/(12*100);
+				 //E = P × r × ( 1 + r )n / ( ( 1 + r )n - 1 )
+				 var powval = Math.pow(1+roi,emi.term);
+				 var interest_payable = emi.amount*roi*powval/(powval-1);
+			 //var interest_payable= emi.amount*(emi.intrestrate/100)*emi.term;
 			 $scope.interestpayable = interest_payable;
                $scope.totalAmount = parseInt(interest_payable)+parseInt(emi.amount);
 			   $scope.monthlyAmount=(parseInt(emi.amount)+parseInt(interest_payable))/(parseInt(emi.term)*12);

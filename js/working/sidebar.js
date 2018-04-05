@@ -48,17 +48,26 @@ app.directive('clientAutoComplete',function($filter){
 });
 app.controller('sidebarCtrl',function($scope,$cookies,$state,networkFactory,$location,$window){
 	
-	
-	$window.scrollTo(0, 0);
-	$('body').attr('id', '');
-	
 	$scope.user_favs=false;
+     $(function() {
+         document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+//         $('.ui.dropdown').dropdown();
+         });
 	var url = $location.absUrl().split('#/')[1];
 	//alert(url);
 	if(url=='dashboard'){
 		$scope.showSearchBar = false;
+        $scope.showOffers = true;
+        $scope.showNRI = true;
+        $scope.showfav = true;
+        $scope.showsignup = true;
 	}else{
 		$scope.showSearchBar = true;
+        $scope.showOffers = false;
+        $scope.showNRI = false;
+        $scope.showfav = false;
+        $scope.showsignup = false;
 	}
 	$scope.openNav =function() {
 		document.getElementById("mySidenav").style.width = "250px";
@@ -69,9 +78,13 @@ app.controller('sidebarCtrl',function($scope,$cookies,$state,networkFactory,$loc
 	}
 	
 	$scope.userLoginType = function(type){
-		if(type =='Sign up') $state.go('signUp');
+		if(type =='Sign up') $state.go('login');
 		else if(type=='Profile') $state.go('myFav');
 	};
+//    $scope.logout = function () {
+//                localStorage.clearAll();
+//                window.location = '/login';
+//            };
 	
 	$scope.setClientData = function(item){
 		
@@ -100,6 +113,7 @@ app.controller('sidebarCtrl',function($scope,$cookies,$state,networkFactory,$loc
          ctrl.client ={name:'', id:'',type:''};
 	 	//var builder = $scope.currentCity;
 		//alert(cities.city);
+		$cookies.put('city_id',cities.id);
 		networkFactory.getBuilderDetails({'city_id':cities.id},function(success){
 			console.log(success.data.autolist);
 			$scope.autolist = success.data.autolist;

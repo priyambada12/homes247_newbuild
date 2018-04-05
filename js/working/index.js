@@ -1,10 +1,10 @@
 //(function(){
-var app = angular.module('homesApp', ['duScroll','slickCarousel','routerApp', 'networkApp', 'sidebarApp',
+var app = angular.module('homesApp', ['duScroll','slickCarousel','angular-page-loader','routerApp', 'networkApp', 'sidebarApp',
     'footerApp', 'aboutUsApp', 'blogsApp',
     'careerApp', 'calculatorApp', 'faqApp',
     'servicesApp', 'offersApp', 'policyApp',
     'signupApp', 'contactUsApp', 'loginApp', 'myAccountApp',
-	'propertyApp','cityApp','ui.bootstrap','modalApp'
+	'propertyApp','cityApp','ui.bootstrap','modalApp','forgotpwdModule'
 ]);
 
 app.config(function ($httpProvider) {
@@ -141,14 +141,14 @@ app.directive('clientAutoComplete',function($filter){
 
             };
 });
-app.controller('dashboardCtrl', function($scope,$timeout,$window, networkFactory,$state,urls,$modal, $log,$cookies,cityFactory) {
+app.controller('dashboardCtrl', function($scope,$timeout, networkFactory,$state,urls,$modal, $log,$cookies,cityFactory) {
 
     //$('.test_design').niceSelect();
-	$window.scrollTo(0, 0);
 	$('body').attr('id', '');
-	
 
 $(function() {
+     document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 	$(this).css('background-color', 'red');
 	$scope.slickConfig3Loaded = true;
     $scope.slickConfig2Loaded = true;
@@ -174,6 +174,9 @@ $(function() {
 
      $('#fourd01').carouseller(); 
 });
+     $scope.sorterFunc = function(property){
+    return parseInt(property.BHK);
+};
 //	$cookies.put('key','dashboard');
     $scope.user = {
         name: '',
@@ -249,13 +252,36 @@ $(function() {
 		$scope.getBuilders();
 		$scope.updateNumber();
 		 $scope.slickConfig3 = {
-      autoplay: true,
+      autoplay: false,
       infinite: true,
-      autoplaySpeed: 1000,
+//      autoplaySpeed: 1000,
       slidesToShow: 4,
       slidesToScroll: 1,
-	  cssEase: 'ease-out',
-      method: {}
+//	  cssEase: 'ease-out',
+      responsive: [
+        {
+          breakpoint: 995,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
     };
 		//$scope.slickConfig3();
 		//customerSearchCtrl();
@@ -279,9 +305,9 @@ $(function() {
 		$scope.updateNumber2();
 		
     $scope.slickConfig2 = {
-      autoplay: true,
+      autoplay: false,
       infinite: true,
-      autoplaySpeed: 1000,
+//      autoplaySpeed: 1000,
       slidesToShow: 3,
       slidesToScroll: 1,
 	  init: true,
@@ -298,12 +324,14 @@ $(function() {
 		$scope.newProperties = success.data.deatils;
 		 $scope.updateNumber3();
 		 $scope.slickConfig4 = {
-      autoplay: true,
-      infinite: true,
-      autoplaySpeed: 1000,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      method: {}
+        autoplay: false,
+        arrows : false,
+        infinite: true,
+        dots: true,
+//      autoplaySpeed: 1000,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        method: {}
     };
     });
 	}
@@ -329,6 +357,7 @@ $(function() {
          ctrl.client ={name:'', id:'',type:''};
 	 	var builder = $scope.currentCity;
 		console.log(builder);
+		$cookies.put('city_id',builder.id);
 		networkFactory.getBuilderDetails({'city_id':builder.id},function(success){
 			console.log(success.data.autolist);
 			$scope.autolist = success.data.autolist;
@@ -347,6 +376,7 @@ $scope.setClientData = function(item){
 
 	$scope.getPropertyID = function(propertyID){
 		var clientData = $cookies.get('user');
+		
 		if(clientData == null){
 			/* $cookies.put('recentView',propertyID);
 			$state.go('login'); */

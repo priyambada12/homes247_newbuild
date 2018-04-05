@@ -1,6 +1,6 @@
 <!-- <div loading-indicatoraccount class="waiting-box">
 	<span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
-<div class="container">
+<div class="container homeloan_main">
 
     <div class="row">
         <div id="horizontalTab">
@@ -10,7 +10,8 @@
                     <ul class="resp-tabs-list">
                         <li><a ng-href="#/myFav">My Favourite</a></li>
                         <li><a ng-href="#/recentlyView">Recently Viewed</a></li>
-                        <li><a ng-href="#/setting">Account Settings</a></li>
+                        <li><a class="page_active" ng-href="#/setting">Account Settings</a></li>
+                        <li><a ng-click="logoutprofile();">Logout</a></li>
                         <li>
                             <a ng-href="#/referEarn"><img src="images/refer_earn_img.png" alt="" /></a>
                         </li>
@@ -18,18 +19,24 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-9">
-                <div class="resp-tabs-container" >
+                <div class="resp-tabs-container">
                     <div class="my_account_details">
                         <div class="account_photo">
-                            <span><img src="images/profile.png" alt="" /></span>
+                            <!-- <span><img ng-src="images/profile.png" alt="no image found"/></span> -->
+                            <span><img ng-src="{{user_imgpath}}"/></span>
                             <ul>
-                                <li><a href="#">Edit</a></li>
-                                <li><a href="#">Remove</a></li>
+                                <label class="fileContainer">
+                                    edit
+                                    <input type="file" onchange="angular.element(this).scope().setFile(this)" />
+                                    <!-- {{theFile.name}} -->
+
+                                </label>
+                                <li><a ng-click="removePic()">Remove</a></li>
                             </ul>
-                            <button type="button" ng-click = "changePwd()">Change</button>
+                            <button type="button" ng-click="changePwd()">Change</button>
                         </div>
                         <div class="account_info" ng-repeat="account in accounts track by $index">
-							
+
                             <form>
                                 <div>
                                     <label>User Name </label>
@@ -47,8 +54,8 @@
                             <div class="password_section">
                                 <h3>Update Password</h3>
                                 <form>
-                                    <input placeholder="New Password" type="password" ng-model ="user.newPwd" />
-                                    <input placeholder="Confirm password" type="password" ng-model ="user.confPwd" />
+                                    <input placeholder="New Password" type="password" ng-model="user.newPwd" />
+                                    <input placeholder="Confirm password" type="password" ng-model="user.confPwd" />
                                 </form>
                             </div>
                         </div>
@@ -69,16 +76,15 @@
     </div>
 </div>
 
- <script type="text/ng-template" id="myModalContent.html">
-         <div class="modal-header">
-           <h3 class="modal-title">Message</h3> 
-        </div> 
-        <div class="modal-body">
-            <b>{{ message}}</b>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-	 
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Message</h3>
+    </div>
+    <div class="modal-body">
+        <b>{{ message}}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

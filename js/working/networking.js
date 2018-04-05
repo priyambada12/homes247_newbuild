@@ -1,6 +1,6 @@
 var network = angular.module('networkApp',[]);
- network.constant('domain', 'http://18.218.16.184/homes247/backend');
- network.constant('images_url','http://18.218.16.184/homes247/images/'); 
+ network.constant('domain', 'http://homes247.in/cms/backend');
+ network.constant('images_url','http://homes247.in/cms/images/'); 
  network.service('urls', function(domain,images_url) {
     this.apiUrl = domain;
 	this.imagesURL = images_url;
@@ -82,6 +82,20 @@ var network = angular.module('networkApp',[]);
 		 
 	 };
 	 
+	  factory.jsonmultipartfileRequest = function(serviceUrl,formdata){
+		 
+		 var req = {
+			 method:'POST',
+			 url: serviceUrl,
+		     data: formdata,
+			 transformRequest: angular.identity,
+             headers: {
+                   'Content-Type': undefined
+             }
+		 } 
+		 return req;
+		 
+	 };
 	 
 	 
 	 factory.callServerForUrlEncondedPOSTRequest = function(serverUrl,requestData,callback){
@@ -107,6 +121,13 @@ var network = angular.module('networkApp',[]);
 	 
 	 factory.callServerForJsonPOSTRequest = function(serverUrl,requestData,callback){
 		 var requestForJson = factory.jsonPostRequest(urls.apiUrl+serverUrl,requestData);
+		 return $http(requestForJson).then(callback,function(error){
+			 console.log(error);
+		 })
+	 };
+	 
+	 factory.callServerForJsonmultipartRequest = function(serverUrl,requestData,callback){
+		 var requestForJson = factory.jsonmultipartfileRequest(urls.apiUrl+serverUrl,requestData);
 		 return $http(requestForJson).then(callback,function(error){
 			 console.log(error);
 		 })

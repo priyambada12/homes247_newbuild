@@ -20,11 +20,14 @@ app.factory('blogsFactory', function(networking) {
     return factory;
 });
 
-app.controller('blogsCtrl',function($scope,blogsFactory,urls,$cookies,$window){
-	
-	$window.scrollTo(0, 0);
-	$('body').attr('id', '');
-	
+app.controller('blogsCtrl',function($scope,blogsFactory,urls,$cookies){
+	//$cookies.set('key','others');
+	$(function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        $('.ui.dropdown').dropdown();
+    });
+	//$scope.imagepath = urls.imagesURL + "stories/";
 	$scope.imagepath = urls.imagesURL + "New%20folder/";
 	blogsFactory.gettop_stories(function(success){
 		console.log(success.data);

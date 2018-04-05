@@ -11,11 +11,7 @@
         <div class="about_section1_text">
         	<h1>Who We Are</h1>
         	<p>
-            	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-<br /><br />
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. 
-<br /><br />
-Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+            	Homes247.in is the global real estate aggregator aspiring to be on the top of real estate market by offering premier property solutions in the digital world. Trust, Integrity, Excellence and Service (TIES) are the core values which inspires us to serve the top services to our clients. We are a family of passionate real estate professionals enriched with years of excellence in real estate market. Our relationship with the top class builders and strong knowledge in the market makes us stand out of the crowd and enables us to deliver best in class real estate solution for our clients and assist them to buy and create living spaces at the best price.
             </p>
         </div>
     </div>
@@ -23,9 +19,9 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
     <div class="about_us_section2">
     	<div class="about_section2_img"><img src="images/about_us_img_2.jpg" alt="" /></div>
         <div class="about_section2_text">
-        	<h1>How It All Started</h1>
+        	<h1>What We Do</h1>
             <p>
-            	At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis raesentium voluptatum deleniti atque corrupti quos olores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+            	We connect and engage buyers and sellers 24/7 across India and provide end to end assistance. Our unique process combines a wide range of quality abodes for our clients and our proficient consultant provides the perfect property guidance to enhance the property search until they find their dream home. We delight our valuable customers and handhold them with value added services such as Home loan assistance, Interior consultation, Property Rental management services, Reselling and more. With us, NRI's can relieve the stress on investing their wealth on the right property. We are there round the clock to cater all the requirements of our NRI clients. 
             </p>
         </div>
     </div>
@@ -37,7 +33,7 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
         <div class="about_section3_text">
         	<h1>Our Vision</h1>
             <p>
-            	At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis raesentium voluptatum deleniti atque corrupti quos, At vero eos et accusamus et iusto odio dignissimos ducimus Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+            	Our motto is to provide the pivotal real estate advisory solution for the neoteric customer and extend one step more for our clients by creating positive and fruitful experiences on their journey to exquisite home.
             </p>
         </div>
     </div>
@@ -70,18 +66,19 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
 						
                     	<form name="aboutForm">
 						
-                        	<input placeholder="Name" name="uname" required ng-minlength="3" type="text" ng-model="user.name" />                            
+                        	<input placeholder="Name" name="uname" only-letters-input required ng-minlength="3" type="text" ng-model="user.name" />                     <span class="abt_err" ng-show="aboutForm.uname.$dirty && aboutForm.uname.$error.required">This is a required field</span>
+							<span class="abt_err" ng-show="aboutForm.uname.$dirty && aboutForm.uname.$error.minlength">Minimum length required is 3</span>
+                            
                             <select class="test_design">
                             	<option>+91 INDIA</option>
                             </select>
-                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13"/>
+                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno" name="phno" numbers-only required ng-minlength="10" ng-maxlength="13"/>
                             <div class="clearfix"></div>
-							<span ng-show="aboutForm.uname.$dirty && aboutForm.uname.$error.required">This is a required field</span>
-							<span ng-show="aboutForm.uname.$dirty && aboutForm.uname.$error.minlength">Minimum length required is 3</span>
+							
             				
-							<span ng-show="aboutForm.phno.$dirty && aboutForm.phno.$error.required">This is a required field</span>
-							<span ng-show="aboutForm.phno.$dirty && aboutForm.phno.$error.minlength">Minimum length required is 10</span>
-							<span ng-show="aboutForm.phno.$dirty && aboutForm.phno.$error.maxlength">Mobile Number is too long</span>
+							<span class="abt_err_num" ng-show="aboutForm.phno.$dirty && aboutForm.phno.$error.required">This is a required field</span>
+							<span class="abt_err_num abt_err_nums" ng-show="aboutForm.phno.$dirty && aboutForm.phno.$error.minlength">Minimum length required is 10</span>
+							<span class="abt_err_num" ng-show="aboutForm.phno.$dirty && aboutForm.phno.$error.maxlength">Mobile Number is too long</span>
 		
                             <button class="btn_style" ng-click="callBack(user);">Get Call Back</button>
 							

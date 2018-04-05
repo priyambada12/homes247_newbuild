@@ -137,10 +137,10 @@
    position: relative;
    text-align: center;
    cursor: default;
-   background: #fff url(../images/bgimg.jpg) no-repeat center center;
+   background:url(../images/bgimg.jpg) no-repeat center center;
 }
 .view .mask,.view .content {
-   width:100%;
+   width:360px;
    height: 100%;
    position: absolute;
    overflow: hidden;

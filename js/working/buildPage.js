@@ -2,6 +2,7 @@
 var app = angular.module('buildPageApp',[]);
 
 app.controller('builderPageCtrl',function(){
+    
 	//$cookies.set('key','others');
 	 /* $('.test_design').niceSelect();
 	 

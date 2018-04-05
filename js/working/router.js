@@ -2,7 +2,7 @@
 
 var router= angular.module('routerApp',['ui.router']);
 router.config(["$stateProvider", "$urlRouterProvider",
-		function ($stateProvider, $urlRouterProvider) {
+		function ($stateProvider, $urlRouterProvider, $locationProvider) {
 			
 			var header = {
 					templateUrl: 'html/sidebar.html',
@@ -22,7 +22,17 @@ router.config(["$stateProvider", "$urlRouterProvider",
                 header: header,
                 content: {
                     templateUrl: 'html/dashboard.html',
-                    controller: 'dashboardCtrl'
+                    controller: 'dashboardCtrl',
+                    resolve: {
+                        
+//            timing: function($timeout, $q) {
+//                var defer = $q.defer();
+//                $timeout(function() {
+//                    defer.resolve();
+//                }, 3500);
+//                return defer.promise;
+//            }
+        }
                 },
                 footer: footer
             }	
@@ -49,14 +59,14 @@ router.config(["$stateProvider", "$urlRouterProvider",
                 footer: footer
             }
 			}).state('city', {
-				//url: '/city',
-				url: '/city/:cityname/:locality/:buliderId/:reraId',
-				/* params: {
+				url: '/city',
+				//url: '/city/:cityname/:locality/:buliderId/:reraId',
+				 params: {
 					cityname: null,
 					locality:null,
 					buliderId:null,
 					reraId:null,
-					}, */
+					},
 				views: {
                 header: header,
                 content: {
@@ -307,11 +317,11 @@ router.config(["$stateProvider", "$urlRouterProvider",
             }
 				
 			}).state('property', {
-				//url: '/property',
-				url: '/property:param',
-				/* params: {
+				url: '/property',
+				//url: '/property:param',
+				 params: {
 					param:null,
-				}, */
+				}, 
 				views: {
                 header: header,
 				content: {
@@ -324,11 +334,11 @@ router.config(["$stateProvider", "$urlRouterProvider",
 				
 				
 			}).state('similarprop', {
-				//url: '/similarproperty',
-				url: '/similarproperty:param',
-				/* params: {
+				url: '/similarproperty',
+				//url: '/similarproperty:param',
+				 params: {
 					param:null,
-				}, */
+				}, 
 				views: {
                 header: header,
 				content: {
@@ -341,11 +351,11 @@ router.config(["$stateProvider", "$urlRouterProvider",
 				
 				
 			}).state('enquiry', {
-				//url: '/enquiry',
-				url: '/enquiry:param',
-				/* params: {
+				url: '/enquiry',
+				//url: '/enquiry:param',
+				 params: {
 					param:null,
-				}, */
+				}, 
 				views: {
                 header: header,
 				content: {
@@ -374,12 +384,12 @@ router.config(["$stateProvider", "$urlRouterProvider",
 				
 				
 			}).state('newStory', {
-				//url: '/newStory',
-				url: '/newStory/:param/:type',
-				/* params: {
+				url: '/newStory',
+				//url: '/newStory/:param/:type',
+				 params: {
 					param:null,
 					type:null,
-				}, */
+				}, 
 				views: {
                 header: header,
 				content: {
@@ -390,10 +400,41 @@ router.config(["$stateProvider", "$urlRouterProvider",
             }
 				
 				
+			}).state('forgotPassword', {
+				url: '/forgotPassword?token',
+				views: {
+				 header: header,
+				content: {
+                    templateUrl: 'html/forgot-pwd.html',
+					controller: 'fpwdCtrl'
+                },
+				footer: footer
+               
+            }
+				
+				
+			}).state('rera', {
+				url: '/rera',
+				//url: '/newStory/:param/:type',
+				 params: {
+					param:null,
+					type:null,
+				}, 
+				views: {
+                header: header,
+				content: {
+                    templateUrl: 'html/rera.html',
+					controller: 'reraCtrl'
+                },
+                 footer: footer
+            }
+				
+				
 			})
 			
 			
 			$urlRouterProvider.otherwise('/dashboard');
+//            $locationProvider.html5Mode(true);
 		}]);
 
    

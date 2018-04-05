@@ -1,66 +1,57 @@
 <!-- <div loading-indicatoremi class="waiting-box">
 	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
-       <div class="container">
+       <div class="container homeloan_main">
        		<div class="row">
             	<div class="col-lg-12">
                 	<div class="emi_etc_section_main">
                     	<div id="horizontalTab">
                         <ul class="resp-tabs-list">
+                        <li>EMI Calculator</li>
                         <li>Home Loan</li>
-                        <li class="resp-tab-active">EMI Calculator</li>
                         <li>Interiors</li>
                         <li>Vaastu Tips</li>
                         <li>News</li>
                         </ul>
                         <div class="resp-tabs-container">
-                        <div>
-                        	<div class="monthly_installments_banner">
-                            	<img src="images/home_loan_banner.jpg" alt="" />
-                                <h2>Home Loan Consulting</h2>
-                            </div>
-                            <div class="home_loan_text">
-                            <p>
-                            	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-<br /><br />
-At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
-<br /><br />
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains
-                            </p>
-                            <h4>FAQ on Home loans</h4>
-                            </div>
-                        </div>
-                        <div>
+                            <div>
                         	<div class="monthly_installments_banner">
                             	<img src="images/monthly_installments_bg.jpg" alt="" />
                                 <h2>Equated Monthly Installments</h2>
                             </div>
+                                
                             <div class="row">
                             	<div class="col-lg-3 col-md-3 col-sm-3">
                                 	<div class="loan_emi_calculator">
                                     	<h2>Home Loan & EMI Calculator</h2>
                                         <form>
-                                        	<select>
-                                            	<option>1 BHK + 1T (1000 sq ft)</option>
-                                            </select>
+                                        	
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Loan Amount</h3>
-                                                <input placeholder="Enter amount" valid-number type="text" ng-model="emi.amount" />
+                                                <input placeholder="Enter Amount"  valid-number type="text" maxlength="{{selecteddata.Type.MaxLength}}" ng-model="emi.amount" />
                                                 <div class="loan_emi_scale">
-                                            	<img src="images/loan_emi_graph.png" alt="" />
+                                            	<article>
+                                        <rzslider rz-slider-model="emi.amount" rz-slider-options="slider_ticks_values_at.options"></rzslider>
+                                                    </article>
                                            		 </div>
                                             </div>
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Loan Tenure (in yrs)</h3>
-                                                <input placeholder="year" valid-number type="text" ng-model="emi.term" />
+                                                <input placeholder="Year" valid-number type="text" ng-model="emi.term" max="35" prevent-typing-greater maxlength="{{selecteddate.Type.MaxLength}}"   />
                                                 <div class="loan_emi_scale">
-                                            	<img src="images/loan_emi_graph2.png" alt="" />
+                                            	<article>
+                                        <rzslider rz-slider-model="emi.term" rz-slider-options="customSlider.options"></rzslider>
+                                                    </article>
                                            		 </div>
                                             </div>
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Interest Rate (p.a)</h3>
-                                                <input placeholder="rate of interest" valid-number type="text" ng-model="emi.intrestrate"/>
+                                                <input placeholder="Rate Of Interest" valid-number type="text" ng-model="emi.intrestrate" max="15" prevent-typing-greater maxlength="{{selectedpercent.Type.MaxLength}}" />
                                                 <div class="loan_emi_scale">
-                                            	<img src="images/loan_emi_graph3.png" alt="" />
+                                                <article>
+                                                    <rzslider rz-slider-model="emi.intrestrate"
+                                    rz-slider-options="percentages.options">
+                                                    </rzslider>
+                                                </article>
                                            		 </div>
                                             </div>
                                         </form>
@@ -97,7 +88,26 @@ On the other hand, we denounce with righteous indignation and dislike men who ar
                                     </div>
                                 </div>
                             </div>
+                                
                         </div>
+                        <div>
+                        	<div class="monthly_installments_banner">
+                            	<img src="images/home_loan_banner.jpg" alt="" />
+                                <h2>Home Loan Consulting</h2>
+                            </div>
+                            <div class="home_loan_text">
+                            <p>
+                            	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+<br /><br />
+At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+<br /><br />
+On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains
+                            </p>
+                            <h4>FAQ on Home loans</h4>
+                            </div>
+                        </div>
+                        
+                            
                         <div>
                         	<div class="monthly_installments_banner">
                             	<img src="images/interiors_banner.jpg" alt="" />
@@ -144,7 +154,7 @@ Bedrooms:
 <br />Bedrooms should be absolutely clutter free, especially the area around where you place your head while sleeping.	
                             </p>
                             <div class="btn_nri">
-                    	<a href="#">Read More</a>
+                    	<a >Read More</a>
                     </div>
                             </div>
                         </div>
@@ -155,7 +165,7 @@ Bedrooms:
                             			<img src="images/news_banner.jpg" alt="" />
                                         <div class="news_text">
                                         	<h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h5>
-                                            <a href="#">Read more -></a>
+                                            <a >Read more -></a>
                                         </div>
                             		</div>
                                 </div>
@@ -164,19 +174,19 @@ Bedrooms:
                                         <h1>Trending News</h1>
                                         <div class="content mCustomScrollbar">
                                         <div class="trending_news_info">
-                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <a >Advantages of owning a property in Bangalore</a>
                                             <p>by Eddard Stark</p>
                                         </div>
                                         <div class="trending_news_info">
-                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <a >Advantages of owning a property in Bangalore</a>
                                             <p>by Eddard Stark</p>
                                         </div>
                                         <div class="trending_news_info">
-                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <a >Advantages of owning a property in Bangalore</a>
                                             <p>by Eddard Stark</p>
                                         </div>
                                         <div class="trending_news_info">
-                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <a >Advantages of owning a property in Bangalore</a>
                                             <p>by Eddard Stark</p>
                                         </div>
                                         </div>
@@ -197,7 +207,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -206,7 +216,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -215,7 +225,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -224,7 +234,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -233,7 +243,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -242,7 +252,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -251,7 +261,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -260,7 +270,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -269,7 +279,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -278,7 +288,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -287,7 +297,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -296,7 +306,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -321,9 +331,9 @@ Bedrooms:
                 	<div class="col-lg-4 col-md-4 col-sm-4">
                     	<div class="clarify_query_form">
                         	<div class="input_div">
-                            	<input placeholder="Name" type="text" ng-model ="user.name" name="uname" required ng-minlength="3" />
-								<span ng-show="moreForm.uname.$dirty && moreForm.uname.$error.required">This is a required field</span>
-								<span ng-show="moreForm.uname.$dirty && moreForm.uname.$error.minlength">Minimum length required is 3</span>
+                            	<input placeholder="Name" type="text" ng-model ="user.name" name="uname" only-letters-input required ng-minlength="3" />
+								<span class="policy_cmnerror" ng-show="moreForm.uname.$dirty && moreForm.uname.$error.required">This is a required field</span>
+								<span class="policy_cmnerror" ng-show="moreForm.uname.$dirty && moreForm.uname.$error.minlength">Minimum length required is 3</span>
             				
                             </div>                            
                             <div class="input_div">
@@ -331,15 +341,15 @@ Bedrooms:
                                 	<option>+91 INDIA</option>
                                 </select>
                             	<input class="inhalf" placeholder="Mobile Number" type="text" numbers-only ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13" />
-								<span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.required">This is a required field</span>
-							    <span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.minlength">Minimum length required is 10</span>
-							    <span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.maxlength">Mobile Number is too long</span>
+								<span class="policy_cmnerror" ng-show="moreForm.phno.$dirty && moreForm.phno.$error.required">This is a required field</span>
+							    <span class="num_error policy_cmnerror" ng-show="moreForm.phno.$dirty && moreForm.phno.$error.minlength">Minimum length required is 10</span>
+							    <span class="num_error policy_cmnerror" ng-show="moreForm.phno.$dirty && moreForm.phno.$error.maxlength">Mobile Number is too long</span>
 		
                             </div>
                             <div class="input_div">
                             	<input placeholder="Email Id" type="email" name="email" ng-model ="user.email" />
-								<span ng-show="moreForm.email.$dirty && moreForm.email.$error.required">This is a required field</span>
-							    <span ng-show="moreForm.$error.email">Enter a valid Email Address</span>
+								<span class="policy_cmnerror" ng-show="moreForm.email.$dirty && moreForm.email.$error.required">This is a required field</span>
+							    <span class="policy_cmnerror" ng-show="moreForm.$error.email">Enter a valid Email Address</span>
                             
                             </div> 
                         </div>
@@ -348,7 +358,7 @@ Bedrooms:
                     	<div class="clarify_query_form">
                         	<div class="input_div">
                             	<textarea placeholder="Your message" ng-model="user.msg" name="msg" required></textarea>
-								<span ng-show="moreForm.msg.$dirty && moreForm.msg.$error.required">This is a required field</span>
+								<span class="text_err policy_cmnerror" ng-show="moreForm.msg.$dirty && moreForm.msg.$error.required">This is a required field</span>
                             </div>
                             <div class="input_div">
                             	<p>All email enquiries will be taken care in one business day</p>
@@ -380,7 +390,7 @@ Bedrooms:
                             </div>
                             <div class="input_div">
                             	<p>All email enquiries will be taken care in one business day</p>
-                            	<a href="#">Submit</a>
+                            	<a >Submit</a>
                             </div>
                         </div>
                     </div> -->

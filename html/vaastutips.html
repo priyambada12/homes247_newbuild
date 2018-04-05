@@ -1,18 +1,48 @@
 <!-- <div loading-indicatoremi class="waiting-box">
 	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
-       <div class="container">
+       <div class="container homeloan_main">
        		<div class="row">
             	<div class="col-lg-12">
                 	<div class="emi_etc_section_main">
                     	<div id="horizontalTab">
                         <ul class="resp-tabs-list">
+                        <li>Vaastu Tips</li>
                         <li>Home Loan</li>
                         <li>EMI Calculator</li>
                         <li>Interiors</li>
-                        <li class="resp-tab-active">Vaastu Tips</li>
                         <li>News</li>
                         </ul>
                         <div class="resp-tabs-container">
+                            <div>
+                        	<div class="monthly_installments_banner">
+                            	<img src="images/vaastu_tips_banner.jpg" alt="" />
+                                <h2>Vaastu - Tips</h2>
+                            </div>
+                            <div class="home_loan_text">
+                            <h2>Vaastu for Home</h2>
+                            <p>
+                            	Vaastu is a set of principles that helps home owners lead a happy and peaceful life in their abode. The doctrine of Vaastu is related to architecture and the designs are based on directional arrangements. Vaastu guidelines can be applied during the construction of homes, offices, temples and other buildings and help bring about positive energy and general well-being for the home owner. As such, it is important to keep in mind few tips while searching for or building your ideal house.
+<br /><br />
+General Tips:
+<br />The entrance to the house should be towards the east as it is considered an auspicious direction. The entrance should also be well-kept and nicely decorated
+<br />The north direction signifies prosperity, as such this part of the house should not be blocked in any way
+<br />Make sure to never grow a Cactus plant in the house
+<br />Hinges on doors should work smoothly and should not make noise
+<br />If the house has a slope, it should be from south to north or from west to east only
+<br />Avoid putting up paintings or pictures that depict violence or sorrow
+<br /><br />
+Bedrooms:
+<br />The master bedroom in the house should always be in the south-west direction and not in the north
+<br />One should always sleep with their head towards the south
+<br />Make sure the bed is not placed directly below a beam
+<br />Bedrooms should be absolutely clutter free, especially the area around where you place your head while sleeping.	
+                            </p>
+                            <div class="btn_nri">
+                    	<a >Read More</a>
+                    </div>
+                            </div>
+                        </div>
+                            
                         <div>
                         	<div class="monthly_installments_banner">
                             	<img src="images/home_loan_banner.jpg" alt="" />
@@ -39,28 +69,35 @@ On the other hand, we denounce with righteous indignation and dislike men who ar
                                 	<div class="loan_emi_calculator">
                                     	<h2>Home Loan & EMI Calculator</h2>
                                         <form>
-                                        	<select>
-                                            	<option>1 BHK + 1T (1000 sq ft)</option>
-                                            </select>
+                                        	
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Loan Amount</h3>
-                                                <input placeholder="Enter amount" valid-number type="text" ng-model="emi.amount" />
+                                                <input placeholder="Enter Amount"  valid-number type="text" maxlength="{{selecteddata.Type.MaxLength}}" ng-model="emi.amount" />
                                                 <div class="loan_emi_scale">
-                                            	<img src="images/loan_emi_graph.png" alt="" />
+                                            	<article>
+                                        <rzslider rz-slider-model="emi.amount" rz-slider-options="slider_ticks_values_at.options"></rzslider>
+                                                    </article>
                                            		 </div>
                                             </div>
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Loan Tenure (in yrs)</h3>
-                                                <input placeholder="year" valid-number type="text" ng-model="emi.term" />
+                                                <input placeholder="Year" valid-number type="text" ng-model="emi.term" 
+                                                    maxlength="{{selecteddate.Type.MaxLength}}"   />
                                                 <div class="loan_emi_scale">
-                                            	<img src="images/loan_emi_graph2.png" alt="" />
+                                            	<article>
+                                        <rzslider rz-slider-model="emi.term" rz-slider-options="customSlider.options"></rzslider>
+                                                    </article>
                                            		 </div>
                                             </div>
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Interest Rate (p.a)</h3>
-                                                <input placeholder="rate of interest" valid-number type="text" ng-model="emi.intrestrate"/>
+                                                <input placeholder="Rate Of Interest" valid-number type="text" ng-model="emi.intrestrate"/>
                                                 <div class="loan_emi_scale">
-                                            	<img src="images/loan_emi_graph3.png" alt="" />
+                                                <article>
+                                                    <rzslider rz-slider-model="emi.intrestrate"
+                                    rz-slider-options="percentages.options">
+                                                    </rzslider>
+                                                </article>
                                            		 </div>
                                             </div>
                                         </form>
@@ -97,6 +134,8 @@ On the other hand, we denounce with righteous indignation and dislike men who ar
                                     </div>
                                 </div>
                             </div>
+                             
+                             
                         </div>
                         <div>
                         	<div class="monthly_installments_banner">
@@ -119,35 +158,7 @@ On the other hand, we denounce with righteous indignation and dislike men who ar
                             </ul>
                             </div>
                         </div>
-                        <div>
-                        	<div class="monthly_installments_banner">
-                            	<img src="images/vaastu_tips_banner.jpg" alt="" />
-                                <h2>Vaastu - Tips</h2>
-                            </div>
-                            <div class="home_loan_text">
-                            <h2>Vaastu for Home</h2>
-                            <p>
-                            	Vaastu is a set of principles that helps home owners lead a happy and peaceful life in their abode. The doctrine of Vaastu is related to architecture and the designs are based on directional arrangements. Vaastu guidelines can be applied during the construction of homes, offices, temples and other buildings and help bring about positive energy and general well-being for the home owner. As such, it is important to keep in mind few tips while searching for or building your ideal house.
-<br /><br />
-General Tips:
-<br />The entrance to the house should be towards the east as it is considered an auspicious direction. The entrance should also be well-kept and nicely decorated
-<br />The north direction signifies prosperity, as such this part of the house should not be blocked in any way
-<br />Make sure to never grow a Cactus plant in the house
-<br />Hinges on doors should work smoothly and should not make noise
-<br />If the house has a slope, it should be from south to north or from west to east only
-<br />Avoid putting up paintings or pictures that depict violence or sorrow
-<br /><br />
-Bedrooms:
-<br />The master bedroom in the house should always be in the south-west direction and not in the north
-<br />One should always sleep with their head towards the south
-<br />Make sure the bed is not placed directly below a beam
-<br />Bedrooms should be absolutely clutter free, especially the area around where you place your head while sleeping.	
-                            </p>
-                            <div class="btn_nri">
-                    	<a href="#">Read More</a>
-                    </div>
-                            </div>
-                        </div>
+                        
                         <div>
                         	<div class="row">
                             	<div class="col-lg-7 col-md-7 col-sm-7">
@@ -155,7 +166,7 @@ Bedrooms:
                             			<img src="images/news_banner.jpg" alt="" />
                                         <div class="news_text">
                                         	<h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h5>
-                                            <a href="#">Read more -></a>
+                                            <a >Read more -></a>
                                         </div>
                             		</div>
                                 </div>
@@ -164,19 +175,19 @@ Bedrooms:
                                         <h1>Trending News</h1>
                                         <div class="content mCustomScrollbar">
                                         <div class="trending_news_info">
-                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <a >Advantages of owning a property in Bangalore</a>
                                             <p>by Eddard Stark</p>
                                         </div>
                                         <div class="trending_news_info">
-                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <a >Advantages of owning a property in Bangalore</a>
                                             <p>by Eddard Stark</p>
                                         </div>
                                         <div class="trending_news_info">
-                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <a >Advantages of owning a property in Bangalore</a>
                                             <p>by Eddard Stark</p>
                                         </div>
                                         <div class="trending_news_info">
-                                            <a href="#">Advantages of owning a property in Bangalore</a>
+                                            <a >Advantages of owning a property in Bangalore</a>
                                             <p>by Eddard Stark</p>
                                         </div>
                                         </div>
@@ -197,7 +208,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -206,7 +217,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -215,7 +226,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -224,7 +235,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -233,7 +244,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -242,7 +253,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -251,7 +262,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -260,7 +271,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -269,7 +280,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -278,7 +289,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -287,7 +298,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -296,7 +307,7 @@ Bedrooms:
                                         	<img src="images/news_img1.jpg" alt="" />
                                             <div class="name_link">
                                             	<h4>Lorem ipsum dolor sit ame</h4>
-                                            	<a href="#">Read more -></a>
+                                            	<a >Read more -></a>
                                             </div>
                                     </div>
                                 </div>
@@ -321,9 +332,9 @@ Bedrooms:
                 	<div class="col-lg-4 col-md-4 col-sm-4">
                     	<div class="clarify_query_form">
                         	<div class="input_div">
-                            	<input placeholder="Name" type="text" ng-model ="user.name" name="uname" required ng-minlength="3" />
-								<span ng-show="moreForm.uname.$dirty && moreForm.uname.$error.required">This is a required field</span>
-								<span ng-show="moreForm.uname.$dirty && moreForm.uname.$error.minlength">Minimum length required is 3</span>
+                            	<input placeholder="Name" type="text" ng-model ="user.name" name="uname" only-letters-input required ng-minlength="3" />
+								<span class="policy_cmnerror" ng-show="moreForm.uname.$dirty && moreForm.uname.$error.required">This is a required field</span>
+								<span class="policy_cmnerror" ng-show="moreForm.uname.$dirty && moreForm.uname.$error.minlength">Minimum length required is 3</span>
             				
                             </div>                            
                             <div class="input_div">
@@ -331,15 +342,15 @@ Bedrooms:
                                 	<option>+91 INDIA</option>
                                 </select>
                             	<input class="inhalf" placeholder="Mobile Number" type="text" numbers-only ng-model="user.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13" />
-								<span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.required">This is a required field</span>
-							    <span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.minlength">Minimum length required is 10</span>
-							    <span ng-show="moreForm.phno.$dirty && moreForm.phno.$error.maxlength">Mobile Number is too long</span>
+								<span class="policy_cmnerror" ng-show="moreForm.phno.$dirty && moreForm.phno.$error.required">This is a required field</span>
+							    <span class="num_error policy_cmnerror" ng-show="moreForm.phno.$dirty && moreForm.phno.$error.minlength">Minimum length required is 10</span>
+							    <span class="num_error policy_cmnerror" ng-show="moreForm.phno.$dirty && moreForm.phno.$error.maxlength">Mobile Number is too long</span>
 		
                             </div>
                             <div class="input_div">
                             	<input placeholder="Email Id" type="email" name="email" ng-model ="user.email" />
-								<span ng-show="moreForm.email.$dirty && moreForm.email.$error.required">This is a required field</span>
-							    <span ng-show="moreForm.$error.email">Enter a valid Email Address</span>
+								<span class="policy_cmnerror" ng-show="moreForm.email.$dirty && moreForm.email.$error.required">This is a required field</span>
+							    <span class="policy_cmnerror" ng-show="moreForm.$error.email">Enter a valid Email Address</span>
                             
                             </div> 
                         </div>
@@ -348,7 +359,7 @@ Bedrooms:
                     	<div class="clarify_query_form">
                         	<div class="input_div">
                             	<textarea placeholder="Your message" ng-model="user.msg" name="msg" required></textarea>
-								<span ng-show="moreForm.msg.$dirty && moreForm.msg.$error.required">This is a required field</span>
+								<span class="text_err policy_cmnerror" ng-show="moreForm.msg.$dirty && moreForm.msg.$error.required">This is a required field</span>
                             </div>
                             <div class="input_div">
                             	<p>All email enquiries will be taken care in one business day</p>

@@ -1,10 +1,12 @@
 //(function(){
 var app = angular.module('contactUsApp',['ui.bootstrap','modalApp']);
-app.controller('contactUsCtrl',function($scope, networkFactory,$modal, $log,$cookies,$window){
-	
-		$window.scrollTo(0, 0);
-		$('body').attr('id', '');
-	
+app.controller('contactUsCtrl',function($scope, networkFactory,$modal, $log,$cookies){
+        
+    $(function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        $('.ui.dropdown').dropdown();
+    });
 //	$cookies.set('key','others');
 //s$('.test_design').niceSelect();
 	/* $('#first').carouseller({

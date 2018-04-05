@@ -1,5 +1,13 @@
- <div loading-indicator class="waiting-box">
-	<span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> 
+ <style>
+ 
+ .bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+	color:#fff;
+	font-size:30px;
+}
+ </style>
 <div ng-repeat = "propDetail in propDetails" >
     <div class="property_details_banner" >
     	<img ng-src="{{propertyimage}}{{image}}" alt="" />
@@ -8,7 +16,7 @@
         	<div class="row">
             	<div class="col-lg-12 col-md-12 col-sm-12">
                 	<h1>{{propDetail.propertyName}}</h1>
-                    <!-- <h3>by Prestige Group</h3> -->
+                     <h3>by {{propDetail.BuliderName}}</h3>
                     <p><img src="images/location_icon2.png" alt="" /> {{location}}, {{city_name}}</p>
                 </div>
             </div>
@@ -24,7 +32,7 @@
                 	<div class="about_property_row">
                     	<div class="aap">
                         	<h3>Apartments</h3><h2>
-                            <div ng-repeat="BHKtype in propDetail.BHK_Deatils">{{BHKtype.BHK}}{{$last ? ' BHK' : ($index==propDetail.BHK_Deatils.length-2) ? ' , ' : ', '}}</div></h2>
+                            <div class="bhk_dtls" ng-repeat="BHKtype in propDetail.BHK_Deatils|unique : 'BHK' | orderBy:sorterFunc">{{BHKtype.BHK}}{{$last ? ' BHK' : ($index==propDetail.BHK_Deatils.length-2) ? ' , ' : ' , '}}</div></h2>
                         </div>
                         <div class="aap">
                         	<h3>Area</h3>
@@ -37,7 +45,8 @@
                         </div>
                     </div>
                     <div class="sticky-stuff">
-                    <div class="property_details_menu single-page-nav">
+                        <div id="sticky-anchor1"></div>
+                    <div class="property_details_menu single-page-nav" id="sublinks_sticky">
                         <ul>
                         <li><a href="#section1" du-smooth-scroll du-scrollspy>Overview</a></li>
                         <li><a href="#section2" du-smooth-scroll du-scrollspy>Gallery</a></li>
@@ -48,8 +57,8 @@
                         </ul>
                     </div>
                     </div>
-                    <div class="overview_section_main" id="section1">
-                       	<h2>{{propDetail.propertyName}}</h2>
+                    <div class="overview_section_main">
+                       	<h2 id="section1">{{propDetail.propertyName}}</h2>
                      
                      <div id="overview01" class="overview_section_row">
                     	<div class="osm">
@@ -67,67 +76,50 @@
                         <div class="clearfix"></div>
                         <p>
 							{{propDetail.discription}}
-                            <!-- <a href="#">more</a> -->
+                            <!-- <a >more</a> -->
                         </p>
                         <h5>Home loan available in the following banks</h5>
-                        <div class="bank_logo">
-                        	<img src="images/banks_logo.png" alt="" />
+                         
+                         <div class="bank_logo">
+                             <span class="bank_span" ng-repeat="banks in propDetail.Bank_Deatils">
+                        	<img ng-src={{bankImages}}{{banks.ImgPath}} alt="" />
+                            </span>
                         </div>
+                         
                     </div>
-					<div class="property_details_gallery" id="section2">
+					<div class="scroll-positions property_details_gallery" id="section2">
                      	<h2>Gallery</h2>
-						<!--<div class="gallery_slider_box">
+  
+			<!-- MAIN SLIDES -->
+                        <div class="gallery_slider_box">
                             <div class="left" id="slideshow-main">
-                                   <ul id="slideshow-list" ng-repeat="img in propDetail.images">
-                                    <li><a href="Javascript:void(0)"><img src="{{propertyimage}}{{img.name}}" alt="" />
-                                        </a>
-                        
-                                    </li>
-                                    
-                                </ul> 
+			<slick class="slider glry-left-thumb" init-onload="true" settings="slickConfig2" ng-if="slickConfig2Loaded">
+				<div ng-repeat="imgs in propDetail.images">
+					<img src="{{propertyimage}}{{imgs.name}}" alt="One"><div class="bottom-left">{{imgs.image_title}}</div>
+					
+				</div>
+			</slick>
                             </div>
+			<!-- THUMBNAILS -->
                             <div class="right">
-                            <div class="content mCustomScrollbar">
-                               <ul id="image-list" ng-repeat="img in propDetail.images">
-                                    <li><a href="Javascript:void(0)"><img src="{{propertyimage}}{{img.name}}" alt=""/>
-                                        </a>
-                                    </li>
-                                   
-                                </ul>
+			<slick class="slider-nav-thumbnails glry-right-thumb mCustomScrollbar" init-onload="true" settings="slickConfig3"                    ng-if="slickConfig3Loaded">
+				<div class="thumb-div" ng-repeat="img in propDetail.images">
+                   <img src="{{propertyimage}}{{img.name}}" alt="One">
+				</div>
+			</slick>
                             </div>
-                            </div>
-                        </div> -->
-						
+                        </div>
 						
     
-    <div class="gallery_slider_box">
+<!--
+                    <div class="gallery_slider_box">
                             <div class="left" id="slideshow-main">
 							  <ul id="slideshow-list" >
                                     <li ng-repeat="imgs in propDetail.images" my-repeat-directive>
-									<a href=""><img src="{{propertyimage}}{{imgs.name}}"
-									class=""
-									alt="" 
-									ng-class="{'active': imgs.Id == activeItem}" />
-                                        </a>
-                        
-                                    </li>
-                                    
+									<a href=""><img src="{{propertyimage}}{{imgs.name}}" alt="" 
+									ng-class="{'active': imgs.Id == activeItem}" /></a></li>
                                 </ul> 
-                                <!-- <ul id="slideshow-list">
-                                    
-                                    <li><a href="Javascript:void(0)"><img src="images/gallery_img1.jpg" alt="" />
-                                        </a>
-                        
-                                    </li>
-                                    <li><a href="Javascript:void(0)"><img src="images/gallery_img1.jpg" alt=""/>
-                                        </a>
-                        
-                                    </li>
-                                    <li><a href="Javascript:void(0)"><img src="images/gallery_img2.jpg" alt=""/>
-                                        </a>
-                        
-                                    </li>
-                                </ul> --> 
+                                
                             </div>
                             <div class="right">
                             <div class="content mCustomScrollbar">
@@ -136,62 +128,52 @@
 									<img src="{{propertyimage}}{{img.name}}" alt=""/>
                                         </a>
                                     </li>
-                                   
                                 </ul>
-<!--                                 <ul id="image-list">
-                                    <li><a href="Javascript:void(0)"><img src="images/gallery_img1.jpg" alt=""/>
-                                        </a>
-                                    </li>
-                                    <li><a href="Javascript:void(0)"><img src="images/gallery_img2.jpg" alt="" class="active"/>
-                                        </a>
-                                    </li>
-                                    <li><a href="Javascript:void(0)"><img src="images/gallery_img1.jpg" alt=""/>
-                                        </a>
-                                    </li>
-                                     <li><a href="Javascript:void(0)"><img src="images/gallery_img2.jpg" alt=""/>
-                                        </a>
-                                    </li>
-                                     <li><a href="Javascript:void(0)"><img src="images/gallery_img1.jpg" alt=""/>
-                                        </a>
-                        
-                                    </li>
-                                </ul> -->
                             </div>
                             </div>
                         </div>
+-->
 						
                      </div>
 					
-                     <div class="price_floor_plans" id="section3" >
+                     <div class="scroll-positions price_floor_plans" id="section3" >
                      	<h2>Price & Floor plans</h2>
+                         
                         <div class="price_floor_plans">
                         	<div id="horizontalTab" >
                         <ul class="resp-tabs-list">
                         <li class="tab" ng-class="{active:isSet(tab.BHK)}"
-						ng-repeat="tab in propDetail.BHK_Deatils">
+						ng-repeat="tab in propDetail.BHK_Deatils |unique : 'BHK'| orderBy:sorterFunc">
 						<a href ng-click="setTab(tab.BHK)">
-						{{tab.BHK}} BHK</li></a>
+						{{tab.BHK}} BHK</a></li>
                         </ul>
-                        <div class="resp-tabs-container" style="text-align:center;" ng-show="isSet(bhk.BHK)"
-						ng-repeat="bhk in propDetail.BHK_Deatils">
+                                <div class="floor-plan-main">
+                        <div class="resp-tabs-container floor-cntnt" style="text-align:center;" ng-show="isSet(bhk.BHK)"
+						ng-repeat="bhk in propDetail.BHK_Deatils | limitTo: limit as results" n="{{bhk}}">
                        
-                        	<div class="price_floor_property tab-content"  >
-                            	<span><img src="{{uploadBHKImages}}{{bhk.ImgPath}}" alt="" style="height: 68px;"/></span>
+                        	<div class="price_floor_property tab-content">
+                            	<span>
+                                <a class="example-image-link" href="{{uploadBHKImages}}{{bhk.ImgPath}}" data-lightbox="example-set"><img class="example-image" src="{{uploadBHKImages}}{{bhk.ImgPath}}" alt=""/></a>
+                                    </span>
+                                
                                 <h6>{{bhk.Area}} sq ft
-                                	<small>{{bhk.BHK}} BHK+{{bhk.Bedroom}}T)</small>
+                                	<small>{{bhk.BHK}} BHK+{{bhk.Bedroom}}T</small>
                                 </h6>
-                                <h5>Price :{{bhk.Price}} L </h5>
-                                <a ui-sref="enquiry({param:propDetail.property_info_IDPK})">Enquire now</a>
+                                <h5>Price :{{bhk.Price}} </h5>
+                                <a class="enqr_btn" ui-sref="enquiry({param:propDetail.property_info_IDPK})">Enquire now</a>
                             </div>
-                           
-                           <!--  <div class="show_more"><a href="#">Show More</a></div> -->
-                       
+                            
                         
                         </div>
+                            </div>
+                                <div class="show_hide">
+                        <a ng-hide="results.length === propDetail.BHK_Deatils.length" ng-click="limit = limit +3">Show More...</a>
+<!--                         <a ng-show="results.length === propDetail.BHK_Deatils.length" ng-click="limit = limit - 3">Show Less...</a>       -->
+                                </div>
                         </div>
                         </div>
                      </div>
-                     <div class="amenities_section" id="section4">
+                     <div class="scroll-positions amenities_section" id="section4">
                      	<h2>Amenities</h2>
                         <div class="amenities_info" ng-repeat="amenities in propDetail.Amenities_Deatils">
                         	<span><img ng-src={{amenitesImages}}{{amenities.ImgPath}} alt="" /></span>
@@ -201,36 +183,68 @@
                      </div>
                      <div class="neighbourhood_section" id="section5">
                      	<h2>Neighbourhood</h2>
-                        <div id="neighbour-map" style="width:750px;height:440px;" ></div>
-                     </div>
-                     <div class="homeloan_calculator_section" id="section6">
+                         
+            <ul class="map-content nav nav-tabs">
+                <li class="element-imgs active"><a data-toggle="tab" data-target="#restaurant_map"><img src="map/restaurant.png"/> <span class="restrnt">Restaurant</span></a></li>
+                <li class="element-imgs" ng-click="schoolclick()"><a data-toggle="tab" data-target="#school_map"><img src="map/school.png"/><span class="school">School</span></a></li>
+                <li class="element-imgs"><a data-toggle="tab" data-target="#hospital_map"><img src="map/hospital.png"/><span class="hosp">Hospital</span></a></li>
+                <li class="element-imgs"><a data-toggle="tab" data-target="#mall_map"><img src="map/mall.png"/><span class="cart">Shopping malls</span></a></li>
+                <li class="element-imgs"><a data-toggle="tab" data-target="#atm_map"><img src="map/atm.png"/><span class="atm">ATM</span></a></li>
+            </ul>
+                         <div class="tab-content">
+                         <div id="restaurant_map" class="neighbour-map tab-pane fade in active" style="width:750px;height:400px"></div>
+                         <div id="school_map" class="neighbour-map tab-pane fade" style="width:750px;height:400px"></div>
+                         <div id="hospital_map" class="neighbour-map tab-pane fade" style="width:750px;height:400px"></div>    
+                         <div id="mall_map" class="neighbour-map tab-pane fade" style="width:750px;height:400px"></div>    
+                         <div id="atm_map" class="neighbour-map tab-pane fade" style="width:750px;height:400px"></div> 
+                         </div>
+            
+            </div>
+                     <div class="scroll-positions homeloan_calculator_section" id="section6">
                         <div class="row">
                         	<div class="col-lg-5 col-md-5 col-sm-5">
                             	<div class="loan_emi_calculator">
                                     	<h2>Home Loan & EMI Calculator</h2>
                                         <form>
+<!--
                                         	<select>
                                             	<option>{{propDetail.bhk}}   ({{propDetail.dimension}} sq ft)</option>
                                             </select>
+-->
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Loan Amount</h3>
-                                                <input placeholder="Enter amount" valid-number type="text" ng-model="emi.amount" />
+<!--
+                                                <input placeholder="Enter Amount"  valid-number type="text" maxlength="{{selecteddata.Type.MaxLength}}" ng-model="emis[0].value" 
+                                                ng-change="emi.amount=emis[0].value" hidden />
+-->
+                                                <input placeholder="Enter Amount"  valid-number type="text" maxlength="{{selecteddata.Type.MaxLength}}" ng-model="emi.amount" />
                                                 <div class="loan_emi_scale">
-                                            	<img src="images/loan_emi_graph.png" alt="" />
+                                                    <article>
+                                        <rzslider rz-slider-model="emi.amount" rz-slider-options="slider_ticks_values_at.options"></rzslider>
+                                                    </article>
+<!--                                            	<img src="images/loan_emi_graph.png" alt="" />-->
                                            		 </div>
                                             </div>
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Loan Tenure (in yrs)</h3>
-                                                <input placeholder="year" valid-number type="text" ng-model="emi.term" />
+                                                <input placeholder="Year" valid-number type="text" ng-model="emi.term" max="35" prevent-typing-greater  maxlength="{{selecteddate.Type.MaxLength}}"   />
                                                 <div class="loan_emi_scale">
-                                            	<img src="images/loan_emi_graph2.png" alt="" />
+                                                    <article>
+                                        <rzslider rz-slider-model="emi.term" rz-slider-options="customSlider.options"></rzslider>
+                                                    </article>
+<!--                                            	<img src="images/loan_emi_graph2.png" alt="" />-->
                                            		 </div>
                                             </div>
                                             <div class="loan_emi_calculator_box">
                                             	<h3>Interest Rate (p.a)</h3>
-                                                <input placeholder="rate of interest" valid-number type="text" ng-model="emi.intrestrate"/>
+                                                <input placeholder="Rate Of Interest" valid-number type="text" ng-model="emi.intrestrate" max="15" prevent-typing-greater maxlength="{{selectedpercent.Type.MaxLength}}" />
                                                 <div class="loan_emi_scale">
-                                            	<img src="images/loan_emi_graph3.png" alt="" />
+                                                <article>
+                                                    <rzslider rz-slider-model="emi.intrestrate"
+                                    rz-slider-options="percentages.options">
+                                                    </rzslider>
+                                                </article>
+<!--                                            	<img src="images/loan_emi_graph3.png" alt="" />-->
                                            		 </div>
                                             </div>
                                         </form>
@@ -238,7 +252,14 @@
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-7">
                             	<div class="principal_amount">
-                                    	<img src="images/img_1.png" alt="" />
+<!--                                    DONUT-CHART-->
+                                    <section class="donut_main">
+                                        <donut stroke="'#fff'" width="267" height="267" radius="50" property="'value'" colours="donutColours"
+                                        mousemove="openTooltip(model)" mouseleave="closeTooltip()" ng-model="emis"> 
+                                        </donut>
+                                    </section>
+<!--                                    DONUT-CHART-->
+<!--                                    	<img src="images/img_1.png" alt="" />-->
                                         <h4>Principal amount
                                         	<strong>{{emi.amount}}</strong>
                                         </h4>
@@ -250,6 +271,10 @@
                                         </div>
                                         <div class="emi_indicators_box">
                                         	<span style="background:#0a3544;"></span>
+<!--
+                                             <input type="text" ng-model="interestpayable"
+                                            ng-change="emis[0].value=interestpayable"/>
+-->
                                             <h6>Interest <br />Payable : <strong>{{interestpayable |currency:"&#8377;"}}</strong></h6>
                                         </div>
                                         <div class="emi_indicators_box">
@@ -261,7 +286,7 @@
                                     	<h4>Monthly EMI : {{monthlyAmount|currency:"&#8377;"}}</h4>
                                     </div>
                                     <div class="apply_now_btn">
-                                    	<a ng-click ="getrate(emi);">Apply Now</a>
+                                    	<a ng-click ="getrate(emi);">CALCULATE</a>
                                     </div>
                                     </div>
                             </div>
@@ -269,42 +294,46 @@
                      </div>                     
                     </div> 
                 </div>
+    
                 <div class="col-lg-4 col-md-4 col-sm-4">
-                	<div class="property_details_form">
+                    <div id="sticky-anchor"></div>
+                	<div class="property_details_form" id="side_bar_sticky">
                     	<h2>Interested to buy this property !</h2>
                         <form name="propenquiryForm">
-						<input placeholder="Name" type="text" ng-model="enquiry.name" name="username" required ng-minlength="3" />                            
-                            <select class="test_design">
-                            	<option>+91</option>
+						<input placeholder="Name" type="text" ng-model="enquiry.name" name="username" only-letters-input required ng-minlength="3" />                            
+                            <select class="ui selection dropdown intrst_cntct">
+                                <option value="+91">+91</option>
+<!--                                <option value="+81">+81</option>-->
                             </select>
                             
-                            <span ng-show="propenquiryForm.username.$dirty && propenquiryForm.username.$error.required">This is a required field</span>
-							<span ng-show="propenquiryForm.username.$dirty && propenquiryForm.username.$error.minlength">Minimum length required is 3</span>
+                            <span class="intrst_err" ng-show="propenquiryForm.username.$dirty && propenquiryForm.username.$error.required">This is a required field</span>
+							<span class="intrst_err" ng-show="propenquiryForm.username.$dirty && propenquiryForm.username.$error.minlength">Minimum length required is 3</span>
             				
 							
-                            <input placeholder="Mobile Number" class="mob_nu" type="text" name="contact" 
+                            <input placeholder="Mobile Number" class="mob_nu" type="text" name="contact" numbers-only 
 							required ng-minlength="10" ng-maxlength="13" ng-pattern="ph_numbr"
 							ng-model="enquiry.mobileno" />
-							<span ng-show="propenquiryForm.contact.$dirty && propenquiryForm.contact.$error.required">This is a required field</span>
+							<span class="intrst_err_num" ng-show="propenquiryForm.contact.$dirty && propenquiryForm.contact.$error.required">This is a required field</span>
 							<!-- <span ng-show="propForm.phno.$dirty && propForm.phno.$error.minlength">Minimum length required is 10</span> -->
-							<span ng-show="propenquiryForm.contact.$dirty && propenquiryForm.contact.$error.maxlength">Mobile Number is too long</span>
-							<span class="red-text" ng-show="propenquiryForm.contact.$error.pattern">Please enter a 10 digit number</span>
+							<span class="intrst_err_num" ng-show="propenquiryForm.contact.$dirty && propenquiryForm.contact.$error.maxlength">Mobile Number is too long</span>
+							<span class="intrst_err_num" class="red-text" ng-show="propenquiryForm.contact.$error.pattern">Please enter a 10 digit number</span>
                             
                             <div class="clearfix"></div>
-							<a class="gcb_btn" ng-disabled="!propenquiryForm.$valid" ng-click="getcallBackForProperties(enquiry);">Get Call Back</a>
-							<a class="read_d" href="#">read disclaimer</a>
+                            <button class="btn_style gcb_btn" ng-click="getcallBackForProperties(enquiry);" ng-disabled="!propenquiryForm.$valid">Get Call Back</button>
+<!--							<a class="gcb_btn" ng-disabled="!propenquiryForm.$valid" ng-click="getcallBackForProperties(enquiry);">Get Call Back</a>-->
+							<a class="read_d" ng-href="#/policy">Read disclaimer</a>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="row">
             	<div class="col-lg-12 col-md-12 col-sm-12">
-                	<div class="similar_projects_section">
+                	<div class="similar_projects_section" id="simler_pdr">
                      	<h2>Similar Projects</h2>
                     </div>
                 </div>
             </div>
-            <div class="row similar_projects_slider">
+             <div class="row similar_projects_slider">
             	<div class="col-lg-12">
                     	<div id="third" class="carouseller"> 			
 			<div class="carousel-wrapper"> 
@@ -325,11 +354,36 @@
 					</div>             
 				</div>
 			</div>
+<!--
             <a href="javascript:void(0)" class="carousel-button-right"><img src="images/property_right_icon.png" alt="" /></a>
             <a href="javascript:void(0)" class="carousel-button-left"><img src="images/property_left_icon.png" alt="" /></a> 			
+-->
 		</div>
                     </div>
             </div>
+<!--
+            <div class="row similar_projects_slider">
+                
+                    <div class="content">
+					<slick class="slider similar_projct" init-onload="true" settings="slickConfig1" ng-if="slickConfig1Loaded">
+					<div class="span3 carousel-block" ng-repeat ="similarprop in similarpropDetails" my-repeat-directive>
+						<div class="similar_projects_section">                     	
+                        <div class="similar_projects_box">
+                        	<a ui-sref="property({param:{{similarprop.property_info_IDPK}}})">
+							<div ng-repeat = "image in similarprop.images|limitTo: 1" my-repeat-directive>
+                        	<img ng-src="{{propertyimage}}{{image.name}}" alt="" />
+							</div>
+                            <h4>{{similarprop.propertyName}}
+                            <small>{{similarprop.locality_name}}</small>
+                            </h4>
+                            </a>
+                        </div>
+                     </div>
+					</div>
+					</slick> 
+					</div>
+            </div>
+-->
         </div>
     </div>
     <div class="about_contact_us property_cb_bg">
@@ -340,24 +394,24 @@
                 	<div class="call_back_form">
                     	<h1 style="font-size:30px;">How About Saving Your Time!</h1>
                     	<form name="propForm">
-                        	<input placeholder="Name" type="text" ng-model="user.name" name="uname" required ng-minlength="3" />                            
+                        	<input placeholder="Name" type="text" ng-model="user.name" name="uname" only-letters-input required ng-minlength="3" />                            
                             <select class="test_design">
                             	<option>+91 INDIA</option>
                             </select>
-                            <input placeholder="Mobile Number" type="text" ng-model="user.mobileno" 
+                            <input placeholder="Mobile Number" type="text" numbers-only ng-model="user.mobileno" 
 							name="phno" required ng-minlength="10" ng-maxlength="13" ng-pattern="ph_numbr"/>
                             <div class="clearfix"></div>
 							
-							<span ng-show="propForm.uname.$dirty && propForm.uname.$error.required">This is a required field</span>
-							<span ng-show="propForm.uname.$dirty && propForm.uname.$error.minlength">Minimum length required is 3</span>
+							<span class="city_err" ng-show="propForm.uname.$dirty && propForm.uname.$error.required">This is a required field</span>
+							<span class="city_err" ng-show="propForm.uname.$dirty && propForm.uname.$error.minlength">Minimum length required is 3</span>
             				
-							<span ng-show="propForm.phno.$dirty && propForm.phno.$error.required">This is a required field</span>
+							<span class="prprty_err_num" ng-show="propForm.phno.$dirty && propForm.phno.$error.required">This is a required field</span>
 							<!-- <span ng-show="propForm.phno.$dirty && propForm.phno.$error.minlength">Minimum length required is 10</span> -->
-							<span ng-show="propForm.phno.$dirty && propForm.phno.$error.maxlength">Mobile Number is too long</span>
-							<span class="red-text" ng-show="propForm.phno.$error.pattern">Please enter a 10 digit number</span>
-                            <button class="btn_style" ng-click="callBack(user);">Get Call Back</button>
+							<span class="prprty_err_numlong" ng-show="propForm.phno.$dirty && propForm.phno.$error.maxlength">Mobile Number is too long</span>
+							<span class="prprty_err_numlong" class="red-text" ng-show="propForm.phno.$error.pattern">Please enter a 10 digit number</span>
+                            <button class="btn_style" ng-click="callBack(user);" ng-disabled="!propForm.$valid">Get Call Back</button>
                         </form>   
-                        <p style="text-align:center; margin-top: 30px;">All the request are handled in just 5 minutes, Please <a href="#">click here</a> to send an email inquiry</p>                     
+                        <p style="text-align:center; margin-top: 30px;">All the request are handled in just 5 minutes.</p>                     
                     </div>
                 </div>
             <div class="col-lg-2 col-md-2 col-sm-2"></div>
@@ -385,7 +439,53 @@
 		$('.test_design').niceSelect();
 		});
 		</script>
+<!--STICKY-->
+<script>
+	function sticky_relocate() {
+    var window_top = $(window).scrollTop();
+    var footer_top = $("#simler_pdr").offset().top;
+    var div_top = $('#sticky-anchor').offset().top;
+    var div_height = $("#side_bar_sticky").height();
+    
+    if (window_top + div_height > footer_top)
+        $('#side_bar_sticky').removeClass('stick');    
+    else if (window_top > div_top) {
+        $('#side_bar_sticky').addClass('stick');
+    } else {
+        $('#side_bar_sticky').removeClass('stick');
+    }
+	
+	var window_top = $(window).scrollTop();
+    var footer_top = $("#simler_pdr").offset().top;
+    var div_top = $('#sticky-anchor1').offset().top;
+    var div_height = $("#sublinks_sticky").height();
+    
+    if (window_top + div_height > footer_top)
+        $('#sublinks_sticky').removeClass('stick1');    
+    else if (window_top > div_top) {
+        $('#sublinks_sticky').addClass('stick1');
+    } else {
+        $('#sublinks_sticky').removeClass('stick1');
+    }
+	
+}
 
+$(function () {
+    $(window).scroll(sticky_relocate);
+    sticky_relocate();
+});
+</script>
+<!--STICKY-->
+
+<script>
+	$(window).scroll(function(){
+  var sticky = $('.top_section_main'),
+      scroll = $(window).scrollTop();
+
+  if (scroll >= 100) sticky.addClass('fixed');
+  else sticky.removeClass('fixed');
+});
+</script>
 
 
 <!--************ Tabs seript Start ************ -->
@@ -411,6 +511,7 @@ type: 'vertical',
 width: 'auto',
 fit: true
 });
+
 });
 </script>
 
@@ -419,8 +520,28 @@ fit: true
 <!--**************** Gallery Vertical Silder ****************-->
 
 <script>
+	 var firstSlides = $("#slideshow-list li"),
+     secondSlides = $("#image-list li"),
+     nbSlides = firstSlides.length,
+     slideTime = 3000,
+     nextSlide = 0,
+     timer;
 
-	  
+ function slideshow() {
+     secondSlides.eq(nextSlide).addClass('active').siblings().removeClass('active');
+     firstSlides.eq(nextSlide).fadeIn().delay(2000).fadeOut();
+     nextSlide = (nextSlide + 1) % nbSlides;
+     timer = setTimeout(slideshow, slideTime);
+
+ }
+
+ slideshow();
+
+// $('#image-list li').click(function () {
+//     clearTimeout(timer);
+//     var clickIndex = $(this).index()
+//     $('#slideshow-list li').eq(clickIndex).show().siblings().hide();
+// });
 
 
  $('#image-list').mouseleave(function (e) {
@@ -429,23 +550,6 @@ fit: true
      setTimeout(slideshow(), 2000);
  });
 			
-			//alert("normal :: "+nbSlides);
-	//alert("getting child elements as "+firstSlides.children().length);
-/* function slideshow() {
-
-     secondSlides.eq(nextSlide).addClass('active').siblings().removeClass('active');
-     firstSlides.eq(nextSlide).fadeIn().delay(2000).fadeOut();
-     nextSlide = (nextSlide + 1) % nbSlides;
-     timer = setTimeout(slideshow, slideTime);
-	//alert(nextSlide+ " "+timer);
- }
- slideshow(); */
-	//}
- 
-
- 
-	
-// http://lesson8.blogspot.com/
 </script>
 
 

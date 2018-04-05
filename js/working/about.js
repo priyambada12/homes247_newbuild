@@ -2,10 +2,13 @@
 var aboutapp = angular.module('aboutUsApp', ['ui.bootstrap','modalApp']);
 
 
-aboutapp.controller('aboutusCtrl', function($scope, networkFactory,$modal,$window, $log,$cookies) {
-	
-	$window.scrollTo(0, 0);
-	$('body').attr('id', '');
+aboutapp.controller('aboutusCtrl', function($scope, networkFactory,$modal, $log,$cookies) {
+	//$cookies.put('key','others');
+    $(function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        $('.ui.dropdown').dropdown();
+        });
     $scope.user = {
         name: '',
         mobileno: ''

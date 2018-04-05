@@ -1,6 +1,6 @@
 <!-- <div loading-indicator class="waiting-box">
 	<span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
-<div class="container">
+<div class="container homeloan_main">
 
     <div class="row">
         <div id="horizontalTab">
@@ -9,8 +9,9 @@
                     <h2>My Accounts</h2>
                     <ul class="resp-tabs-list">
                          <li><a ng-href="#/myFav">My Favourite</a></li>
-                        <li><a ng-href="#/recentlyView">Recently Viewed</a></li>
+                        <li><a class="page_active" ng-href="#/recentlyView">Recently Viewed</a></li>
                         <li><a ng-href="#/setting">Account Settings</a></li>
+                        <li><a ng-click="logoutprofile();">Logout</a></li>
                         <li>
                             <a ng-href="#/referEarn"><img src="images/refer_earn_img.png" alt="" /></a>
                         </li>

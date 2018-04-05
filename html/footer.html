@@ -1,20 +1,19 @@
- <!-- <div loading-indicatorfooter class="waiting-box">
-	  <span>Please wait...<img src="http://intown.biz/demo/wait/waiting.gif" /></span></div> -->
+ 
  <div class="clearfix"></div>
  <div class="footer_main">
     	<div class="container">
-        	<div class="row">
+        	<div class="row first_row">
             	<div class="col-lg-5 col-md-5 col-sm-5">
                 	<div class="footer_about">
                 	<h1>About us</h1>
                     <p>
-                    	Homes247.in is an online real estate advisor that 
-functions on the fundamentals of trust, transparency and expertise. As a digital marketplace with an exhaustive range of property listings, we know it is easy to get lost. 
+Homes247.in is the global real estate aggregator aspiring to be on the top of real estate market by offering premier property solutions in the digital world. Trust, Integrity, Excellence and Service (TIES) are the core values which inspires us to serve the top services to our clients. 
+We are a family of passionate real estate professionals enriched with years of excellence in real estate market. Our relationship with the top class builders and strong knowledge in the market makes us stand out of the crowd and enables us to deliver best in class real estate solution for our clients and assist them to buy and create living spaces at the best price. 
 <br /><br />
-At Homes247.in, we guide home buyers right from the start of their home search to the very end. Browse through more than 139,000 verified real estate properties with accurate lowdown on amenities, neighborhoods and cities, and genuine pictures. Shortlist your favorite homes and allow us to arrange site visits. 
+We connect and engage buyers and sellers 24/7 across India and provide end to end assistance. Our unique process combines a wide range of quality abodes for our clients and our proficient consultant provides the perfect property guidance to enhance the property search until they find their dream home. We delight our valuable customers and handhold them with value added services such as Home loan assistance, Interior consultation, Property Rental management services, Reselling and more.
+With us, NRI's can relieve the stress on investing their wealth on the right property. We are there round the clock to cater all the requirements of our NRI clients.
 <br /><br />
-Our work does not end here. We assist you with home loans and property registrations. Buying a home is an important investment – turn it into your safest, best deal at Homes247.in. Our work does not end here. We assist you with home loans and property registrations. Buying a home is an important investment – turn it into your safest, best deal at Homes247.in
-Our work does not end here. We assist you with home loans and property registrations. Buying a home is an important investment – turn it into your safest, best deal at Homes247.in.
+Our motto is to provide the pivotal real estate advisory solution for the neoteric customer and extend one step more for our clients by creating positive and fruitful experiences on their journey to exquisite home.
                     </p>
                     </div>
                 </div>
@@ -27,17 +26,17 @@ Our work does not end here. We assist you with home loans and property registrat
                         </ul>
                     </div>
                     <div class="footer_right_links">
-                    	<h1>Properties In India</h1>
+                    	<h1>Property Type</h1>
                         <ul>
-                        	<li><a href="#">Apartments For Sale In India</a></li>
-                            <li><a href="#">Villas in India</a></li>
-                            <li><a href="#">New Apartments For Sale In India</a></li>
-                            <li><a href="#">Upcoming Apartments For Sale In India</a></li>
-                            <li><a href="#">Resale Apartments In India</a></li>
+                        	<li><a >Apartments For Sale In India</a></li>
+                            <li><a >Villas in India</a></li>
+                            <li><a >New Apartments For Sale In India</a></li>
+                            <li><a >Upcoming Apartments For Sale In India</a></li>
+                            <li><a >Resale Apartments In India</a></li>
                         </ul>
                     </div>
                     <div class="footer_right_links">
-                    	<h1>Real Estate In India</h1>
+                    	<h1>Properties In India</h1>
                         <ul ng-repeat="city_details in cities">
                         	<li><a ui-sref="city({cityname:city_details.city,locality:'',buliderId:'',reraId:''})">Property in {{city_details.city}}</a></li>
                           
@@ -45,76 +44,15 @@ Our work does not end here. We assist you with home loans and property registrat
                     </div>
                     <div class="footer_right_links mrgLft15">
                     	<h1>Builders</h1>
-                        <ul>
-                        	<li><a href="#">Prestige Group</a></li>
-                            <li><a href="#">Sobha Limited</a></li>
-                            <li><a href="#">DLF</a></li>
-                            <li><a href="#">Unitech</a></li>
-                            <li><a href="#">Kolte Patil Developers</a></li>
+                        <ul ng-repeat="builder in builders | limitTo:quantity">
+                        	<li><a ui-sref="city({cityname:'',locality:'',buliderId:builder.buliderInfo_IDPK,reraId:''})">{{builder.buliderInfo_name}}</a></li>
+                           
                         </ul>
                     </div>
                     
                 </div>
             </div>
-            <div class="row">
-            	<div class="col-lg-5 col-md-5 col-sm-5">
-                	<h3>Property Type</h3>
-                    <div class="footer_right_links">
-                    	<ul>
-                    		<li><a href="#">Apartments sale in India</a></li>
-                            <li><a href="#">Property sale in India</a></li>
-                            <li><a href="#">Villas sale in India</a></li>
-                            <li><a href="#">Plots sale in India</a></li>
-                            <li><a href="#">New apartments for sale in India</a></li>
-                            <li><a href="#">Upcoming flats for sale in India</a></li>
-                    	</ul>                    	
-                    </div>
-                    <div class="footer_right_links">
-                    	<ul>
-                    		<li><a href="#">Ongoing projects in India</a></li>
-                            <li><a href="#">Ready to move flats in India</a></li>
-                            <li><a href="#">Resale apartments in India</a></li>
-                            <li><a href="#">Properties for Senior Citizen</a></li>
-                            <li><a href="#">All Projects in India</a></li>
-                    	</ul>                    	
-                    </div>
-                </div>
-                <div class="col-lg-7 col-md-7 col-sm-7">
-                	<div class="footer_right_down">
-                    	<h3>Quick Links</h3>
-                        <ul>
-                        	<li><a ng-href="#/dashboard">Home</a></li>
-                            <li><a href="#">User Agreement</a></li>
-                            <li><a href="#">Guide</a></li>
-                            <li><a ng-href="#/contactUs">Contact us</a></li>
-                            <li><a ng-href="#/policy">Privacy Policy</a></li>
-                            <li><a href="#">Disclaimer</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer_right_down">
-                    	<h3>Resources</h3>
-                        <ul>
-                        	<li><a ng-href="#/calculator">Home Loan</a></li>
-                            <li><a ng-href="#/services">NRI Services</a></li>
-                            <li><a href="#">How To Buy</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer_right_down">
-                    	<h3>Network sites</h3>
-                        <ul>
-                        	<li><a href="#">Housing.com</a></li>
-                            <li><a href="#">IREF</a></li>
-                            <li><a href="#">Makaan.com</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer_right_down">
-                    	<h3>Global Partners</h3>
-                        <ul>
-                        	<li><a href="#">Mansionglobal.com</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            
         </div>
         <div class="footer_end_info">
         	<div class="container">
@@ -145,10 +83,10 @@ Our work does not end here. We assist you with home loans and property registrat
                     	<div class="follow_us_icon">
                         	<h5>Follow us</h5>
                             <ul>
-                            	<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            	<li><a class="fb" ><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a class="insta" ><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                <li><a class="twitt" ><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a class="linked" ><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div>

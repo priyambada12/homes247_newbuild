@@ -8,19 +8,19 @@
 
 						<input placeholder="Name" type="text" ng-model="enquiry.name" name="uname" required ng-minlength="3" />                            
                             <select class="test_design">
-                            	<option>+91 INDIA</option>
+                            	<option>+91</option>
                             </select>
                             <input placeholder="Mobile Number" class="mob_nu" type="text" ng-model="enquiry.mobileno" name="phno" required ng-minlength="10" ng-maxlength="13"/>
                             <div class="clearfix"></div>
-							<span ng-show="enquiryForm.uname.$dirty && enquiryForm.uname.$error.required">This is a required field</span>
-							<span ng-show="enquiryForm.uname.$dirty && enquiryForm.uname.$error.minlength">Minimum length required is 3</span>
+							<span class="enqr_err" ng-show="enquiryForm.uname.$dirty && enquiryForm.uname.$error.required">This is a required field</span>
+							<span class="enqr_err" ng-show="enquiryForm.uname.$dirty && enquiryForm.uname.$error.minlength">Minimum length required is 3</span>
             				
-							<span ng-show="enquiryForm.phno.$dirty && enquiryForm.phno.$error.required">This is a required field</span>
-							<span ng-show="enquiryForm.phno.$dirty && enquiryForm.phno.$error.minlength">Minimum length required is 10</span>
-							<span ng-show="enquiryForm.phno.$dirty && enquiryForm.phno.$error.maxlength">Mobile Number is too long</span>
-		
-							<a class="gcb_btn" ng-click="getcallBackForProperties();">Get Call Back</a>
-							<a class="read_d" href="#">read disclaimer</a>
+							<span class="enqr_err_num" ng-show="enquiryForm.phno.$dirty && enquiryForm.phno.$error.required">This is a required field</span>
+							<span class="enqr_err_num" ng-show="enquiryForm.phno.$dirty && enquiryForm.phno.$error.minlength">Minimum length required is 10</span>
+							<span class="enqr_err_num" ng-show="enquiryForm.phno.$dirty && enquiryForm.phno.$error.maxlength">Mobile Number is too long</span>
+		                  <button class="btn_style gcb_btn" ng-click="getcallBackForProperties();" ng-disabled="!enquiryForm.$valid">Get Call Back</button>
+<!--							<a class="gcb_btn" ng-click="getcallBackForProperties();">Get Call Back</a>-->
+							<a class="read_d" ng-href="#/policy">Read disclaimer</a>
                         </form>
                     </div>
                 </div>
